@@ -155,7 +155,77 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="source"><a class="header" href="#source">SOURCE</a></h1>
+                        <h4 id="1-st_makepoint"><a class="header" href="#1-st_makepoint">1. ST_MakePoint</a></h4>
+<pre><code>SELECT ST_MakePoint(127.289231, 36.480057);
+SELECT ST_MakePoint(127.2622522, 36.5024220);
+</code></pre>
+<h4 id="2-st_makeline"><a class="header" href="#2-st_makeline">2. ST_MakeLine</a></h4>
+<pre><code>SELECT ST_MakeLine(ST_MakePoint(127.2615956, 36.5048945), ST_MakePoint(127.2603770, 36.5022889))
+</code></pre>
+<h4 id="3-st_geomfromtext"><a class="header" href="#3-st_geomfromtext">3. ST_GeomFromTEXT</a></h4>
+<pre><code>SELECT ST_GeomFromText('POINT(127.289231 36.480057)', 4326);
+SELECT ST_GeomFromText('LINESTRING(127.2615956 36.5048945, 127.2603770 36.5022889)', 4326);
+SELECT ST_GeomFromText('POLYGON((127.2682235 36.4992861, 127.2688328 36.4990864, 127.2684956 36.4984017, 127.2678923 36.4986014, 127.2682235 36.4992861))', 4326);
+</code></pre>
+<h4 id="4-st_srid"><a class="header" href="#4-st_srid">4. ST_SRID</a></h4>
+<pre><code>SELECT ST_SRID(location) FROM sejong_point
+SELECT * FROM geometry_columns
+</code></pre>
+<h4 id="5-st_setsrid"><a class="header" href="#5-st_setsrid">5. ST_SetSRID</a></h4>
+<pre><code>SELECT ST_SetSRID(ST_MakePoint(127.289231,36.480057), 4326);
+SELECT ST_SetSRID(ST_MakeLine(ST_MakePoint(127.2615956, 36.5048945), ST_MakePoint(127.2603770, 36.5022889)), 4326);
+</code></pre>
+<h4 id="6-st_transform"><a class="header" href="#6-st_transform">6. ST_Transform</a></h4>
+<pre><code>SELECT ST_Transform(location, 3857) FROM sejong_line;
+SELECT ST_SRID(location) FROM sejong_line
+</code></pre>
+<h4 id="7-st_x-st_y"><a class="header" href="#7-st_x-st_y">7. ST_X, ST_Y</a></h4>
+<pre><code>SELECT ST_X(location) FROM sejong_point
+SELECT ST_Y(location) FROM sejong_point
+</code></pre>
+<h4 id="8-st_area"><a class="header" href="#8-st_area">8. ST_Area</a></h4>
+<pre><code>SELECT ST_Area(location) FROM sejong_polygon
+</code></pre>
+<h4 id="9-st_perimeter"><a class="header" href="#9-st_perimeter">9. ST_Perimeter</a></h4>
+<pre><code>SELECT ST_Perimeter(location) FROM sejong_polygon
+</code></pre>
+<h4 id="10-st_length"><a class="header" href="#10-st_length">10. ST_Length</a></h4>
+<pre><code>SELECT ST_Length(location) FROM sejong_line
+</code></pre>
+<h4 id="11-st_distance"><a class="header" href="#11-st_distance">11. ST_Distance</a></h4>
+<pre><code>SELECT ST_Distance 
+(ST_GeomFromText('Point(127.2595298 36.5019938)', 4326),
+ ST_GeomFromText('Point(127.2652880 36.5021095)', 4326));
+</code></pre>
+<h4 id="12-st_distancesphere"><a class="header" href="#12-st_distancesphere">12. ST_DistanceSphere</a></h4>
+<pre><code>SELECT ST_DistanceSphere 
+(ST_GeomFromText('Point(127.2595298 36.5019938)', 4326),
+ ST_GeomFromText('Point(127.2652880 36.5021095)', 4326));
+</code></pre>
+<h4 id="13-st_intersect"><a class="header" href="#13-st_intersect">13. ST_Intersect</a></h4>
+<pre><code>SELECT * FROM yang_building as b, yang_flood as f
+WHERE f.objectid_1='1' and ST_Intersects(b.geom, f.geom)
+</code></pre>
+<h4 id="14-st_within"><a class="header" href="#14-st_within">14. ST_Within</a></h4>
+<pre><code>SELECT * FROM yang_building as b, yang_flood as f
+WHERE f.objectid_1='1' and ST_Within(b.geom, f.geom)
+</code></pre>
+<h4 id="15-st_overlap"><a class="header" href="#15-st_overlap">15. ST_Overlap</a></h4>
+<pre><code>SELECT * FROM yang_building as b, yang_flood as f
+WHERE f.objectid_1='1' and ST_Overlap(b.geom, f.geom)
+</code></pre>
+<h4 id="16-st_disjoint"><a class="header" href="#16-st_disjoint">16. ST_Disjoint</a></h4>
+<pre><code>SELECT * FROM yang_building AS b, yang_flood AS f
+WHERE f.objectid_1='1' and ST_Disjoint(b.geom, f.geom)
+</code></pre>
+<h4 id="17-st_buffer"><a class="header" href="#17-st_buffer">17. ST_Buffer</a></h4>
+<pre><code>SELECT * FROM yang_building as b, yang_flood as f
+WHERE ST_INTERSECTS(b.geom, ST_Buffer(f.geom, 500))
+</code></pre>
+<h4 id="18-st_dwithin"><a class="header" href="#18-st_dwithin">18. ST_DWithin</a></h4>
+<pre><code>SELECT * FROM yang_building as b, yang_flood as f
+WHERE ST_DWithin(b.geom, f.geom, 500)
+</code></pre>
 
                     </main>
 

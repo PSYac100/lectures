@@ -259,14 +259,124 @@ VALUES('홍보관', 'POLYGON((127.2706894 36.5002781, 127.2713780 36.5006383, 12
 </code>
 </pre><div style="break-before: page; page-break-before: always;"></div><h1 id="qgis-활용법"><a class="header" href="#qgis-활용법">QGIS 활용법</a></h1>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="source"><a class="header" href="#source">SOURCE</a></h1>
-<div style="break-before: page; page-break-before: always;"></div><h1 id="quiz"><a class="header" href="#quiz">QUIZ</a></h1>
-<div style="break-before: page; page-break-before: always;"></div><h1 id="기하데이터-함수"><a class="header" href="#기하데이터-함수">기하데이터 함수</a></h1>
-<div style="break-before: page; page-break-before: always;"></div><h1 id="source-1"><a class="header" href="#source-1">SOURCE</a></h1>
-<div style="break-before: page; page-break-before: always;"></div><h1 id="quiz-1"><a class="header" href="#quiz-1">QUIZ</a></h1>
-<div style="break-before: page; page-break-before: always;"></div><h1 id="공간질의실습"><a class="header" href="#공간질의실습">공간질의실습</a></h1>
-<div style="break-before: page; page-break-before: always;"></div><h1 id="source-2"><a class="header" href="#source-2">SOURCE</a></h1>
-<div style="break-before: page; page-break-before: always;"></div><h4 id="01-실습폴더의-ownercsv-파일을-이용하여-테이블을-생성해-봅시다"><a class="header" href="#01-실습폴더의-ownercsv-파일을-이용하여-테이블을-생성해-봅시다">01. 실습폴더의 owner.csv 파일을 이용하여 테이블을 생성해 봅시다.</a></h4>
+<div style="break-before: page; page-break-before: always;"></div><h4 id="01-공간데이터베이스-연습문제-3번의-결과물ex_03을-qgis에서-벡터-자료로-저장해-봅시다"><a class="header" href="#01-공간데이터베이스-연습문제-3번의-결과물ex_03을-qgis에서-벡터-자료로-저장해-봅시다">01. 공간데이터베이스 연습문제 3번의 결과물(ex_03)을 QGIS에서 벡터 자료로 저장해 봅시다.</a></h4>
 <h5 id="아래-그림을-오른쪽-클릭하여-새탭에서-링크-열기-선택하여-동영상-재생"><a class="header" href="#아래-그림을-오른쪽-클릭하여-새탭에서-링크-열기-선택하여-동영상-재생">(아래 그림을 오른쪽 클릭하여 새탭에서 링크 열기 선택하여 동영상 재생)</a></h5>
+<p><a href="https://youtu.be/qlRzarBlVIw"><img src="http://img.youtube.com/vi/qlRzarBlVIw/0.jpg" alt="ex_01" /></a></p>
+<h4 id="02-qgis를-활용하여-실습폴더의-sejong_government-자료를-spatial-데이터베이스-밑에-공간-테이블로-생성해-봅시다"><a class="header" href="#02-qgis를-활용하여-실습폴더의-sejong_government-자료를-spatial-데이터베이스-밑에-공간-테이블로-생성해-봅시다">02. QGIS를 활용하여 실습폴더의 sejong_government 자료를 spatial 데이터베이스 밑에 공간 테이블로 생성해 봅시다.</a></h4>
+<h5 id="아래-그림을-오른쪽-클릭하여-새탭에서-링크-열기-선택하여-동영상-재생-1"><a class="header" href="#아래-그림을-오른쪽-클릭하여-새탭에서-링크-열기-선택하여-동영상-재생-1">(아래 그림을 오른쪽 클릭하여 새탭에서 링크 열기 선택하여 동영상 재생)</a></h5>
+<p><a href="https://youtu.be/gJnw1fH5G9M"><img src="http://img.youtube.com/vi/gJnw1fH5G9M/0.jpg" alt="ex_01" /></a></p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="기하데이터-함수"><a class="header" href="#기하데이터-함수">기하데이터 함수</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h4 id="1-st_makepoint"><a class="header" href="#1-st_makepoint">1. ST_MakePoint</a></h4>
+<pre><code>SELECT ST_MakePoint(127.289231, 36.480057);
+SELECT ST_MakePoint(127.2622522, 36.5024220);
+</code></pre>
+<h4 id="2-st_makeline"><a class="header" href="#2-st_makeline">2. ST_MakeLine</a></h4>
+<pre><code>SELECT ST_MakeLine(ST_MakePoint(127.2615956, 36.5048945), ST_MakePoint(127.2603770, 36.5022889))
+</code></pre>
+<h4 id="3-st_geomfromtext"><a class="header" href="#3-st_geomfromtext">3. ST_GeomFromTEXT</a></h4>
+<pre><code>SELECT ST_GeomFromText('POINT(127.289231 36.480057)', 4326);
+SELECT ST_GeomFromText('LINESTRING(127.2615956 36.5048945, 127.2603770 36.5022889)', 4326);
+SELECT ST_GeomFromText('POLYGON((127.2682235 36.4992861, 127.2688328 36.4990864, 127.2684956 36.4984017, 127.2678923 36.4986014, 127.2682235 36.4992861))', 4326);
+</code></pre>
+<h4 id="4-st_srid"><a class="header" href="#4-st_srid">4. ST_SRID</a></h4>
+<pre><code>SELECT ST_SRID(location) FROM sejong_point
+SELECT * FROM geometry_columns
+</code></pre>
+<h4 id="5-st_setsrid"><a class="header" href="#5-st_setsrid">5. ST_SetSRID</a></h4>
+<pre><code>SELECT ST_SetSRID(ST_MakePoint(127.289231,36.480057), 4326);
+SELECT ST_SetSRID(ST_MakeLine(ST_MakePoint(127.2615956, 36.5048945), ST_MakePoint(127.2603770, 36.5022889)), 4326);
+</code></pre>
+<h4 id="6-st_transform"><a class="header" href="#6-st_transform">6. ST_Transform</a></h4>
+<pre><code>SELECT ST_Transform(location, 3857) FROM sejong_line;
+SELECT ST_SRID(location) FROM sejong_line
+</code></pre>
+<h4 id="7-st_x-st_y"><a class="header" href="#7-st_x-st_y">7. ST_X, ST_Y</a></h4>
+<pre><code>SELECT ST_X(location) FROM sejong_point
+SELECT ST_Y(location) FROM sejong_point
+</code></pre>
+<h4 id="8-st_area"><a class="header" href="#8-st_area">8. ST_Area</a></h4>
+<pre><code>SELECT ST_Area(location) FROM sejong_polygon
+</code></pre>
+<h4 id="9-st_perimeter"><a class="header" href="#9-st_perimeter">9. ST_Perimeter</a></h4>
+<pre><code>SELECT ST_Perimeter(location) FROM sejong_polygon
+</code></pre>
+<h4 id="10-st_length"><a class="header" href="#10-st_length">10. ST_Length</a></h4>
+<pre><code>SELECT ST_Length(location) FROM sejong_line
+</code></pre>
+<h4 id="11-st_distance"><a class="header" href="#11-st_distance">11. ST_Distance</a></h4>
+<pre><code>SELECT ST_Distance 
+(ST_GeomFromText('Point(127.2595298 36.5019938)', 4326),
+ ST_GeomFromText('Point(127.2652880 36.5021095)', 4326));
+</code></pre>
+<h4 id="12-st_distancesphere"><a class="header" href="#12-st_distancesphere">12. ST_DistanceSphere</a></h4>
+<pre><code>SELECT ST_DistanceSphere 
+(ST_GeomFromText('Point(127.2595298 36.5019938)', 4326),
+ ST_GeomFromText('Point(127.2652880 36.5021095)', 4326));
+</code></pre>
+<h4 id="13-st_intersect"><a class="header" href="#13-st_intersect">13. ST_Intersect</a></h4>
+<pre><code>SELECT * FROM yang_building as b, yang_flood as f
+WHERE f.objectid_1='1' and ST_Intersects(b.geom, f.geom)
+</code></pre>
+<h4 id="14-st_within"><a class="header" href="#14-st_within">14. ST_Within</a></h4>
+<pre><code>SELECT * FROM yang_building as b, yang_flood as f
+WHERE f.objectid_1='1' and ST_Within(b.geom, f.geom)
+</code></pre>
+<h4 id="15-st_overlap"><a class="header" href="#15-st_overlap">15. ST_Overlap</a></h4>
+<pre><code>SELECT * FROM yang_building as b, yang_flood as f
+WHERE f.objectid_1='1' and ST_Overlap(b.geom, f.geom)
+</code></pre>
+<h4 id="16-st_disjoint"><a class="header" href="#16-st_disjoint">16. ST_Disjoint</a></h4>
+<pre><code>SELECT * FROM yang_building AS b, yang_flood AS f
+WHERE f.objectid_1='1' and ST_Disjoint(b.geom, f.geom)
+</code></pre>
+<h4 id="17-st_buffer"><a class="header" href="#17-st_buffer">17. ST_Buffer</a></h4>
+<pre><code>SELECT * FROM yang_building as b, yang_flood as f
+WHERE ST_INTERSECTS(b.geom, ST_Buffer(f.geom, 500))
+</code></pre>
+<h4 id="18-st_dwithin"><a class="header" href="#18-st_dwithin">18. ST_DWithin</a></h4>
+<pre><code>SELECT * FROM yang_building as b, yang_flood as f
+WHERE ST_DWithin(b.geom, f.geom, 500)
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="기하데이터-함수-1"><a class="header" href="#기하데이터-함수-1">기하데이터 함수</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="공간질의실습"><a class="header" href="#공간질의실습">공간질의실습</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h4 id="1-공간-데이터-테이블의-좌표계를-확인하고-모든-자료의-좌표계를-4326으로-변환해-봅시다"><a class="header" href="#1-공간-데이터-테이블의-좌표계를-확인하고-모든-자료의-좌표계를-4326으로-변환해-봅시다">1. 공간 데이터 테이블의 좌표계를 확인하고, 모든 자료의 좌표계를 4326으로 변환해 봅시다.</a></h4>
+<pre><code>SELECT * FROM geometry_columns;
+ 
+ALTER TABLE sigungu 
+ALTER COLUMN geom TYPE geometry(MULTIPOLYGON, 4326) 
+USING ST_TRANSFORM(geom, 4326);
+
+SELECT ST_SRID(geom) FROM sigungu LIMIT 1;
+</code></pre>
+<h4 id="2-서울특별시-동대문구의-행정-경계의-면적은-얼마인가단-단위는-km2으로-표현"><a class="header" href="#2-서울특별시-동대문구의-행정-경계의-면적은-얼마인가단-단위는-km2으로-표현">2. 서울특별시 동대문구의 행정 경계의 면적은 얼마인가?(단, 단위는 km2으로 표현)</a></h4>
+<pre><code>SELECT sig_kor_nm AS name, ST_AREA(geom)/1000000 AS area
+FROM sigungu
+WHERE sig_kor_nm='동대문구';
+</code></pre>
+<h4 id="3-한강과-인접한-서울특별시의-구는"><a class="header" href="#3-한강과-인접한-서울특별시의-구는">3. 한강과 인접한 서울특별시의 구는?</a></h4>
+<pre><code>SELECT sig_kor_nm
+FROM sigungu, hanriver 
+WHERE cd=1 and ST_INTERSECTS(sigungu.geom, hanriver.geom)
+</code></pre>
+<h4 id="4-pnu-주소-지목-공시지가2024년-기준-정보를-가지는-테이블을-생성해-봅시다"><a class="header" href="#4-pnu-주소-지목-공시지가2024년-기준-정보를-가지는-테이블을-생성해-봅시다">4. PNU, 주소, 지목, 공시지가(2024년 기준) 정보를 가지는 테이블을 생성해 봅시다.</a></h4>
+<pre><code>CREATE TABLE price1 AS
+SELECT j.pnu AS pnu, j.address AS 주소, j.jimok AS 지목, p.price24 AS 공시지가
+FROM jijuk AS j JOIN price AS p ON j.pnu = p.pnu
+</code></pre>
+<h4 id="5-지가의-상승률이-높은-상위-10개의-필지와-각-필지의-면적은"><a class="header" href="#5-지가의-상승률이-높은-상위-10개의-필지와-각-필지의-면적은">5. 지가의 상승률이 높은 상위 10개의 필지와 각 필지의 면적은?</a></h4>
+<pre><code>SELECT j.pnu AS pnu, j.jimok AS 지목, ST_AREA(j.geom) AS 면적, (p.price24 – p.price23)/p.price23*100 AS 지가상승률
+FROM jijuk AS j JOIN price AS p ON j.pnu = p.pnu
+WHERE p.price23 != 0 AND p.price24 != 0
+ORDER BY 지가상승률 DESC LIMIT 10
+</code></pre>
+<h4 id="6-서울특별시-서초구의-건물이-건설된-필지의-지목별-필지의-수는"><a class="header" href="#6-서울특별시-서초구의-건물이-건설된-필지의-지목별-필지의-수는">6. 서울특별시 서초구의 건물이 건설된 필지의 지목별 필지의 수는?</a></h4>
+<pre><code>SELECT j.jimok, COUNT(j.jimok) AS count
+FROM jijuk AS j JOIN building AS b ON j.pnu = b.pnu
+GROUP BY j.jimok
+ORDER BY count ASC
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h4 id="01-실습폴더의-ownercsv-파일을-이용하여-테이블을-생성해-봅시다"><a class="header" href="#01-실습폴더의-ownercsv-파일을-이용하여-테이블을-생성해-봅시다">01. 실습폴더의 owner.csv 파일을 이용하여 테이블을 생성해 봅시다.</a></h4>
+<h5 id="아래-그림을-오른쪽-클릭하여-새탭에서-링크-열기-선택하여-동영상-재생-2"><a class="header" href="#아래-그림을-오른쪽-클릭하여-새탭에서-링크-열기-선택하여-동영상-재생-2">(아래 그림을 오른쪽 클릭하여 새탭에서 링크 열기 선택하여 동영상 재생)</a></h5>
 <p><a href="https://youtu.be/aCyKy27xYQ0"><img src="http://img.youtube.com/vi/aCyKy27xYQ0/0.jpg" alt="ex_01" /></a></p>
 <h4 id="02-도로-중-6차선-이상인-도로를-찾아-길이를-구하시오"><a class="header" href="#02-도로-중-6차선-이상인-도로를-찾아-길이를-구하시오">02. 도로 중 6차선 이상인 도로를 찾아 길이를 구하시오.</a></h4>
 <pre>
@@ -476,10 +586,10 @@ WHERE ST_DISJOINT(dong.geom, ST_BUFFER(fire.geom, 500))
     &lt;/ul&gt;
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="css"><a class="header" href="#css">CSS</a></h1>
-<div style="break-before: page; page-break-before: always;"></div><h1 id="source-3"><a class="header" href="#source-3">SOURCE</a></h1>
-<div style="break-before: page; page-break-before: always;"></div><h1 id="quiz-2"><a class="header" href="#quiz-2">QUIZ</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="source-1"><a class="header" href="#source-1">SOURCE</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="quiz"><a class="header" href="#quiz">QUIZ</a></h1>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="javascript"><a class="header" href="#javascript">JavaScript</a></h1>
-<div style="break-before: page; page-break-before: always;"></div><h1 id="source-4"><a class="header" href="#source-4">SOURCE</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="source-2"><a class="header" href="#source-2">SOURCE</a></h1>
 <div style="break-before: page; page-break-before: always;"></div><h4 id="01-박국토의-하루-지출-내역이-다음과-같다고-할-때-하루-지출-비용의-합계를-구한-후-적정-지출-비용의-초과-여부를-출력해-봅시다"><a class="header" href="#01-박국토의-하루-지출-내역이-다음과-같다고-할-때-하루-지출-비용의-합계를-구한-후-적정-지출-비용의-초과-여부를-출력해-봅시다">01. 박국토의 하루 지출 내역이 다음과 같다고 할 때, 하루 지출 비용의 합계를 구한 후 적정 지출 비용의 초과 여부를 출력해 봅시다.</a></h4>
 <pre><code>let traffic = 3000;
 let food = 8000;

@@ -155,7 +155,42 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="source"><a class="header" href="#source">SOURCE</a></h1>
+                        <h4 id="1-공간-데이터-테이블의-좌표계를-확인하고-모든-자료의-좌표계를-4326으로-변환해-봅시다"><a class="header" href="#1-공간-데이터-테이블의-좌표계를-확인하고-모든-자료의-좌표계를-4326으로-변환해-봅시다">1. 공간 데이터 테이블의 좌표계를 확인하고, 모든 자료의 좌표계를 4326으로 변환해 봅시다.</a></h4>
+<pre><code>SELECT * FROM geometry_columns;
+ 
+ALTER TABLE sigungu 
+ALTER COLUMN geom TYPE geometry(MULTIPOLYGON, 4326) 
+USING ST_TRANSFORM(geom, 4326);
+
+SELECT ST_SRID(geom) FROM sigungu LIMIT 1;
+</code></pre>
+<h4 id="2-서울특별시-동대문구의-행정-경계의-면적은-얼마인가단-단위는-km2으로-표현"><a class="header" href="#2-서울특별시-동대문구의-행정-경계의-면적은-얼마인가단-단위는-km2으로-표현">2. 서울특별시 동대문구의 행정 경계의 면적은 얼마인가?(단, 단위는 km2으로 표현)</a></h4>
+<pre><code>SELECT sig_kor_nm AS name, ST_AREA(geom)/1000000 AS area
+FROM sigungu
+WHERE sig_kor_nm='동대문구';
+</code></pre>
+<h4 id="3-한강과-인접한-서울특별시의-구는"><a class="header" href="#3-한강과-인접한-서울특별시의-구는">3. 한강과 인접한 서울특별시의 구는?</a></h4>
+<pre><code>SELECT sig_kor_nm
+FROM sigungu, hanriver 
+WHERE cd=1 and ST_INTERSECTS(sigungu.geom, hanriver.geom)
+</code></pre>
+<h4 id="4-pnu-주소-지목-공시지가2024년-기준-정보를-가지는-테이블을-생성해-봅시다"><a class="header" href="#4-pnu-주소-지목-공시지가2024년-기준-정보를-가지는-테이블을-생성해-봅시다">4. PNU, 주소, 지목, 공시지가(2024년 기준) 정보를 가지는 테이블을 생성해 봅시다.</a></h4>
+<pre><code>CREATE TABLE price1 AS
+SELECT j.pnu AS pnu, j.address AS 주소, j.jimok AS 지목, p.price24 AS 공시지가
+FROM jijuk AS j JOIN price AS p ON j.pnu = p.pnu
+</code></pre>
+<h4 id="5-지가의-상승률이-높은-상위-10개의-필지와-각-필지의-면적은"><a class="header" href="#5-지가의-상승률이-높은-상위-10개의-필지와-각-필지의-면적은">5. 지가의 상승률이 높은 상위 10개의 필지와 각 필지의 면적은?</a></h4>
+<pre><code>SELECT j.pnu AS pnu, j.jimok AS 지목, ST_AREA(j.geom) AS 면적, (p.price24 – p.price23)/p.price23*100 AS 지가상승률
+FROM jijuk AS j JOIN price AS p ON j.pnu = p.pnu
+WHERE p.price23 != 0 AND p.price24 != 0
+ORDER BY 지가상승률 DESC LIMIT 10
+</code></pre>
+<h4 id="6-서울특별시-서초구의-건물이-건설된-필지의-지목별-필지의-수는"><a class="header" href="#6-서울특별시-서초구의-건물이-건설된-필지의-지목별-필지의-수는">6. 서울특별시 서초구의 건물이 건설된 필지의 지목별 필지의 수는?</a></h4>
+<pre><code>SELECT j.jimok, COUNT(j.jimok) AS count
+FROM jijuk AS j JOIN building AS b ON j.pnu = b.pnu
+GROUP BY j.jimok
+ORDER BY count ASC
+</code></pre>
 
                     </main>
 
