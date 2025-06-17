@@ -160,10 +160,70 @@
 <h4 id="저는-공간정보-분야-특히-webgis-쪽을-강의하고-있습니다-올해부터는-교육생분들이-더-효과적으로-학습하실-수-있도록-웹-사이트를-하나-만들었습니다-저는-실습교육-중-강의-내용-학습-및-복습을-위해-연습-문제-또는-퀴즈를-제시합니다-교육생-여러분들이-자가-학습을-통해-습득하시되-본-사이트에서-해당-문제에-대한-정답을-확인하시고-향후-학습-시-참고용으로-활용하시면-될-것-같습니다"><a class="header" href="#저는-공간정보-분야-특히-webgis-쪽을-강의하고-있습니다-올해부터는-교육생분들이-더-효과적으로-학습하실-수-있도록-웹-사이트를-하나-만들었습니다-저는-실습교육-중-강의-내용-학습-및-복습을-위해-연습-문제-또는-퀴즈를-제시합니다-교육생-여러분들이-자가-학습을-통해-습득하시되-본-사이트에서-해당-문제에-대한-정답을-확인하시고-향후-학습-시-참고용으로-활용하시면-될-것-같습니다">저는 공간정보 분야, 특히 WebGIS 쪽을 강의하고 있습니다. 올해부터는 교육생분들이 더 효과적으로 학습하실 수 있도록 웹 사이트를 하나 만들었습니다. 저는 실습교육 중 강의 내용 학습 및 복습을 위해 연습 문제 또는 퀴즈를 제시합니다. 교육생 여러분들이 자가 학습을 통해 습득하시되 본 사이트에서 해당 문제에 대한 정답을 확인하시고, 향후 학습 시 참고용으로 활용하시면 될 것 같습니다.</a></h4>
 <h4 id="계속해서-기술이-발전하고-여러-학문이-융합하는-시대에-새로운-것을-배우는-것은-분명-어렵고-힘든-일입니다-그러나-새로운-것을-하나씩-알아가는-재미도-있지-않을까요-저도-가능했기에-여러분도-충분히-하실-수-있으실-겁니다-화이팅"><a class="header" href="#계속해서-기술이-발전하고-여러-학문이-융합하는-시대에-새로운-것을-배우는-것은-분명-어렵고-힘든-일입니다-그러나-새로운-것을-하나씩-알아가는-재미도-있지-않을까요-저도-가능했기에-여러분도-충분히-하실-수-있으실-겁니다-화이팅">계속해서 기술이 발전하고 여러 학문이 융합하는 시대에 새로운 것을 배우는 것은 분명 어렵고 힘든 일입니다. 그러나 새로운 것을 하나씩 알아가는 재미도 있지 않을까요? 저도 가능했기에 여러분도 충분히 하실 수 있으실 겁니다. 화이팅!!</a></h4>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="공간정보db"><a class="header" href="#공간정보db">공간정보DB</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="공간데이터베이스"><a class="header" href="#공간데이터베이스">공간데이터베이스</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h4 id="01-한-개의-point-벡터-자료를-저장하는-테이블-생성-및-값-입력"><a class="header" href="#01-한-개의-point-벡터-자료를-저장하는-테이블-생성-및-값-입력">01. 한 개의 Point 벡터 자료를 저장하는 테이블 생성 및 값 입력</a></h4>
+<pre><code>CREATE TABLE sejong_point (
+    name varchar(20),
+    location geometry(POINT, 4326)	
+);
+
+INSERT INTO sejong_point (name, location)
+VALUES('세종특별자치시청', 'POINT(127.289231 36.480057)');
+</code></pre>
+<h4 id="02-두-개-이상의-point-벡터-자료를-저장하는-테이블-생성-및-값-입력"><a class="header" href="#02-두-개-이상의-point-벡터-자료를-저장하는-테이블-생성-및-값-입력">02. 두 개 이상의 Point 벡터 자료를 저장하는 테이블 생성 및 값 입력</a></h4>
+<pre><code>CREATE TABLE sejong_points (
+    name varchar(20),
+    location geometry(MULTIPOINT, 4326)	
+);
+
+INSERT INTO sejong_points
+VALUES('정부청사', 'POINT(127.2651565 36.5020749)');
+INSERT INTO sejong_points
+VALUES('보건복지부', 'POINT(127.2622522 36.5024220)');
+</code></pre>
+<h4 id="03-한-개의-line-벡터-자료를-저장하는-테이블-생성-및-값-입력"><a class="header" href="#03-한-개의-line-벡터-자료를-저장하는-테이블-생성-및-값-입력">03. 한 개의 Line 벡터 자료를 저장하는 테이블 생성 및 값 입력</a></h4>
+<pre><code>CREATE TABLE sejong_line (
+    name varchar(20),
+    location geometry(LINESTRING, 4326)	
+);
+
+INSERT INTO sejong_line
+VALUES('한누리대로', 
+'LINESTRING(127.2615956 36.5048945, 127.2603770 36.5022889)');
+</code></pre>
+<h4 id="04-두-개-이상의-line-벡터-자료를-저장하는-테이블-생성-및-값-입력"><a class="header" href="#04-두-개-이상의-line-벡터-자료를-저장하는-테이블-생성-및-값-입력">04. 두 개 이상의 Line 벡터 자료를 저장하는 테이블 생성 및 값 입력</a></h4>
+<pre><code>CREATE TABLE sejong_lines (
+    name varchar(20),
+    location geometry(MULTILINESTRING, 4326)	
+);
+
+INSERT INTO sejong_lines(location)
+VALUES('MULTILINESTRING((127.2614299 36.5045711, 127.2691788 36.5022080),
+        (127.2604599 36.5024743, 127.2681733 36.5000778))');
+</code></pre>
+<h4 id="05-한-개의-polygon-벡터-자료를-저장하는-테이블-생성-및-값-입력"><a class="header" href="#05-한-개의-polygon-벡터-자료를-저장하는-테이블-생성-및-값-입력">05. 한 개의 Polygon 벡터 자료를 저장하는 테이블 생성 및 값 입력</a></h4>
+<pre><code>CREATE TABLE sejong_polygon (
+    name varchar(20),
+    location geometry(POLYGON, 4326)	
+);
+
+INSERT INTO sejong_polygon
+VALUES('국립세종도서관', 
+'POLYGON((127.2682235 36.4992861, 127.2688328 36.4990864, 
+          127.2684956 36.4984017, 127.2678923 36.4986014,
+          127.2682235 36.4992861))');
+</code></pre>
+<h4 id="06-두-개-이상의-polygon-벡터-자료를-저장하는-테이블-생성-및-값-입력"><a class="header" href="#06-두-개-이상의-polygon-벡터-자료를-저장하는-테이블-생성-및-값-입력">06. 두 개 이상의 Polygon 벡터 자료를 저장하는 테이블 생성 및 값 입력</a></h4>
+<pre><code>CREATE TABLE sejong_polygons (name varchar(20), location geometry(MULTIPOLYGON, 4326));
+
+INSERT INTO sejong_polygons(name, location)
+VALUES('국립세종도서관', 'POLYGON((127.2682235 36.4992861, 127.2688328 36.4990864, 127.2684956 36.4984017, 127.2678923 36.4986014, 127.2682235 36.4992861))');
+
+INSERT INTO sejong_polygons(name, location)
+VALUES('정부세종컨벤션센터', 'POLYGON((127.2691108 36.5011429, 127.2705364 36.5011548, 127.2705393 36.5008814, 127.2704713 36.5008790, 127.2704713 36.5007388, 127.2691019 36.5007412, 127.2691108 36.5011429))');
+</code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h4 id="01-두-개-이상의-point-벡터-자료를-저장하는-테이블-생성-및-값을-입력해-봅시다"><a class="header" href="#01-두-개-이상의-point-벡터-자료를-저장하는-테이블-생성-및-값을-입력해-봅시다">01. 두 개 이상의 Point 벡터 자료를 저장하는 테이블 생성 및 값을 입력해 봅시다.</a></h4>
-<pre>
-<code>
-CREATE TABLE ex_01 (
+<pre><code>CREATE TABLE ex_01 (
 	name varchar(20),
 	location geometry(MULTIPOINT, 4326)	
 );
@@ -171,8 +231,7 @@ INSERT INTO ex_01(name, location)
 VALUES('고용노동부', 'POINT(127.2618986 36.5014630)');
 INSERT INTO ex_01(name, location)
 VALUES('국가보훈처', 'POINT(127.2614193 36.5032112)');
-</code>
-</pre>
+</code></pre>
 <h4 id="02-두-개-이상의-line-벡터-자료를-저장하는-테이블-생성-및-값을-입력해-봅시다"><a class="header" href="#02-두-개-이상의-line-벡터-자료를-저장하는-테이블-생성-및-값을-입력해-봅시다">02. 두 개 이상의 Line 벡터 자료를 저장하는 테이블 생성 및 값을 입력해 봅시다.</a></h4>
 <pre>
 <code>
@@ -198,15 +257,16 @@ VALUES('대통령기록관', 'POLYGON((127.2730822 36.5017954, 127.2734715 36.50
 INSERT INTO ex_03(name, location)
 VALUES('홍보관', 'POLYGON((127.2706894 36.5002781, 127.2713780 36.5006383, 127.2716756 36.5002767, 127.2709904 36.4999179, 127.2706894 36.5002781))');
 </code>
-</pre><div style="break-before: page; page-break-before: always;"></div><h4 id="01-공간데이터베이스-연습문제-3번의-결과물ex_03을-qgis에서-벡터-자료로-저장해-봅시다"><a class="header" href="#01-공간데이터베이스-연습문제-3번의-결과물ex_03을-qgis에서-벡터-자료로-저장해-봅시다">01. 공간데이터베이스 연습문제 3번의 결과물(ex_03)을 QGIS에서 벡터 자료로 저장해 봅시다.</a></h4>
-<h5 id="아래-그림을-오른쪽-클릭하여-새탭에서-링크-열기-선택하여-동영상-재생"><a class="header" href="#아래-그림을-오른쪽-클릭하여-새탭에서-링크-열기-선택하여-동영상-재생">(아래 그림을 오른쪽 클릭하여 새탭에서 링크 열기 선택하여 동영상 재생)</a></h5>
-<p><a href="https://youtu.be/qlRzarBlVIw"><img src="http://img.youtube.com/vi/qlRzarBlVIw/0.jpg" alt="ex_01" /></a></p>
-<h4 id="02-qgis를-활용하여-실습폴더의-sejong_government-자료를-spatial-데이터베이스-밑에-공간-테이블로-생성해-봅시다"><a class="header" href="#02-qgis를-활용하여-실습폴더의-sejong_government-자료를-spatial-데이터베이스-밑에-공간-테이블로-생성해-봅시다">02. QGIS를 활용하여 실습폴더의 sejong_government 자료를 spatial 데이터베이스 밑에 공간 테이블로 생성해 봅시다.</a></h4>
-<h5 id="아래-그림을-오른쪽-클릭하여-새탭에서-링크-열기-선택하여-동영상-재생-1"><a class="header" href="#아래-그림을-오른쪽-클릭하여-새탭에서-링크-열기-선택하여-동영상-재생-1">(아래 그림을 오른쪽 클릭하여 새탭에서 링크 열기 선택하여 동영상 재생)</a></h5>
-<p><a href="https://youtu.be/gJnw1fH5G9M"><img src="http://img.youtube.com/vi/gJnw1fH5G9M/0.jpg" alt="ex_01" /></a></p>
+</pre><div style="break-before: page; page-break-before: always;"></div><h1 id="qgis-활용법"><a class="header" href="#qgis-활용법">QGIS 활용법</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="source"><a class="header" href="#source">SOURCE</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="quiz"><a class="header" href="#quiz">QUIZ</a></h1>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="기하데이터-함수"><a class="header" href="#기하데이터-함수">기하데이터 함수</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="source-1"><a class="header" href="#source-1">SOURCE</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="quiz-1"><a class="header" href="#quiz-1">QUIZ</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="공간질의실습"><a class="header" href="#공간질의실습">공간질의실습</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="source-2"><a class="header" href="#source-2">SOURCE</a></h1>
 <div style="break-before: page; page-break-before: always;"></div><h4 id="01-실습폴더의-ownercsv-파일을-이용하여-테이블을-생성해-봅시다"><a class="header" href="#01-실습폴더의-ownercsv-파일을-이용하여-테이블을-생성해-봅시다">01. 실습폴더의 owner.csv 파일을 이용하여 테이블을 생성해 봅시다.</a></h4>
-<h5 id="아래-그림을-오른쪽-클릭하여-새탭에서-링크-열기-선택하여-동영상-재생-2"><a class="header" href="#아래-그림을-오른쪽-클릭하여-새탭에서-링크-열기-선택하여-동영상-재생-2">(아래 그림을 오른쪽 클릭하여 새탭에서 링크 열기 선택하여 동영상 재생)</a></h5>
+<h5 id="아래-그림을-오른쪽-클릭하여-새탭에서-링크-열기-선택하여-동영상-재생"><a class="header" href="#아래-그림을-오른쪽-클릭하여-새탭에서-링크-열기-선택하여-동영상-재생">(아래 그림을 오른쪽 클릭하여 새탭에서 링크 열기 선택하여 동영상 재생)</a></h5>
 <p><a href="https://youtu.be/aCyKy27xYQ0"><img src="http://img.youtube.com/vi/aCyKy27xYQ0/0.jpg" alt="ex_01" /></a></p>
 <h4 id="02-도로-중-6차선-이상인-도로를-찾아-길이를-구하시오"><a class="header" href="#02-도로-중-6차선-이상인-도로를-찾아-길이를-구하시오">02. 도로 중 6차선 이상인 도로를 찾아 길이를 구하시오.</a></h4>
 <pre>
@@ -305,6 +365,129 @@ FROM fire, dong
 WHERE ST_DISJOINT(dong.geom, ST_BUFFER(fire.geom, 500))
 </pre>
 </code><div style="break-before: page; page-break-before: always;"></div><h1 id="웹프로그래밍기본"><a class="header" href="#웹프로그래밍기본">웹프로그래밍기본</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="html"><a class="header" href="#html">HTML</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h4 id="1-lx국토정보교육원-소개html_01txt-파일을-아래와-같이-웹-문서로-작성"><a class="header" href="#1-lx국토정보교육원-소개html_01txt-파일을-아래와-같이-웹-문서로-작성">1. LX국토정보교육원 소개(html_01.txt) 파일을 아래와 같이 웹 문서로 작성</a></h4>
+<pre><code>&lt;h1&gt;LX 국토정보교육원&lt;/h1&gt; 
+&lt;b&gt;국토정보교육원&lt;/b&gt;은 공간정보 &lt;sup&gt;공간정보처리및분석, 프로젝트, 플랫폼 분야
+&lt;/sup&gt; 드론, 지적측량 등 디지털 혁신을 선도하는 &lt;mark&gt;국내 유일의 국토정보 전문 
+교육훈련기관&lt;/mark&gt;입니다. &lt;br&gt;&lt;hr&gt;&lt;sub&gt;수요자 중심의 교육훈련체계 혁신을 
+바탕으로&lt;/sub&gt; 대한민국 국토정보 발전의 거점이자 &lt;i&gt;&lt;b&gt;미래형 국토정보 혁신 
+인재를 양성&lt;/b&gt;&lt;/i&gt;하는 전당이 되도록 최선의 노력을 다하겠습니다.
+</code></pre>
+<h4 id="2-lx국토정보교육원-교육과정-소개html_03txt-html_03_1jpg-참고-파일을-아래와-같이-웹-문서로-작성"><a class="header" href="#2-lx국토정보교육원-교육과정-소개html_03txt-html_03_1jpg-참고-파일을-아래와-같이-웹-문서로-작성">2. LX국토정보교육원 교육과정 소개(html_03.txt, html_03_1.jpg 참고) 파일을 아래와 같이 웹 문서로 작성</a></h4>
+<pre><code>&lt;h3&gt;직무전문분야&lt;/h3&gt;
+&lt;ul&gt;
+    &lt;li&gt;지적측량&lt;/li&gt;
+    &lt;li&gt;융복합(공간정보+지적)&lt;/li&gt;
+    &lt;li&gt;공간정보&lt;/li&gt;
+&lt;/ul&gt;
+</code></pre>
+<h4 id="3-lx국토정보교육원-교육과정-소개html_03txt-html_03_2jpg-참고-파일을-아래와-같이-웹-문서로-작성"><a class="header" href="#3-lx국토정보교육원-교육과정-소개html_03txt-html_03_2jpg-참고-파일을-아래와-같이-웹-문서로-작성">3. LX국토정보교육원 교육과정 소개(html_03.txt, html_03_2.jpg 참고) 파일을 아래와 같이 웹 문서로 작성</a></h4>
+<pre><code>&lt;h3&gt;플랫폼 개발 분야 교육체계&lt;/h3&gt;
+    &lt;ul&gt;
+        &lt;li&gt;공통과정&lt;/li&gt;
+        &lt;ol type="1"&gt;
+            &lt;li&gt;공간정보 이해&lt;/li&gt;
+            &lt;li&gt;GIS TOOL 운용&lt;/li&gt;
+            &lt;li&gt;인공지능 이해와 활용&lt;/li&gt;
+        &lt;/ol&gt;
+        &lt;li&gt;기본과정&lt;/li&gt;
+        &lt;ol type="a"&gt;
+            &lt;li&gt;웹프로그래밍 기본&lt;/li&gt;
+            &lt;li&gt;공간정보DB 기본&lt;/li&gt;
+            &lt;li&gt;3D그래픽 기본&lt;/li&gt;
+            &lt;li&gt;공간정보 플랫폼 기술융합&lt;/li&gt;
+        &lt;/ol&gt;
+        &lt;li&gt;전문과정&lt;/li&gt;
+        &lt;ol type="i"&gt;
+            &lt;li&gt;공간정보웹서비스 개발&lt;/li&gt;
+            &lt;li&gt;3차원공간정보서비스 구현&lt;/li&gt;
+        &lt;/ol&gt;
+    &lt;/ul&gt;
+</code></pre>
+<h4 id="4-lx국토정보교육원-교육과정-소개html_03txt-html_03_3jpg-참고-파일을-아래와-같이-웹-문서로-작성"><a class="header" href="#4-lx국토정보교육원-교육과정-소개html_03txt-html_03_3jpg-참고-파일을-아래와-같이-웹-문서로-작성">4. LX국토정보교육원 교육과정 소개(html_03.txt, html_03_3.jpg 참고) 파일을 아래와 같이 웹 문서로 작성</a></h4>
+<pre><code>&lt;h3&gt;플랫폼 개발 분야 교육내용&lt;/h3&gt;
+&lt;dl&gt;
+&lt;dt&gt;웹프로그래밍 기본&lt;/dt&gt;
+&lt;dd&gt;HTML, CSS, JavaScript의 기초 코딩과 활용 능력을 배양한다.&lt;/dd&gt;
+&lt;dt&gt;공간정보DB기본&lt;/dt&gt;
+&lt;dd&gt;공간정보 데이터를 SQL 문으로 조회, 처리하여 관리할 수 있다.&lt;/dd&gt;
+&lt;dt&gt;3D그래픽 기본&lt;/dt&gt;
+&lt;dd&gt;3D 그래픽의 기본 이론을 학습하여 3D 공간정보 표현 능력을 배양한다.&lt;/dd&gt;
+&lt;dt&gt;공간정보 플랫폼 기술융합&lt;/dt&gt;
+&lt;dd&gt;공간정보 기반 의사결정과 콘텐츠 융합에 대해 이해한다.&lt;/dd&gt;
+&lt;/dl&gt;
+</code></pre>
+<h4 id="5-표-태그-활용-실습"><a class="header" href="#5-표-태그-활용-실습">5. 표 태그 활용 실습</a></h4>
+<pre><code>&lt;table&gt;
+    &lt;tr&gt;
+        &lt;td&gt;방이름&lt;/td&gt;
+        &lt;td&gt;대상&lt;/td&gt;
+        &lt;td&gt;크기&lt;/td&gt;
+        &lt;td&gt;가격&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;td&gt;유채방&lt;/td&gt;
+        &lt;td&gt;여성 도미토리&lt;/td&gt;
+        &lt;td&gt;2인실&lt;/td&gt;
+        &lt;td rowspan="3"&gt;1인 20,000원&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;td rowspan="2"&gt;동백방&lt;/td&gt;
+        &lt;td&gt;동성 도미토리&lt;/td&gt;
+        &lt;td&gt;2인실&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;td&gt;가족 1팀&lt;/td&gt;
+        &lt;td&gt;4인실&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;td colspan="4"&gt;바깥채 전체를 렌트합니다.&lt;/td&gt;
+    &lt;/tr&gt;    
+&lt;/table&gt;
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h4 id="1-실습-폴더에서-html_02txt-파일을-열어-오른쪽과-같이-되도록html_02jpg-참고-html-문서를-작성해-봅시다"><a class="header" href="#1-실습-폴더에서-html_02txt-파일을-열어-오른쪽과-같이-되도록html_02jpg-참고-html-문서를-작성해-봅시다">1. 실습 폴더에서 html_02.txt 파일을 열어 오른쪽과 같이 되도록(html_02.jpg 참고) html 문서를 작성해 봅시다.</a></h4>
+<pre><code>&lt;h1&gt;LX 국토정보교육원&lt;/h1&gt; &lt;b&gt;국토정보교육원&lt;/b&gt;은 공간정보 
+&lt;sup&gt;공간정보처리및분석, 프로젝트, 플랫폼 분야&lt;/sup&gt; 드론, 지적측량 등 디지털 
+혁신을 선도하는 &lt;mark&gt;국내 유일의 국토정보 전문 교육훈련기관&lt;/mark&gt;입니다. 
+&lt;br&gt;&lt;hr&gt;&lt;sub&gt;수요자 중심의 교육훈련체계 혁신을 바탕으로&lt;/sub&gt; 대한민국 
+국토정보 발전의 거점이자 &lt;i&gt;&lt;b&gt;미래형 국토정보 혁신 인재를 양성&lt;/b&gt;&lt;/i&gt;하는 
+전당이 되도록 최선의 노력을 다하겠습니다.
+</code></pre>
+<h4 id="2-실습-폴더에서-html_04txt-파일을-열어-다음과-같이-되도록html_04jpg-참고-html-문서를-작성해-봅시다"><a class="header" href="#2-실습-폴더에서-html_04txt-파일을-열어-다음과-같이-되도록html_04jpg-참고-html-문서를-작성해-봅시다">2. 실습 폴더에서 html_04.txt 파일을 열어 다음과 같이 되도록(html_04.jpg 참고) html 문서를 작성해 봅시다.</a></h4>
+<pre><code>&lt;h3&gt;지적재조사의 필요성&lt;/h3&gt;
+    &lt;ul&gt;
+        &lt;li&gt;&lt;b&gt;훼손되고 부정확&lt;/b&gt;한 종이지적도&lt;/li&gt;
+        &lt;li&gt;국토의 약 15%가 지적도와 &lt;b&gt;불일치&lt;/b&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;b&gt;일본 동경을 기준&lt;/b&gt;으로 하는 대한민국 지적도&lt;/li&gt;
+    &lt;/ul&gt;
+&lt;h3&gt;기대효과&lt;/h3&gt;
+    &lt;ul&gt;
+        &lt;li&gt;디지털 지적을 통한 국민 재산권 보호&lt;/li&gt;
+        &lt;ul&gt;
+            &lt;li&gt;지표, 지상, 지하의 정보를 디지털 지적에 등록함으로써 
+            국민의 재산권 보호 실현&lt;/li&gt;            
+        &lt;/ul&gt;
+        &lt;li&gt;대국민 지적행정 서비스의 질적 향상&lt;/li&gt;
+        &lt;ul&gt;
+            &lt;li&gt;중복정보 및 불일치 정보 정정으로 정확한 토지정보 제공&lt;/li&gt;
+            &lt;li&gt;건축 및 개발 등에 필요한 행정적 절차의 간소화&lt;/li&gt;
+        &lt;/ul&gt;
+    &lt;/ul&gt;
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="css"><a class="header" href="#css">CSS</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="source-3"><a class="header" href="#source-3">SOURCE</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="quiz-2"><a class="header" href="#quiz-2">QUIZ</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="javascript"><a class="header" href="#javascript">JavaScript</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="source-4"><a class="header" href="#source-4">SOURCE</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h4 id="01-박국토의-하루-지출-내역이-다음과-같다고-할-때-하루-지출-비용의-합계를-구한-후-적정-지출-비용의-초과-여부를-출력해-봅시다"><a class="header" href="#01-박국토의-하루-지출-내역이-다음과-같다고-할-때-하루-지출-비용의-합계를-구한-후-적정-지출-비용의-초과-여부를-출력해-봅시다">01. 박국토의 하루 지출 내역이 다음과 같다고 할 때, 하루 지출 비용의 합계를 구한 후 적정 지출 비용의 초과 여부를 출력해 봅시다.</a></h4>
+<pre><code>let traffic = 3000;
+let food = 8000;
+let drink = 6000;
+let result = traffic + food + drink;
+result = result &gt; 10000? result-10000 + "원 초과" : "돈 관리 참 잘했어요!";
+document.write(result);
+</code></pre>
 
                     </main>
 

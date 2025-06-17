@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>웹프로그래밍기본 - Professor Soyoung Park&#x27;s Lecture Room</title>
+        <title>QUIZ - Professor Soyoung Park&#x27;s Lecture Room</title>
 
 
         <!-- Custom HTML head -->
@@ -155,17 +155,115 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="웹프로그래밍기본"><a class="header" href="#웹프로그래밍기본">웹프로그래밍기본</a></h1>
+                        <h4 id="01-실습폴더의-ownercsv-파일을-이용하여-테이블을-생성해-봅시다"><a class="header" href="#01-실습폴더의-ownercsv-파일을-이용하여-테이블을-생성해-봅시다">01. 실습폴더의 owner.csv 파일을 이용하여 테이블을 생성해 봅시다.</a></h4>
+<h5 id="아래-그림을-오른쪽-클릭하여-새탭에서-링크-열기-선택하여-동영상-재생"><a class="header" href="#아래-그림을-오른쪽-클릭하여-새탭에서-링크-열기-선택하여-동영상-재생">(아래 그림을 오른쪽 클릭하여 새탭에서 링크 열기 선택하여 동영상 재생)</a></h5>
+<p><a href="https://youtu.be/aCyKy27xYQ0"><img src="http://img.youtube.com/vi/aCyKy27xYQ0/0.jpg" alt="ex_01" /></a></p>
+<h4 id="02-도로-중-6차선-이상인-도로를-찾아-길이를-구하시오"><a class="header" href="#02-도로-중-6차선-이상인-도로를-찾아-길이를-구하시오">02. 도로 중 6차선 이상인 도로를 찾아 길이를 구하시오.</a></h4>
+<pre>
+<code>
+SELECT lanes, ST_LENGTH(geom/1000) AS length
+FROM road
+WHERE lanes >= 6
+</code>
+</pre>
+<h4 id="03-서울특별시-읍면동에서-area라는-칼럼을-삽입하여-모든-행정구역의-면적을-구하고-면적이-5km2-이상인-행정구역을-찾으시오"><a class="header" href="#03-서울특별시-읍면동에서-area라는-칼럼을-삽입하여-모든-행정구역의-면적을-구하고-면적이-5km2-이상인-행정구역을-찾으시오">03. 서울특별시 읍면동에서 area라는 칼럼을 삽입하여 모든 행정구역의 면적을 구하고, 면적이 5km2 이상인 행정구역을 찾으시오.</a></h4>
+<pre>
+<code>
+ALTER TABLE dong ADD COLUMN area real;
+UPDATE dong SET area = ST_AREA(geom);
+SELECT * FROM dong
+WHERE area > 5.0; 
+</code>
+</pre>
+<h4 id="04-서울특별시의-시군구별-면적을-계산하고-면적이-가장-큰-상위-5개를-선택하여-나타내-봅시다"><a class="header" href="#04-서울특별시의-시군구별-면적을-계산하고-면적이-가장-큰-상위-5개를-선택하여-나타내-봅시다">04. 서울특별시의 시군구별 면적을 계산하고, 면적이 가장 큰 상위 5개를 선택하여 나타내 봅시다.</a></h4>
+<pre>
+<code>
+SELECT sig_kor_nm AS name, ST_AREA(geom)/1000000 AS area
+FROM sigungu 
+ORDER BY area DESC
+</code>
+</pre>
+<h4 id="05-도로-중-강남구-필지를-가로질러서-지나가는-2차선-이상인-도로를-찾아-봅시다"><a class="header" href="#05-도로-중-강남구-필지를-가로질러서-지나가는-2차선-이상인-도로를-찾아-봅시다">05. 도로 중 강남구 필지를 가로질러서 지나가는 2차선 이상인 도로를 찾아 봅시다.</a></h4>
+<pre>
+<code>
+SELECT j.pnu, r.lanes, r.road_name
+FROM jijuk AS j, road AS r
+WHERE ST_CROSSES(j.geom, r.geom)
+</code>
+</pre>
+<h4 id="06-379428-12697653-지점을-기준으로-반경-1km-이내에-있는-마트를-찾아-봅시다"><a class="header" href="#06-379428-12697653-지점을-기준으로-반경-1km-이내에-있는-마트를-찾아-봅시다">06. 37.9428, 126.97653 지점을 기준으로 반경 1km 이내에 있는 마트를 찾아 봅시다.</a></h4>
+<pre>
+<code>
+SELECT * 
+FROM mart 
+WHERE ST_DISTANCE(ST_GeomFromText('Point(126.97653 37.59428)', 4326), 
+mart.geom) < 1000
 
+WHERE ST_DWITHIN(ST_GeomFromText('Point(126.97653 37.59428)', 4326), 
+mart.geom, 500)
+
+WHERE ST_INTERSECTS(mart.geom, ST_BUFFER(ST_GeomFromText('Point(126.97653 37.59428)', 4326), 500))
+</code>
+</pre>
+<h4 id="07-병원-중-강남구에-위치한-병원을-찾아-봅시다"><a class="header" href="#07-병원-중-강남구에-위치한-병원을-찾아-봅시다">07. 병원 중 강남구에 위치한 병원을 찾아 봅시다.</a></h4>
+<pre>
+<code>
+SELECT * 
+FROM hospital 
+WHERE hospital.소재지 LIKE '%강남구%'
+
+SELECT *
+FROM hospital AS h, gangnam AS g
+WHERE ST_WITHIN(h.geom, g.geom)
+</pre>
+</code>
+<h4 id="08-병원-중-한방병원만-찾아서-새로운-공간테이블을-생성해-봅시다"><a class="header" href="#08-병원-중-한방병원만-찾아서-새로운-공간테이블을-생성해-봅시다">08. 병원 중 한방병원만 찾아서 새로운 공간테이블을 생성해 봅시다.</a></h4>
+<pre>
+<code>
+CREATE TABLE clinic AS
+SELECT * 
+FROM hospital 
+WHERE hospital.시설명 LIKE '%한방병원%'
+</pre>
+</code>
+<h4 id="09-6차선-이상의-도로에-인접한-필지에-건설된-건물의-기하-데이터를-구해-봅시다"><a class="header" href="#09-6차선-이상의-도로에-인접한-필지에-건설된-건물의-기하-데이터를-구해-봅시다">09. 6차선 이상의 도로에 인접한 필지에 건설된 건물의 기하 데이터를 구해 봅시다.</a></h4>
+<pre>
+<code>
+SELECT j.pnu, j.jimok, b.geom
+FROM road AS r, jijuk AS j JOIN building AS b ON j.pnu = b.pnu
+WHERE ST_INTERSECTS(r.geom, j.geom) AND r.lanes >= 6
+</pre>
+</code>
+<h4 id="10-토지-소유자가-개인이면서-공유인수가-10명-이상인-필지를-찾아-면적을-구해-봅시다"><a class="header" href="#10-토지-소유자가-개인이면서-공유인수가-10명-이상인-필지를-찾아-면적을-구해-봅시다">10. 토지 소유자가 개인이면서 공유인수가 10명 이상인 필지를 찾아 면적을 구해 봅시다.</a></h4>
+<pre>
+<code>
+SELECT j.pnu, o.소유구분, o.공유인수, ST_AREA(j.geom) AS area
+FROM jijuk AS j JOIN owner AS o ON j.pnu = o.pnu
+WHERE o.소유구분 = '개인' AND 공유인수 >= 10</pre>
+</pre>
+</code>
+<h4 id="11-토지-소유자가-개인이면서-공유인수가-10명-이상인-필지를-찾아-면적을-구해-봅시다"><a class="header" href="#11-토지-소유자가-개인이면서-공유인수가-10명-이상인-필지를-찾아-면적을-구해-봅시다">11. 토지 소유자가 개인이면서 공유인수가 10명 이상인 필지를 찾아 면적을 구해 봅시다.</a></h4>
+<pre>
+<code>
+CREATE TABLE fire AS
+SELECT *
+FROM firestation 
+WHERE firestation.이름 = '종로소방서' 
+
+SELECT *
+FROM fire, dong
+WHERE ST_DISJOINT(dong.geom, ST_BUFFER(fire.geom, 500))
+</pre>
+</code>
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                            <a rel="prev" href="../db/quiz4.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="../db/source4.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
 
-                            <a rel="next prefetch" href="../web/README1.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next prefetch" href="../web/index.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
 
@@ -175,11 +273,11 @@
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                    <a rel="prev" href="../db/quiz4.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="../db/source4.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
 
-                    <a rel="next prefetch" href="../web/README1.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a rel="next prefetch" href="../web/index.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
             </nav>
