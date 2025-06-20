@@ -155,7 +155,101 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="source"><a class="header" href="#source">SOURCE</a></h1>
+                        <h4 id="1-스타일-시트"><a class="header" href="#1-스타일-시트">1. 스타일 시트</a></h4>
+<pre><code>&lt;h1 style = "font-family:궁서";&gt;LX국토정보교육원&lt;/h1&gt;
+
+&lt;style&gt;
+    h1{font-family:궁서;}
+&lt;/style&gt;
+
+&lt;link rel = "stylesheet" href = "html_01.css"&gt;
+</code></pre>
+<h4 id="2-글꼴-관련-스타일"><a class="header" href="#2-글꼴-관련-스타일">2. 글꼴 관련 스타일</a></h4>
+<pre><code>* {
+  font-family: "Gamja Flower";
+  font-size: 1.03em;
+}
+
+h1{
+    font-size: 2.0em;
+    color: #1866aa;
+    text-align: center;
+}
+
+p{
+    font-size:1.5em;
+    font-weight:bold;
+    color: #1866aa;
+}
+</code></pre>
+<h4 id="3-목록-관련-스타일"><a class="header" href="#3-목록-관련-스타일">3. 목록 관련 스타일</a></h4>
+<pre><code>/* li 두 군데랑 ul에 클래스 추가 후 스타일 변경 */
+.list1{
+    list-style-type: circle;
+}
+
+.list2{
+    list-style-type: square;
+}
+
+.list3{
+    list-style-type: none;
+}
+
+/* ul에 클래스 추가 후 스타일 변경 */
+.list4{
+    list-style-type: decimal;
+}
+</code></pre>
+<h4 id="4-배경-관련-스타일"><a class="header" href="#4-배경-관련-스타일">4. 배경 관련 스타일</a></h4>
+<pre><code>#name{
+    background-color: #e8f3fd;
+}
+
+#belong{
+    background-color: #e8f3fd;
+}
+
+/* textarea에 id 추가 후 스타일 변경 */
+#text{
+    background-color: #e8f3fd;
+}
+
+
+#header{
+    height: 50px;
+    background-image:url('lxcti.png');
+    background-size: 20% 50%;
+    background-position: left, center;
+    background-repeat: no-repeat;
+}
+</code></pre>
+<h4 id="5-포니셔닝-주요-속성들"><a class="header" href="#5-포니셔닝-주요-속성들">5. 포니셔닝 주요 속성들</a></h4>
+<pre><code>/* html 파일에서 div 수정 후 스타일 변경 */
+#header{
+    height: 50px;
+    background-image:url('lxcti.png');
+    background-size: 20% 50%;
+    background-position: left, center;
+    background-repeat: no-repeat;
+    border-bottom: 2px solid #e8f3fd;
+}
+
+#menu{
+    float:left;
+    /* height: 100%; */
+    border-right: 2px solid #e8f3fd;    
+    padding: 50px 20px 20px 0px;
+}
+
+#content{
+    float:left;
+    /* height: 100%; */
+    position: absolute;
+    top: 50px;
+    left: 200px;
+}
+</code></pre>
 
                     </main>
 

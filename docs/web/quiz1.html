@@ -184,6 +184,52 @@
         &lt;/ul&gt;
     &lt;/ul&gt;
 </code></pre>
+<h4 id="3-다음과-같이-나타나도록-웹-문서를-작성해-봅시다"><a class="header" href="#3-다음과-같이-나타나도록-웹-문서를-작성해-봅시다">3. 다음과 같이 나타나도록 웹 문서를 작성해 봅시다.</a></h4>
+<pre><code>    &lt;div id="container"&gt;
+        &lt;h1&gt;웹 기반 국토정보플랫폼 구축 &lt;/h1&gt;
+        &lt;p&gt;가장 유익한 과목은 무엇입니까?&lt;/p&gt;
+        &lt;hr&gt;
+        &lt;form&gt;
+            &lt;h4&gt;개인정보&lt;/h4&gt;
+            &lt;ul&gt;
+                &lt;li&gt;
+                    &lt;label for="name"&gt; 이름 &lt;/label&gt;
+                    &lt;input type="text" id="name" autofocus placeholder="공백없이 입력하세요"&gt;
+                &lt;/li&gt;
+                &lt;li&gt;
+                    &lt;label for="belong"&gt; 소속 &lt;/label&gt;
+                    &lt;input type="text" id="belong"&gt;
+                &lt;/li&gt;
+            &lt;/ul&gt;
+            &lt;h4&gt;과목선택&lt;/h4&gt;
+            &lt;ul&gt;
+                &lt;li&gt;
+                    &lt;label&gt;
+                        &lt;input type="radio" name="field" value="sub1"&gt; PostgreSQL과 PostGIS
+                    &lt;/label&gt;
+                &lt;/li&gt;
+                &lt;li&gt;
+                    &lt;label&gt;
+                        &lt;input type="radio" name="field" value="sub1"&gt; Geoserver
+                    &lt;/label&gt;
+                &lt;/li&gt;
+                &lt;li&gt;
+                    &lt;label&gt;
+                        &lt;input type="radio" name="field" value="sub1"&gt; OpenLayers
+                    &lt;/label&gt;
+                &lt;/li&gt;
+            &lt;/ul&gt;
+            &lt;h4&gt;건의사항&lt;/h4&gt;
+            &lt;label&gt;
+                &lt;textarea cols="60" rows="5" placeholder="수정 및 개선사항을 간략히 써 주세요."&gt;&lt;/textarea&gt;
+            &lt;/label&gt;
+            &lt;div&gt;
+                &lt;input type="submit" value="등록하기"&gt;
+                &lt;input type="reset" value="다시 쓰기"&gt;
+            &lt;/div&gt;
+        &lt;/form&gt;
+    &lt;/div&gt;
+</code></pre>
 
                     </main>
 

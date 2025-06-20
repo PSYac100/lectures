@@ -556,6 +556,13 @@ WHERE ST_DISJOINT(dong.geom, ST_BUFFER(fire.geom, 500))
     &lt;/tr&gt;    
 &lt;/table&gt;
 </code></pre>
+<h4 id="6-폼-태그-활용-실습"><a class="header" href="#6-폼-태그-활용-실습">6. 폼 태그 활용 실습</a></h4>
+<pre><code>&lt;h3&gt;직원 정보&lt;/h3&gt;
+&lt;label&gt;이&amp;nbsp;&amp;nbsp;&amp;nbsp;름&amp;nbsp;&amp;nbsp;&lt;input type="text", id="name"&gt;&lt;/label&gt;&lt;br&gt;
+&lt;label&gt;휴대폰&amp;nbsp;&amp;nbsp;&lt;input type="phone", id="phone"&gt;&amp;nbsp;&lt;/label&gt;&lt;br&gt;
+&lt;label&gt;이메일&amp;nbsp;&amp;nbsp;&lt;input type="email", id="email"&gt;&lt;/label&gt;&lt;br&gt;&lt;br&gt;
+&lt;input type="button", value="등록하기"&gt;&lt;/label&gt;
+</code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h4 id="1-실습-폴더에서-html_02txt-파일을-열어-오른쪽과-같이-되도록html_02jpg-참고-html-문서를-작성해-봅시다"><a class="header" href="#1-실습-폴더에서-html_02txt-파일을-열어-오른쪽과-같이-되도록html_02jpg-참고-html-문서를-작성해-봅시다">1. 실습 폴더에서 html_02.txt 파일을 열어 오른쪽과 같이 되도록(html_02.jpg 참고) html 문서를 작성해 봅시다.</a></h4>
 <pre><code>&lt;h1&gt;LX 국토정보교육원&lt;/h1&gt; &lt;b&gt;국토정보교육원&lt;/b&gt;은 공간정보 
 &lt;sup&gt;공간정보처리및분석, 프로젝트, 플랫폼 분야&lt;/sup&gt; 드론, 지적측량 등 디지털 
@@ -585,11 +592,349 @@ WHERE ST_DISJOINT(dong.geom, ST_BUFFER(fire.geom, 500))
         &lt;/ul&gt;
     &lt;/ul&gt;
 </code></pre>
+<h4 id="3-다음과-같이-나타나도록-웹-문서를-작성해-봅시다"><a class="header" href="#3-다음과-같이-나타나도록-웹-문서를-작성해-봅시다">3. 다음과 같이 나타나도록 웹 문서를 작성해 봅시다.</a></h4>
+<pre><code>    &lt;div id="container"&gt;
+        &lt;h1&gt;웹 기반 국토정보플랫폼 구축 &lt;/h1&gt;
+        &lt;p&gt;가장 유익한 과목은 무엇입니까?&lt;/p&gt;
+        &lt;hr&gt;
+        &lt;form&gt;
+            &lt;h4&gt;개인정보&lt;/h4&gt;
+            &lt;ul&gt;
+                &lt;li&gt;
+                    &lt;label for="name"&gt; 이름 &lt;/label&gt;
+                    &lt;input type="text" id="name" autofocus placeholder="공백없이 입력하세요"&gt;
+                &lt;/li&gt;
+                &lt;li&gt;
+                    &lt;label for="belong"&gt; 소속 &lt;/label&gt;
+                    &lt;input type="text" id="belong"&gt;
+                &lt;/li&gt;
+            &lt;/ul&gt;
+            &lt;h4&gt;과목선택&lt;/h4&gt;
+            &lt;ul&gt;
+                &lt;li&gt;
+                    &lt;label&gt;
+                        &lt;input type="radio" name="field" value="sub1"&gt; PostgreSQL과 PostGIS
+                    &lt;/label&gt;
+                &lt;/li&gt;
+                &lt;li&gt;
+                    &lt;label&gt;
+                        &lt;input type="radio" name="field" value="sub1"&gt; Geoserver
+                    &lt;/label&gt;
+                &lt;/li&gt;
+                &lt;li&gt;
+                    &lt;label&gt;
+                        &lt;input type="radio" name="field" value="sub1"&gt; OpenLayers
+                    &lt;/label&gt;
+                &lt;/li&gt;
+            &lt;/ul&gt;
+            &lt;h4&gt;건의사항&lt;/h4&gt;
+            &lt;label&gt;
+                &lt;textarea cols="60" rows="5" placeholder="수정 및 개선사항을 간략히 써 주세요."&gt;&lt;/textarea&gt;
+            &lt;/label&gt;
+            &lt;div&gt;
+                &lt;input type="submit" value="등록하기"&gt;
+                &lt;input type="reset" value="다시 쓰기"&gt;
+            &lt;/div&gt;
+        &lt;/form&gt;
+    &lt;/div&gt;
+</code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="css"><a class="header" href="#css">CSS</a></h1>
-<div style="break-before: page; page-break-before: always;"></div><h1 id="source-1"><a class="header" href="#source-1">SOURCE</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h4 id="1-스타일-시트"><a class="header" href="#1-스타일-시트">1. 스타일 시트</a></h4>
+<pre><code>&lt;h1 style = "font-family:궁서";&gt;LX국토정보교육원&lt;/h1&gt;
+
+&lt;style&gt;
+    h1{font-family:궁서;}
+&lt;/style&gt;
+
+&lt;link rel = "stylesheet" href = "html_01.css"&gt;
+</code></pre>
+<h4 id="2-글꼴-관련-스타일"><a class="header" href="#2-글꼴-관련-스타일">2. 글꼴 관련 스타일</a></h4>
+<pre><code>* {
+  font-family: "Gamja Flower";
+  font-size: 1.03em;
+}
+
+h1{
+    font-size: 2.0em;
+    color: #1866aa;
+    text-align: center;
+}
+
+p{
+    font-size:1.5em;
+    font-weight:bold;
+    color: #1866aa;
+}
+</code></pre>
+<h4 id="3-목록-관련-스타일"><a class="header" href="#3-목록-관련-스타일">3. 목록 관련 스타일</a></h4>
+<pre><code>/* li 두 군데랑 ul에 클래스 추가 후 스타일 변경 */
+.list1{
+    list-style-type: circle;
+}
+
+.list2{
+    list-style-type: square;
+}
+
+.list3{
+    list-style-type: none;
+}
+
+/* ul에 클래스 추가 후 스타일 변경 */
+.list4{
+    list-style-type: decimal;
+}
+</code></pre>
+<h4 id="4-배경-관련-스타일"><a class="header" href="#4-배경-관련-스타일">4. 배경 관련 스타일</a></h4>
+<pre><code>#name{
+    background-color: #e8f3fd;
+}
+
+#belong{
+    background-color: #e8f3fd;
+}
+
+/* textarea에 id 추가 후 스타일 변경 */
+#text{
+    background-color: #e8f3fd;
+}
+
+
+#header{
+    height: 50px;
+    background-image:url('lxcti.png');
+    background-size: 20% 50%;
+    background-position: left, center;
+    background-repeat: no-repeat;
+}
+</code></pre>
+<h4 id="5-포니셔닝-주요-속성들"><a class="header" href="#5-포니셔닝-주요-속성들">5. 포니셔닝 주요 속성들</a></h4>
+<pre><code>/* html 파일에서 div 수정 후 스타일 변경 */
+#header{
+    height: 50px;
+    background-image:url('lxcti.png');
+    background-size: 20% 50%;
+    background-position: left, center;
+    background-repeat: no-repeat;
+    border-bottom: 2px solid #e8f3fd;
+}
+
+#menu{
+    float:left;
+    /* height: 100%; */
+    border-right: 2px solid #e8f3fd;    
+    padding: 50px 20px 20px 0px;
+}
+
+#content{
+    float:left;
+    /* height: 100%; */
+    position: absolute;
+    top: 50px;
+    left: 200px;
+}
+</code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="quiz"><a class="header" href="#quiz">QUIZ</a></h1>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="javascript"><a class="header" href="#javascript">JavaScript</a></h1>
-<div style="break-before: page; page-break-before: always;"></div><h1 id="source-2"><a class="header" href="#source-2">SOURCE</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h4 id="1-적정-체중-구하기"><a class="header" href="#1-적정-체중-구하기">1. 적정 체중 구하기</a></h4>
+<pre><code>let userHeight = 180;
+let userWeight = 74;
+let normalWeight = (userHeight – 100) * 0.9
+document.write(normalWeight)
+
+let name = prompt("당신의 이름은?", "");
+let height = prompt("당신의 신장은?", "0");
+let weight = prompt("당신의 체중은?", "0");
+let normalWeight = (height – 100) * 0.9;
+let result = weight &gt;= normalWeight - 5 &amp;&amp; weight &lt;= normalWeight + 5;
+result = result ? "적정 체중입니다." : "적정 체중이 아닙니다.";
+document.write(name + "님은" + result);
+</code></pre>
+<h4 id="2-if문"><a class="header" href="#2-if문">2. if문</a></h4>
+<pre><code>let num = 10;
+if(num &lt; 500) {
+   document.write("hello");
+}
+</code></pre>
+<h4 id="03-방문자로부터-걸음-수를-입력-받고-걸음-수가-10000보-이상일-경우에만-결과를-출력하도록-작성"><a class="header" href="#03-방문자로부터-걸음-수를-입력-받고-걸음-수가-10000보-이상일-경우에만-결과를-출력하도록-작성">03. 방문자로부터 걸음 수를 입력 받고, 걸음 수가 10,000보 이상일 경우에만 결과를 출력하도록 작성</a></h4>
+<pre><code>let walkAccount = prompt("당신의 하루 걷는 양은 몇 보인가요?", "0");
+
+if(walkAccont &gt;= 10000){
+    document.write("매우 좋은 습관을 지니고 계시는군요!!");
+}
+</code></pre>
+<h4 id="04-else문"><a class="header" href="#04-else문">04. else문</a></h4>
+<pre><code>let num = 10;
+if(num &lt; 500) {
+   document.write("맞아요");
+} else{
+   document.write("아니에요");
+}
+</code></pre>
+<h4 id="05-방문자에게-질의응답-창으로-좋아하는-숫자를-입력-받고-입력된-값이-짝수인지-홀수인지에-따라-출력되는-결과가-다르게-나타나도록-작성"><a class="header" href="#05-방문자에게-질의응답-창으로-좋아하는-숫자를-입력-받고-입력된-값이-짝수인지-홀수인지에-따라-출력되는-결과가-다르게-나타나도록-작성">05. 방문자에게 질의응답 창으로 좋아하는 숫자를 입력 받고 입력된 값이 짝수인지, 홀수인지에 따라 출력되는 결과가 다르게 나타나도록 작성</a></h4>
+<pre><code>let num = prompt("당신이 좋아하는 숫자는?");
+if(num % 2 == 0){
+    document.write("당신이 좋아하는 숫자는 짝수입니다.");
+} else{
+    document.write("당신이 좋아하는 숫자는 홀수입니다.");
+}
+</code></pre>
+<h4 id="06-웹-페이지에-회원-탈퇴를-묻는-확인취소-창이-나타나게-하고-else-조건문으로-사용자가-확인-버튼을-눌렀을-때와-취소-버튼을-눌렀을-때-결과-화면이-다르게-나타나도록-작성"><a class="header" href="#06-웹-페이지에-회원-탈퇴를-묻는-확인취소-창이-나타나게-하고-else-조건문으로-사용자가-확인-버튼을-눌렀을-때와-취소-버튼을-눌렀을-때-결과-화면이-다르게-나타나도록-작성">06. 웹 페이지에 회원 탈퇴를 묻는 확인/취소 창이 나타나게 하고, else 조건문으로 사용자가 [확인] 버튼을 눌렀을 때와 [취소] 버튼을 눌렀을 때 결과 화면이 다르게 나타나도록 작성</a></h4>
+<pre><code>let result = confirm("정말로 회원을 탈퇴하시겠습니다?");
+if(result){
+   document.write("탈퇴 처리되었습니다");
+} else{
+    document.write("탈퇴 취소되었습니다");
+}
+</code></pre>
+<h4 id="07-방문자에게-현재-몇-월인지를-입력-받고-입력된-월에-해당되는-계절이-출력되도록-작성"><a class="header" href="#07-방문자에게-현재-몇-월인지를-입력-받고-입력된-월에-해당되는-계절이-출력되도록-작성">07. 방문자에게 현재 몇 월인지를 입력 받고 입력된 월에 해당되는 계절이 출력되도록 작성</a></h4>
+<pre><code>let mon = prompt("현재는 몇 월입니까?", "");
+if (mon &gt;= 3 &amp;&amp; mon &lt;= 5){
+   document.write("햇살 가득한 봄이네요!");
+} else if (mon &gt;= 6 &amp;&amp; mon &lt;= 8){
+   document.write("여행 가기 좋은 여름이네요!");
+} else if (mon &gt;= 9 &amp;&amp; mon &lt;= 11){
+   document.write("독서의 계절 가을이네요!");
+} else {
+   document.write("스키의 계절 겨울이네요!");
+}
+</code></pre>
+<h4 id="08-방문자로부터-아이디와-비밀번호를-입력-받고-아이디와-비밀번호가-일치했을-때-환영-문구가-출력되도록-작성"><a class="header" href="#08-방문자로부터-아이디와-비밀번호를-입력-받고-아이디와-비밀번호가-일치했을-때-환영-문구가-출력되도록-작성">08. 방문자로부터 아이디와 비밀번호를 입력 받고, 아이디와 비밀번호가 일치했을 때 환영 문구가 출력되도록 작성</a></h4>
+<pre><code>let user_id = prompt("아이디는?", "");
+let user_pw = prompt("비밀번호는?", "");
+if(user_id == "land"){
+    if(user_pw == "lx1234"){
+       document.write(user_id + "님 반갑습니다!");
+   } else{
+       alert("비밀번호가 일치하지 않습니다!");
+   }
+} else{
+    alert("아이디가 일치하지 않습니다!");
+    location.reload();
+}
+</code></pre>
+<h4 id="09-질의응답-창을-통해-포털-검색-사이트-이름을-입력-받고-switch-문을-이용하여-입력한-이름에-해당하는-사이트로-이동하도록-작성"><a class="header" href="#09-질의응답-창을-통해-포털-검색-사이트-이름을-입력-받고-switch-문을-이용하여-입력한-이름에-해당하는-사이트로-이동하도록-작성">09. 질의응답 창을 통해 포털 검색 사이트 이름을 입력 받고, switch 문을 이용하여 입력한 이름에 해당하는 사이트로 이동하도록 작성</a></h4>
+<pre><code>let name = prompt("네이버, 다음, 구글 중 즐겨 사용하는 포털 검색 사이트는?", "");
+let url
+switch(name){
+   case "네이버" : url = "www.naver.com";
+   break;
+   case "다음" : url = "www.daum.net";
+   break;
+   case "구글" : url = "www.google.com";
+   break;
+   default: alert("보기 중에 없는 사이트입니다!");
+}
+if(url) location.href = http:// + url;
+</code></pre>
+<h4 id="10-사용자가-입력한-숫자가-짝수인지-홀수인지를-알림창으로-알려주도록-작성"><a class="header" href="#10-사용자가-입력한-숫자가-짝수인지-홀수인지를-알림창으로-알려주도록-작성">10. 사용자가 입력한 숫자가 짝수인지 홀수인지를 알림창으로 알려주도록 작성</a></h4>
+<pre><code>let num = Number(prompt("숫자를 입력하세요"));
+switch(num % 2){
+  case 0: alert("짝수입니다");
+  break;
+  case 1: alert("홀수입니다");
+  break;
+  default: alert("숫자가 아닙니다");
+  break;
+}
+</code></pre>
+<h4 id="11-while문"><a class="header" href="#11-while문">11. while문</a></h4>
+<pre><code>let i = 1;
+while(i &lt;= 10){
+  document.write("안녕하세요" + i, "&lt;br/&gt;");
+  i++;
+}
+  document.write("===The End===");
+</code></pre>
+<h4 id="12-1부터-30까지의-숫자-중-2의-배수이면의-6의-배수인-숫자만-출력되도록-작성"><a class="header" href="#12-1부터-30까지의-숫자-중-2의-배수이면의-6의-배수인-숫자만-출력되도록-작성">12. 1부터 30까지의 숫자 중 2의 배수이면의 6의 배수인 숫자만 출력되도록 작성</a></h4>
+<pre><code>let i = 1
+while(i &lt;= 30){
+   if(i % 2 == 0 &amp;&amp; i % 6 == 0){
+       document.write(i, "&lt;br/&gt;");
+   }
+   i++
+}
+</code></pre>
+<h4 id="13-do-while문"><a class="header" href="#13-do-while문">13. do while문</a></h4>
+<pre><code>let i = 1;
+do{
+  document.write("안녕하세요" + i, "&lt;br/&gt;");
+  i++;
+}
+  while(i &lt;= 10);
+</code></pre>
+<h4 id="14-while문-vs-do-while문"><a class="header" href="#14-while문-vs-do-while문">14. while문 vs do while문</a></h4>
+<pre><code>let i = 10;
+while(i &lt; 3) {
+  document.write("안녕하세요" + i, "&lt;br/&gt;");
+}
+document.write("===The End===");
+
+let i = 10;
+do {
+  document.write("안녕하세요" + i, "&lt;br/&gt;");
+} while(i &lt; 3)
+document.write("===The End===");
+</code></pre>
+<h4 id="15-for문"><a class="header" href="#15-for문">15. for문</a></h4>
+<pre><code>for(i = 1; i &lt;= 10; i++){
+  document.write("안녕하세요" + i, "&lt;br/&gt;");
+}
+</code></pre>
+<h4 id="16-중첩-for문"><a class="header" href="#16-중첩-for문">16. 중첩 for문</a></h4>
+<pre><code>for(i = 1; i &lt;= 10; i++){
+   for(j = 1; j &lt;= 10, j++){
+     document.write(String(i) + String(j) + "&lt;br/&gt;"); 
+   }
+}
+</code></pre>
+<h4 id="17-for문에-break문-사용하지-않은-경우-vs-사용한-경우"><a class="header" href="#17-for문에-break문-사용하지-않은-경우-vs-사용한-경우">17. for문에 break문 사용하지 않은 경우 vs 사용한 경우</a></h4>
+<pre><code>for(i = 1; i &lt;= 10; i++){
+  document.write("안녕하세요" + i, "&lt;br/&gt;");
+}
+
+for(i = 1; i &lt;= 10; i++){
+  if (i == 5) {
+    break;
+  }   
+document.write("안녕하세요" + i, "&lt;br/&gt;");
+}
+</code></pre>
+<h4 id="18-for문에-continue문-사용하지-않은-경우-vs-사용한-경우"><a class="header" href="#18-for문에-continue문-사용하지-않은-경우-vs-사용한-경우">18. for문에 continue문 사용하지 않은 경우 vs 사용한 경우</a></h4>
+<pre><code>for(i = 1; i &lt;= 10; i++){
+  document.write("안녕하세요" + i, "&lt;br/&gt;");
+}
+
+for(i = 1; i &lt;= 10; i++){
+  if (i == 5) {
+    continue;
+  }   
+document.write("안녕하세요" + i, "&lt;br/&gt;");
+}
+</code></pre>
+<h4 id="19-사용자로부터-구구단의-단수를-입력-받아-화면에-구구단을-출력하도록-작성"><a class="header" href="#19-사용자로부터-구구단의-단수를-입력-받아-화면에-구구단을-출력하도록-작성">19. 사용자로부터 구구단의 단수를 입력 받아 화면에 구구단을 출력하도록 작성</a></h4>
+<pre><code>let num = prompt("출력할 구구단 단수를 입력하세요", "1");
+let i = 1;
+
+document.write("for문을 이용한 출력", "&lt;br&gt;");
+for(i = 1; i &lt; 10; i++){
+    document.write(num + "*" + i + "=" + (num * i) + "&lt;br&gt;");
+}
+
+i = 1;
+document.write("while문을 이용한 출력", "&lt;br&gt;");
+while(i &lt; 10) {
+    document.write(num + "*" + i + "=" + (num * i) + "&lt;br&gt;");
+    i++;
+}
+
+i = 1;
+document.write("do while문을 이용한 출력", "&lt;br&gt;");
+do {
+    document.write(num + "*" + i + "=" + (num * i) + "&lt;br&gt;");
+    i++;
+} while (i &lt; 10)
+</code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h4 id="01-박국토의-하루-지출-내역이-다음과-같다고-할-때-하루-지출-비용의-합계를-구한-후-적정-지출-비용의-초과-여부를-출력해-봅시다"><a class="header" href="#01-박국토의-하루-지출-내역이-다음과-같다고-할-때-하루-지출-비용의-합계를-구한-후-적정-지출-비용의-초과-여부를-출력해-봅시다">01. 박국토의 하루 지출 내역이 다음과 같다고 할 때, 하루 지출 비용의 합계를 구한 후 적정 지출 비용의 초과 여부를 출력해 봅시다.</a></h4>
 <pre><code>let traffic = 3000;
 let food = 8000;
@@ -598,6 +943,12 @@ let result = traffic + food + drink;
 result = result &gt; 10000? result-10000 + "원 초과" : "돈 관리 참 잘했어요!";
 document.write(result);
 </code></pre>
+<h4 id="02-방문자로부터-하루-통화량을-입력-받고-60분-이상일-경우에만-결과를-출력하도록-작성해-봅시다"><a class="header" href="#02-방문자로부터-하루-통화량을-입력-받고-60분-이상일-경우에만-결과를-출력하도록-작성해-봅시다">02. 방문자로부터 하루 통화량을 입력 받고, 60분 이상일 경우에만 결과를 출력하도록 작성해 봅시다.</a></h4>
+<pre><code>let callTime = prompt("당신의 하루 통화량은 얼마인가요?", "0");
+
+if(callTime &gt;= 60){
+    document.write("많이 사용하는 편이네요!!");
+}</code></pre>
 
                     </main>
 
