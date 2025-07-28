@@ -183,7 +183,11 @@ p{
 }
 </code></pre>
 <h4 id="3-목록-관련-스타일"><a class="header" href="#3-목록-관련-스타일">3. 목록 관련 스타일</a></h4>
-<pre><code>/* li 두 군데랑 ul에 클래스 추가 후 스타일 변경 */
+<pre><code>/* li 두 군데랑 ul에 클래스 추가 후 스타일 변경 
+&lt;li class ="list1"&gt;
+&lt;li class ="list2"&gt;
+&lt;li class ="list3"&gt; */
+
 .list1{
     list-style-type: circle;
 }
@@ -196,7 +200,9 @@ p{
     list-style-type: none;
 }
 
-/* ul에 클래스 추가 후 스타일 변경 */
+/* ul에 클래스 추가 후 스타일 변경 
+&lt;ul class ="list3"&gt; */
+
 .list4{
     list-style-type: decimal;
 }
@@ -210,44 +216,68 @@ p{
     background-color: #e8f3fd;
 }
 
-/* textarea에 id 추가 후 스타일 변경 */
+/* textarea에 id 추가 후 스타일 변경 
+&lt;textarea id="text"&gt; */
+
 #text{
     background-color: #e8f3fd;
 }
 
+/* html 파일에서 div 수정 후 스타일 변경 
+&lt;div id="header"&gt;&lt;/div&gt;
+&lt;div id="container"&gt;
+&lt;div id="menu"&gt;&lt;/div&gt;
+&lt;div id="content"&gt;&lt;/div&gt;
+&lt;/div&gt; */
 
 #header{
     height: 50px;
     background-image:url('lxcti.png');
-    background-size: 20% 50%;
-    background-position: left, center;
-    background-repeat: no-repeat;
-}
-</code></pre>
-<h4 id="5-포니셔닝-주요-속성들"><a class="header" href="#5-포니셔닝-주요-속성들">5. 포니셔닝 주요 속성들</a></h4>
-<pre><code>/* html 파일에서 div 수정 후 스타일 변경 */
-#header{
-    height: 50px;
-    background-image:url('lxcti.png');
-    background-size: 20% 50%;
+    background-size: 20% 60%;
     background-position: left, center;
     background-repeat: no-repeat;
     border-bottom: 2px solid #e8f3fd;
 }
-
-#menu{
+</code></pre>
+<h4 id="5-포니셔닝-주요-속성들"><a class="header" href="#5-포니셔닝-주요-속성들">5. 포니셔닝 주요 속성들</a></h4>
+<pre><code>#menu{
     float:left;
-    /* height: 100%; */
     border-right: 2px solid #e8f3fd;    
-    padding: 50px 20px 20px 0px;
+    padding: 10px 20px 20px 20px;
 }
 
 #content{
     float:left;
-    /* height: 100%; */
     position: absolute;
-    top: 50px;
-    left: 200px;
+    top: 60px;
+    left: 150px;
+}
+</code></pre>
+<h4 id="6-테두리-관련-속성들"><a class="header" href="#6-테두리-관련-속성들">6. 테두리 관련 속성들</a></h4>
+<pre><code>/* html 파일에서 과목체계도 링크 수정 후 스타일 변경
+&lt;a href="table.html" target="_blank"&gt;&lt;h4&gt;과목체계도&lt;/h4&gt;&lt;/a&gt; 
+
+table.html에 스타일시트 삽입(원할 시 글꼴도 변경)
+&lt;link rel="stylesheet" href="test.css"&gt; */
+
+table {
+    border: 1.5px solid #000;
+    padding: auto;  
+    margin: auto; 
+}
+
+th{
+    border: 1px solid #000;
+    background-color:#1866aa;
+    color: #fff;
+    padding: 10px;
+}
+
+td{
+    border: 1px solid #000;
+    background-color: #bfdbf3;
+    padding: 10px;
+    text-align: center;
 }
 </code></pre>
 
