@@ -1,1 +1,1 @@
-# dbms
+# LECTURES
