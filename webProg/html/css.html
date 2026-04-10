@@ -1,0 +1,574 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>CSS 스타일링 - webProg</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="highlight-css" href="../highlight.css">
+        <link rel="stylesheet" id="tomorrow-night-css" href="../tomorrow-night.css">
+        <link rel="stylesheet" id="ayu-highlight-css" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "../";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+            window.path_to_searchindex_js = "../searchindex.js";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../toc.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+                sidebar_toggle.checked = false;
+            }
+            if (sidebar === 'visible') {
+                sidebar_toggle.checked = true;
+            } else {
+                html.classList.remove('sidebar-visible');
+            }
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../toc.html"></iframe>
+            </noscript>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">webProg</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <div class="search-wrapper">
+                            <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                            <div class="spinner-wrapper">
+                                <i class="fa fa-spinner fa-spin"></i>
+                            </div>
+                        </div>
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="css-기초"><a class="header" href="#css-기초">CSS 기초</a></h1>
+<h2 id="1-css-개념"><a class="header" href="#1-css-개념">1. CSS 개념</a></h2>
+<ul>
+<li>
+<h3 id="cascading-style-sheets의-약어로-텍스트-색상이나-크기-이미지-크기나-위치-표-색상-배치-방법-등-웹-문서의-디자인-요소를-담당"><a class="header" href="#cascading-style-sheets의-약어로-텍스트-색상이나-크기-이미지-크기나-위치-표-색상-배치-방법-등-웹-문서의-디자인-요소를-담당">Cascading Style Sheets의 약어로 텍스트 색상이나 크기, 이미지 크기나 위치, 표 색상, 배치 방법 등 <em>웹 문서의 디자인 요소를 담당</em></a></h3>
+</li>
+<li>
+<h3 id="css-zen-gardenhttpcsszengardencom-사이트-접속해서-확인"><a class="header" href="#css-zen-gardenhttpcsszengardencom-사이트-접속해서-확인">CSS Zen Garden(http://csszengarden.com) 사이트 접속해서 확인</a></h3>
+</li>
+<li>
+<h3 id="스타일-형식은-선택자-다음에-중괄호가-오고-그-사이에-속성을-입력"><a class="header" href="#스타일-형식은-선택자-다음에-중괄호가-오고-그-사이에-속성을-입력">스타일 형식은 <em>선택자 다음에 중괄호({})가 오고 그 사이에 속성</em>을 입력</a></h3>
+<ul>
+<li>중괄호 안에 들어가는 <i>속성과 속성 값은 콜론(:), 속성과 속성 값 쌍 다음에는 세미콜론(;)</i>으로 구분<br>
+<img src="../images/css01.png" width ="70%" height="70%"><br><br></li>
+</ul>
+  <details style = "margin-left: 30px"><summary> 스타일 형식 보기(클릭)</summary>
+<pre><code class="language-css">p{
+    color : blue; 
+    font-size: 16px;
+}
+h2{
+    font-size: 20px; 
+    color: orange;
+}
+</code></pre>
+  </details>
+  <details style = "margin-left: 30px"><summary> 정답 보기/숨기기(클릭)</summary>
+  텍스트 단락의 글자 색을 파란색, 글자 크기를 16px로 지정<br>
+  2단계 제목의 글자 크기를 20px, 글자 색상을 오렌지로 지정
+</li>
+</ul>
+<h2 id="2-스타일-시트"><a class="header" href="#2-스타일-시트">2. 스타일 시트</a></h2>
+<ul>
+<li>
+<h3 id="스타일-규칙들을-한-눈에-확인하고-필요할-때마다-수정하기-쉽도록-한-군데-묶어-놓은-것"><a class="header" href="#스타일-규칙들을-한-눈에-확인하고-필요할-때마다-수정하기-쉽도록-한-군데-묶어-놓은-것">스타일 규칙들을 한 눈에 확인하고 필요할 때마다 수정하기 쉽도록 <em>한 군데 묶어 놓은 것</em></a></h3>
+<ul>
+<li>
+<p>인라인 스타일</p>
+<ul>
+<li>스타일 시트를 사용하지 않고 스타일을 <em>적용할 대상에 직접</em> 표시</li>
+</ul>
+</li>
+<li>
+<p>내부 스타일 시트</p>
+<ul>
+<li>웹 문서 안에서 사용할 스타일을 <i><code>&lt;head&gt;</code> 태그 안에서 정의하고, <code>&lt;style&gt;</code> 태그 사이</i>에 작성</li>
+</ul>
+</li>
+<li>
+<p>외부 스타일 시트</p>
+<ul>
+<li>웹 문서에서 사용할 스타일을 <i>별도 파일로 저장(*.css)</i>해 놓고 <code>&lt;link&gt;</code> 태그로 연결
+<br><br>
+<img src="../images/css02.png" width ="90%" height="90%"><br><br></li>
+</ul>
+</li>
+</ul>
+  <details style = "margin-left: 30px"><summary> HTML 코드 보기/숨기기(클릭)</summary>
+<pre><code class="language-html">    &lt;h1&gt;LX국토정보공사&lt;/h1&gt;
+    &lt;h2&gt;국토정보교육원&lt;/h2&gt;
+</code></pre>
+  </details>
+  <details style = "margin-left: 30px"><summary> CSS 코드 보기/숨기기(클릭)</summary>
+<pre><code class="language-css">&lt;h1 style = "font-family:궁서";&gt;LX국토정보공사&lt;/h1&gt;
+
+&lt;style&gt;
+    h1{font-family:궁서;}
+&lt;/style&gt;
+
+&lt;link rel = "stylesheet" href = "html_01.css"&gt;
+    h1{font-family:궁서;}
+</code></pre>
+  </details>
+</li>
+</ul>
+<h2 id="3-주요-선택자"><a class="header" href="#3-주요-선택자">3. 주요 선택자</a></h2>
+<ul>
+<li>
+<h3 id="스타일-속성을-적용하는-요소인-선택자는-태그-하나가-될-수도-있지만-여러-개의-요소를-묶어-별도의-선택자로-지정-가능"><a class="header" href="#스타일-속성을-적용하는-요소인-선택자는-태그-하나가-될-수도-있지만-여러-개의-요소를-묶어-별도의-선택자로-지정-가능">스타일 속성을 적용하는 요소인 선택자는 태그 하나가 될 수도 있지만 여러 개의 요소를 묶어 별도의 선택자로 지정 가능</a></h3>
+<ul>
+<li>
+<p>전체 선택자</p>
+<ul>
+<li>주로 <em>모든 요소</em>에 한꺼번에 스타일을 적용할 때 사용하는 것으로 <i>*(별표)</i>를 사용<br>
+<img src="../images/css03.png" width ="90%" height="90%"></li>
+</ul>
+</li>
+<li>
+<p>태그 선택자</p>
+<ul>
+<li><em>특정 태그</em>가 쓰인 모든 요소에 스타일 적용<br>
+<img src="../images/css04.png" width ="90%" height="90%"></li>
+</ul>
+</li>
+<li>
+<p>그룹 선택자</p>
+<ul>
+<li><em>둘 이상 요소</em>에 같은 스타일을 적용할 때 사용하는 것으로 <i>쉼표(,)로 구분</i>해 여러 선택자를 나열한 후 스타일을 정의<br>
+<img src="../images/css05.png" width ="90%" height="90%"></li>
+</ul>
+</li>
+<li>
+<p>클래스 선택자(여러 번 적용 가능)</p>
+<ul>
+<li><em>특정 부분</em>에만 스타일을 적용할 때 사용하는 것으로 태그 대신 클래스 이름을 사용하고 클래스 이름 앞에 <i>마침표(.)</i>를 붙임(대부분 여러 요소에 같은 스타일)<br>
+<img src="../images/css06.png" width ="90%" height="90%"></li>
+</ul>
+</li>
+<li>
+<p>id 선택자(한 번만 적용 가능)</p>
+<ul>
+<li>클래스 선택자와 마찬가지로 <em>특정 부분</em>에 스타일을 지정할 때 사용하는데 마침표(.) 대신 <i># 기호</i>를 사용(페이지에서 딱 하나만 존재하는 요소)<br>
+<img src="../images/css07.png" width ="90%" height="90%"><br><br></li>
+</ul>
+</li>
+</ul>
+  <details style = "margin-left: 30px"><summary>HTML 코드 보기/숨기기(클릭)</summary>
+<pre><code class="language-html">&lt;h1&gt;LX국토정보공사&lt;/h1&gt;
+&lt;h2&gt;LX국토정보교육원&lt;/h2&gt;
+&lt;h2 class = "lx"&gt;LX국토정보교육원&lt;/h2&gt;
+&lt;h2 id = "lx"&gt;LX국토정보교육원&lt;/h2&gt;
+</code></pre>
+  </details>
+  <details style = "margin-left: 30px"><summary>CSS 코드 보기/숨기기(클릭)</summary>
+<pre><code class="language-css">*{
+    font-family: 궁서;
+}
+
+h2{
+    font-family: 궁서;
+}
+
+h1, h2{
+    font-family: 궁서;
+}
+
+.lx{
+    font-family: 돋움;
+} 
+
+#lx{
+    font-family: 돋움;
+}
+</code></pre>
+  </details>
+</li>
+</ul>
+<h2 id="4-텍스트-관련-스타일"><a class="header" href="#4-텍스트-관련-스타일">4. 텍스트 관련 스타일</a></h2>
+<ul>
+<li>
+<h3 id="font-family-속성"><a class="header" href="#font-family-속성">font-family 속성</a></h3>
+<ul>
+<li>
+<p>웹 문서에 사용할 글꼴 지정하기
+<img src="../images/css08.png" width ="90%" height="90%"></p>
+</li>
+<li>
+<p>웹 폰트(web font) 사용하기</p>
+<ul>
+<li>
+<p>웹 문서를 작성할 때 웹 문서 안에 글꼴 정보도 함께 저장했다가 사용자가 <em>웹 문서에 접속하면 글꼴을 사용자 시스템으로 다운로드 시키는 방식</em>을 사용</p>
+</li>
+<li>
+<p>구글 웹 폰트(https://fonts.google.com) 사용하는 방법<br><br>
+<img src="../images/css09.png" width ="100%" height="100%"></p>
+</li>
+</ul>
+  <details><summary> HTML 코드 보기/숨기기(클릭)</summary>
+<pre><code class="language-html">&lt;!-- Gamja-flower 폰트 embed code in the &lt;head&gt; of your html 부분 붙여넣기 --&gt;
+&lt;link rel="preconnect" href="https://fonts.googleapis.com"&gt;
+&lt;link rel="preconnect" href="https://fonts.gstatic.com" crossorigin&gt;
+&lt;link href="https://fonts.googleapis.com/css2?family=Gamja+Flower&amp;display=swap" rel="stylesheet"&gt;
+</code></pre>
+  </details>
+  <details><summary> CSS 코드 보기/숨기기(클릭)</summary>
+<pre><code class="language-css">/* Gamja Flower:CSS class 부분 붙여넣기 */
+.gamja-flower-regular {
+    font-family: "Gamja Flower", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+*{
+    font-family:"Gamja Flower";
+}
+</code></pre>
+  </details>
+</li>
+</ul>
+</li>
+<li>
+<h3 id="font-size-속성"><a class="header" href="#font-size-속성">font-size 속성</a></h3>
+<ul>
+<li>
+<p><em>글자 크기를 조절</em>하는 것으로 주로 크기 값을 직접 지정하는 방법을 사용</p>
+</li>
+<li>
+<p>크기를 지정할 때 사용할 수 있는 단위는 em, ex, px, pt가 있고 <em>주로 px 단위</em>를 사용</p>
+</li>
+</ul>
+<div class="table-wrapper"><table><thead><tr><th style="text-align: center">단위</th><th style="text-align: center">설명</th></tr></thead><tbody>
+<tr><td style="text-align: center">em</td><td style="text-align: center">대문자 M 발음, 해당 글꼴의 대문자 M의 너비를 기준으로 크기를 조절</td></tr>
+<tr><td style="text-align: center">ex</td><td style="text-align: center">x-height, 해당 글꼴의 소문자 x의 높이를 기준으로 크기를 조절</td></tr>
+<tr><td style="text-align: center">px</td><td style="text-align: center">pixel, 모니터에 따른 상대적 크기</td></tr>
+<tr><td style="text-align: center">pt</td><td style="text-align: center">point, 일반 문서에 많이 사용하는 단위</td></tr>
+</tbody></table>
+</div>  <br>
+  <details style = "margin-left: 30px"><summary> CSS 코드 보기/숨기기(클릭)</summary>
+<pre><code class="language-css">/* 전체 선택자 스타일 수정, 태그 선택자 스타일 삽입 */
+*{
+    font-family:"Gamja Flower";
+    font-size: 15px;
+}
+
+p{
+    font-size: 30px;
+}
+
+h4{
+    font-size: 20px;
+}
+</code></pre>
+  </details>
+</li>
+<li>
+<h3 id="color-속성"><a class="header" href="#color-속성">color 속성</a></h3>
+<ul>
+<li><em>글자 색을 지정</em>하는 속성으로 색상 값은 <em>16진수나 rgb(또는 rgba), hsl(또는 hsla), 색상 이름</em>으로 표시
+<ul>
+<li>
+<p>16진수: RRGGBB와 같이 표기하고 f가 제일 큰 수치이고, 0이 제일 작은 수치</p>
+</li>
+<li>
+<p>rgb: 0 ~ 255 사이의 숫자로 표기하고 값이 클수록 색상 표현이 큼</p>
+</li>
+<li>
+<p>hsl: 색상(hue) 각도를 기준으로 색상을 둥글게 배치한 색상환으로 표시, 채도(saturation)와 밝기(lightness)는 %로 표시</p>
+</li>
+<li>
+<p>알파(a): 0 ~ 1 사이의 숫자로 표기하고 0에 가까울수록 투명, 1에 가까울수록 불투명</p>
+</li>
+</ul>
+</li>
+<li>Color Picker(http://www.colorpicker.com)로 원하는 색상을 추출
+<img src="../images/css10.png" width ="100%" height="100%"><br><br></li>
+</ul>
+  <details style = "margin-left: 30px"><summary> CSS 코드 보기/숨기기(클릭)</summary>
+<pre><code class="language-css">/* color 속성 연습 후 삭제, 실습에서는 16진수 사용 */
+/* p{
+    color: #ff0000;   f00으로도 사용
+    color: rgba(255, 0, 0, 1.0);
+    color: red; 
+} */
+    
+/* 태그 선택자 스타일 삽입 */
+p{
+    font-size: 30px;
+    color: #1866aa;
+}
+
+h4{
+    font-size: 20px;
+    color: #1866aa;
+}
+</code></pre>
+  </details>  
+</li>
+</ul>
+<h2 id="5-문단-스타일"><a class="header" href="#5-문단-스타일">5. 문단 스타일</a></h2>
+<ul>
+<li>
+<h3 id="text-align-속성"><a class="header" href="#text-align-속성">text-align 속성</a></h3>
+<ul>
+<li>문단의 텍스를 정렬하는 속성으로 워드나 한글문서에서 흔히 사용하던 <em>정렬방식</em> 사용 가능
+<img src="../images/css11.png" width ="100%" height="100%"></li>
+</ul>
+<div class="table-wrapper"><table><thead><tr><th style="text-align: center">속성</th><th style="text-align: center">설명</th></tr></thead><tbody>
+<tr><td style="text-align: center">left</td><td style="text-align: center">왼쪽에 맞추어 문단을 정렬</td></tr>
+<tr><td style="text-align: center">right</td><td style="text-align: center">오른쪽에 맞추어 문단을 정렬</td></tr>
+<tr><td style="text-align: center">center</td><td style="text-align: center">가운데에 맞추어 문단을 정렬</td></tr>
+<tr><td style="text-align: center">justify</td><td style="text-align: center">양쪽에 맞추어 문단을 정렬</td></tr>
+</tbody></table>
+</div></li>
+</ul>
+<h2 id="6-목록-스타일"><a class="header" href="#6-목록-스타일">6. 목록 스타일</a></h2>
+<ul>
+<li>
+<h3 id="list-style-type-속성"><a class="header" href="#list-style-type-속성">list-style-type 속성</a></h3>
+<ul>
+<li>순서 없는 목록의 경우 목록 앞에 <em>다양한 불릿(bullet)을 삽입</em>할 수 있고, 순서 목록에서는 번호 스타일을 지정 가능
+<img src="../images/css12.png" width ="100%" height="100%"></li>
+</ul>
+<div class="table-wrapper"><table><thead><tr><th style="text-align: center">속성</th><th style="text-align: center">설명</th><th style="text-align: center">속성</th><th style="text-align: center">설명</th></tr></thead><tbody>
+<tr><td style="text-align: center">disc</td><td style="text-align: center">채운 원(●)</td><td style="text-align: center">decimal</td><td style="text-align: center">숫자(1, 2, 3)</td></tr>
+<tr><td style="text-align: center">circle</td><td style="text-align: center">빈 원(○)</td><td style="text-align: center">decimal-leading-zero</td><td style="text-align: center">숫자(01, 02, 03)</td></tr>
+<tr><td style="text-align: center">square</td><td style="text-align: center">채운 사각형(■)</td><td style="text-align: center">lower-alpha</td><td style="text-align: center">영문 소문자(a, b, c)</td></tr>
+<tr><td style="text-align: center">none</td><td style="text-align: center">불릿 없애기</td><td style="text-align: center">upper-alpha</td><td style="text-align: center">영문 대문자(A, B, C)</td></tr>
+<tr><td style="text-align: center"></td><td style="text-align: center"></td><td style="text-align: center">lower-roman</td><td style="text-align: center">로마자 소문자(ⅰ, ⅱ, ⅲ)</td></tr>
+<tr><td style="text-align: center"></td><td style="text-align: center"></td><td style="text-align: center">upper-roman</td><td style="text-align: center">로마자 대문자(Ⅰ, Ⅱ, Ⅲ)</td></tr>
+</tbody></table>
+</div>  <br>
+  <details style = "margin-left: 30px"><summary> CSS 코드 보기/숨기기(클릭)</summary>
+<pre><code class="language-css">    /* list-style-type 속성 연습 후 삭제, 실습에서는 none 사용 */
+    li{
+        list-style-type: circle;
+        list-style-type: square;
+        list-style-type: none;
+    }
+</code></pre>
+  </details>  
+</li>
+</ul>
+<h2 id="7-배경-색"><a class="header" href="#7-배경-색">7. 배경 색</a></h2>
+<ul>
+<li>
+<h3 id="background-color-속성"><a class="header" href="#background-color-속성">background-color 속성</a></h3>
+<ul>
+<li><em>배경 색을 지정</em>하는 속성으로 색상 값은 color 속성과 동일한 방법으로 적용
+<img src="../images/css13.png" width ="100%" height="100%"></li>
+</ul>
+  <details><summary> HTML 코드 보기/숨기기(클릭)</summary>
+<pre><code class="language-html">&lt;!-- html의 name, belong, textarea에 class 삽입  --&gt;
+&lt;input type="text" name="info" id="name" class="name" autofocus placeholder="공백없이 입력하세요"&gt;    
+&lt;input type="text" name="info" id="belong" class="belong"&gt;
+&lt;textarea class="text" id="feedback" name="feedback" cols="60" rows="5" placeholder="수정 및 개선사항을 간략하게 써 주세요."&gt;
+</code></pre>
+  </details>
+  <details><summary> CSS 코드 보기/숨기기(클릭)</summary>
+<pre><code class="language-css">/* text, textarea에 배경 색 추가 */
+.name{
+    background-color: #e8f3fd;
+}
+
+.belong{
+    background-color: #e8f3fd;
+}
+
+.text{
+    background-color: #e8f3fd;
+}
+</code></pre>
+  </details>  
+</li>
+</ul>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../html/html.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../js/js_README.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../html/html.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../js/js_README.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
+
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+
+    </div>
+    </body>
+</html>

@@ -1,0 +1,447 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>웹 GIS 개념 - webProg</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="highlight-css" href="../highlight.css">
+        <link rel="stylesheet" id="tomorrow-night-css" href="../tomorrow-night.css">
+        <link rel="stylesheet" id="ayu-highlight-css" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "../";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+            window.path_to_searchindex_js = "../searchindex.js";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../toc.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+                sidebar_toggle.checked = false;
+            }
+            if (sidebar === 'visible') {
+                sidebar_toggle.checked = true;
+            } else {
+                html.classList.remove('sidebar-visible');
+            }
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../toc.html"></iframe>
+            </noscript>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">webProg</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <div class="search-wrapper">
+                            <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                            <div class="spinner-wrapper">
+                                <i class="fa fa-spinner fa-spin"></i>
+                            </div>
+                        </div>
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="웹-gis-개념"><a class="header" href="#웹-gis-개념">웹 GIS 개념</a></h1>
+<h2 id="1-공간정보와-지리정보시스템"><a class="header" href="#1-공간정보와-지리정보시스템">1. 공간정보와 지리정보시스템</a></h2>
+<ul>
+<li>
+<h3 id="공간정보geospatial-information"><a class="header" href="#공간정보geospatial-information">공간정보(Geospatial Information)</a></h3>
+<ul>
+<li>지상, 지하, 수상, 수중 등 공간 상에 존재하는 자연 또는 인공적인 객체에 대한 <em>위치정보</em> 및 이와 관련된 <em>공간적 인지와 의사결정에 필요한 정보</em>(공간정보산업 진흥법)<br>
+<img src="../images/index01.jpg" width ="80%" height="80%"></li>
+</ul>
+</li>
+<li>
+<h3 id="지리정보시스템geographic-information-system-gis"><a class="header" href="#지리정보시스템geographic-information-system-gis">지리정보시스템(Geographic Information System, GIS)</a></h3>
+<ul>
+<li>공간적 문제를 해결하기 위해 다양한 <em>공간자료를 수집, 구축, 유지, 관리, 편집하고 분석과 모델링</em>을 통해 추출된 고부가가치의 정보를 <em>표현하고 출력</em>할 수 있게 고안된 종합적인 정보처리시스템<br>
+<img src="../images/index02.jpg" width ="80%" height="80%"></li>
+</ul>
+</li>
+<li>
+<h3 id="어플리케이션별-gis-분류"><a class="header" href="#어플리케이션별-gis-분류">어플리케이션별 GIS 분류</a></h3>
+<ul>
+<li>
+<p>웹(Web) GIS</p>
+<ul>
+<li>인터넷 기술과 GIS를 접목하여 공간정보의 입력, 수정, 조작, 출력 등 GIS 데이터와 서비스를 <em>인터넷 환경에서 제공</em></li>
+</ul>
+</li>
+<li>
+<p>모바일(Mobile) GIS</p>
+<ul>
+<li>언제 어느 장소에서나 공간정보에 기반한 <em>유무선 환경의 통신망</em>을 통해 현재 위치 기반의 필요 정보를 제공할 수 있도록 구현된 GIS</li>
+</ul>
+</li>
+<li>
+<p>엔터프라이즈(Enterprise) GIS</p>
+<ul>
+<li>특정한 업무부서가 아닌 <em>기업이나 기관 전체</em>에서 필요로 하는 정보를 제공하는 것을 목적으로 지리정보를 효율적으로 관리, 분석, 활용하기 위한 GIS</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="2-웹-gis-개념-및-특징"><a class="header" href="#2-웹-gis-개념-및-특징">2. 웹 GIS 개념 및 특징</a></h2>
+<ul>
+<li>
+<h3 id="웹-gis-개념-1"><a class="header" href="#웹-gis-개념-1">웹 GIS 개념</a></h3>
+<ul>
+<li>
+<p>인터넷을 통하여 단일 또는 다수의 기존 애플리케이션 시스템을 표준화된 기술로 결합시켜 모든 비즈니스를 가능하게 하는 <em>웹 서비스를 기반</em>으로 한 개념</p>
+</li>
+<li>
+<p><em>인터넷</em>을 통하여 공간데이터를 교환하고 전송할 뿐 아니라 검색, 분석, 처리할 수 있는 시스템<br><br>
+<img src="../images/index03.jpg" width ="80%" height="80%"></p>
+</li>
+</ul>
+</li>
+<li>
+<h3 id="웹-gis-특징"><a class="header" href="#웹-gis-특징">웹 GIS 특징</a></h3>
+<ul>
+<li>
+<p>분산 환경</p>
+<ul>
+<li>
+<p>대용량을 처리해야 하는 GIS의 기능으로 인하여 <i>분산 컴퓨팅 환경(Distributed Computing Environment, DCE)</i>을 취함</p>
+</li>
+<li>
+<p>인터넷으로 연결된 수많은 서버에 분산되어 있는 데이터와 기능의 객체를 사용자 요구에 따라 다양한 기능을 수행해야 함</p>
+</li>
+</ul>
+</li>
+<li>
+<p>대화형 시스템</p>
+<ul>
+<li>
+<p>인터넷에서 GIS 분석 기능을 수행하는 데 <em>클라이언트 서버 개념을 응용</em></p>
+</li>
+<li>
+<p>벡터를 따로 처리할 수 있는 클라이언트를 개발하고 이를 웹 상에 내재시켜 대화형 시스템을 구현</p>
+</li>
+</ul>
+</li>
+<li>
+<p>동적 유지 관리</p>
+<ul>
+<li>분산 시스템으로써 데이터와 소프트웨어를 <em>최신의 정보로 유지</em>할 수 있음</li>
+</ul>
+</li>
+<li>
+<p>통합 정보 제공</p>
+<ul>
+<li>월드 와이드 웹은 웹 GIS에 비디오, 오디오, 지도, 텍스트, 방송 등의 <em>다양한 형태의 자료를 동일한 웹 페이지로 통합</em>할 수 있는 기능을 제공</li>
+</ul>
+</li>
+<li>
+<p>다양한 사용자들과 협업 가능</p>
+<ul>
+<li>
+<p>다양한 유형의 지리정보 데이터를 <em>서비스 및 데이터 형태인 단순화된 모델로 통합</em>하여 플랫폼에 저장</p>
+</li>
+<li>
+<p>이러한 공통된 모델을 통해 <em>개인, 기관, 커뮤니티 등 모든 사용자를 연결하여 동일한 정보에 접근</em> 가능</p>
+</li>
+</ul>
+</li>
+<li>
+<p>독립적 크로스 플랫폼(cross platform)</p>
+<ul>
+<li><em>기종이나 운영체제</em>에 독립적인 시스템으로 클라이언트의 하드웨어, 운영체제 및 관계형 데이터베이스 시스템의 종류에 <em>관계없이 공통의 데이터와 기능을 공유</em>할 수 있는 크로스 플랫폼을 지원</li>
+</ul>
+</li>
+<li>
+<p>상호운용성(interoperability)</p>
+<ul>
+<li>
+<p>GIS 프로그램을 소유하지 않아도 <em>웹상에서 GIS 프로그램을 구동하는 것과 같은 기능</em>을 수행</p>
+</li>
+<li>
+<p>데이터 포맷, 데이터 교환, 데이터 접근에 대한 표준 및 GIS 분석 컴포넌트의 표준 사양 등을 고려<br><br>
+<img src="../images/index04.jpg" width ="60%" height="60%"></p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="3-웹-서비스-표준"><a class="header" href="#3-웹-서비스-표준">3. 웹 서비스 표준</a></h2>
+<ul>
+<li>
+<h3 id="osgeoopen-source-geospatial-foundation"><a class="header" href="#osgeoopen-source-geospatial-foundation">OSGeo(Open Source Geospatial Foundation)</a></h3>
+<ul>
+<li>
+<p><em>지리공간기술과 데이터의 공개 협업 개발을 지원</em>하고 알리기 위한 비영리, 비정부 단체</p>
+</li>
+<li>
+<p>지리공간 분야의 오픈 소프트웨어와 오픈소스 개발을 폭넓게 재정적, 조직적, 법적으로 지원하기  위해 2006년 2월 4일 미국 시카고에서 창설<br><br>
+<img src="../images/index05.jpg" width ="100%" height="100%"></p>
+</li>
+</ul>
+</li>
+<li>
+<h3 id="ogcopen-geospatial-consortium-standards"><a class="header" href="#ogcopen-geospatial-consortium-standards">OGC(Open Geospatial Consortium) Standards</a></h3>
+<ul>
+<li>
+<p>전 세계 530곳 이상 정부기관과 기업, 대학들이 참여하고 있는 <em>세계 최대 공간정보산업 표준화 추진 기구</em></p>
+</li>
+<li>
+<p>데이터 포맷에서부터 OGC Web Service에 이르는 <em>다양한 표준 제정 및 인증</em></p>
+</li>
+<li>
+<p>분기당 1회씩 매년 4회의 정기총회를 개최하고, 구성 멤버는 약 40% 이상이 기업</p>
+</li>
+<li>
+<p>지역별 기관 수는 유럽이 208개, 북아메리카 182개, 아시아 86개, 중동 34개, 남아메리카 3개, 아프리카 3개 기관으로 구성<br>
+<img src="../images/index06.jpg" width ="90%" height="90%"></p>
+</li>
+</ul>
+</li>
+<li>
+<h3 id="웹-서비스-표준"><a class="header" href="#웹-서비스-표준">웹 서비스 표준</a></h3>
+<ul>
+<li>
+<p>OGC와 월드 와이드 웹 컨소시엄(World Wide Web Consortium, W3C)의 주관으로 개발</p>
+<ul>
+<li>웹 서비스 표준화 기구에서 진행되는 기반 기술의 표준화 작업을 바탕으로 하여 GIS와 관련되는 실질적인 기술 표준화는 OGC에서 추진</li>
+</ul>
+</li>
+<li>
+<p>웹 서비스 기반의 GIS 표준 개발을 추진하여 실제 요구에 의하여 개발해 온 <em>다양한 표준을 개념적으로 정리 및 통합</em><br></p>
+</li>
+</ul>
+</li>
+<li>
+<h3 id="ogc의-대표적인-표준-서비스"><a class="header" href="#ogc의-대표적인-표준-서비스">OGC의 대표적인 표준 서비스</a></h3>
+<ul>
+<li>
+<p>WMS(Web Map Service)</p>
+<ul>
+<li>공간 데이터베이스의 데이터를 <em>지도 이미지로 서비스하기 위한 표준 프로토콜</em>로 블록이나 선 같은 기본 지도(윤곽)를 표시</li>
+</ul>
+</li>
+<li>
+<p>WFS(Web Feature Service)</p>
+<ul>
+<li>
+<p>플랫폼에 독립적인 호출을 이용하여 <em>공간데이터에 대한 개체를 요청</em>할 수 있는 인터페이스를 제공</p>
+</li>
+<li>
+<p>WMS가 단순한 지도 이미지만을 서비스하는 데 반하여 WFS는 공간 분석 등과 같은 <em>연산에 필요한 데이터</em>를 서비스</p>
+</li>
+</ul>
+</li>
+<li>
+<p>WPS(Web Processing Service)</p>
+<ul>
+<li>공간데이터에 대한 <em>다양한 처리 서비스를 웹 상에서 정의하고 접근할 수 있도록 하기 위한 표준 프로토콜</em>이며, 모든 OGC 표준 웹 서비스와 상호 호환성을 갖도록 함</li>
+</ul>
+</li>
+<li>
+<p>WMTS(Web Map Tile Service)</p>
+<ul>
+<li>
+<p>정적인 이미지를 모아둔 저장소를 이용하여 <em>매우 빠르게 지도 서비스를 수행</em>하는 서비스</p>
+</li>
+<li>
+<p>지도 이미지 저장소는 <em>특정 축척별로 지도 영역을 타일 이미지로 저장</em>한 디렉토리 구조</p>
+</li>
+<li>
+<p>지도를 데이터베이스로부터 직접 생성하는 것보다 훨씬 시간 단축 가능</p>
+</li>
+<li>
+<p>사용자가 복잡한 지도를 생성할 때 획기적으로 <em>지도 생성 시간을 단축시키는 효과와 성능 향상을 위한 모든 노력 제거</em> 가능<br>
+<img src="../images/index07.jpg" width ="100%" height="100%"></p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../index/index_README.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../index/programming.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../index/index_README.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../index/programming.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
+
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+
+    </div>
+    </body>
+</html>

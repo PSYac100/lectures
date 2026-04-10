@@ -1,0 +1,708 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>변수와 연산자 - webProg</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="highlight-css" href="../highlight.css">
+        <link rel="stylesheet" id="tomorrow-night-css" href="../tomorrow-night.css">
+        <link rel="stylesheet" id="ayu-highlight-css" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "../";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+            window.path_to_searchindex_js = "../searchindex.js";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../toc.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+                sidebar_toggle.checked = false;
+            }
+            if (sidebar === 'visible') {
+                sidebar_toggle.checked = true;
+            } else {
+                html.classList.remove('sidebar-visible');
+            }
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../toc.html"></iframe>
+            </noscript>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">webProg</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <div class="search-wrapper">
+                            <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                            <div class="spinner-wrapper">
+                                <i class="fa fa-spinner fa-spin"></i>
+                            </div>
+                        </div>
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="변수와-연산자"><a class="header" href="#변수와-연산자">변수와 연산자</a></h1>
+<h2 id="1-상수와-변수"><a class="header" href="#1-상수와-변수">1. 상수와 변수</a></h2>
+<ul>
+<li>
+<h3 id="상수constant의-개념-및-선언"><a class="header" href="#상수constant의-개념-및-선언">상수(constant)의 개념 및 선언</a></h3>
+<ul>
+<li>
+<p>상수는 <em>항상 같은 수</em>라는 의미로 값에 이름을 한 번 붙이면 <em>값을 수정할 수 없음</em></p>
+</li>
+<li>
+<p>상수를 만드는 과정은 <em>선언</em>이라고 표현하고, <em>const 키워드</em>를 사용하여 선언</p>
+<ul>
+<li>기본형: <code>const 이름 = 값</code></li>
+</ul>
+</li>
+<li>
+<p>상수를 만든 뒤에는 <em>상수 이름을 사용해서 자료를 사용</em> 가능</p>
+</li>
+<li>
+<p>자주 발생하는 오류</p>
+<ul>
+<li>"Uncaught SyntaxError: Missing initializer in const declaration"<br> → 상수는 선언할 때 <em>반드시 값을 함께 지정</em></li>
+<li>"TypeError: Assignment to constatn variable"<br> → 한 번 선언된 상수의 자료를 <em>변경할 수 없음</em><br><br></li>
+</ul>
+  <details><summary> 예제 코드 보기/숨기기(클릭)</summary>
+<pre><code class="language-JavaScript">//Chrome 창에서 개발자도구(F12) &gt; Console 탭 활용 실습
+const pi
+//왜 오류가 뜰까요?
+
+const pi = 3.141592
+pi
+
+pi = 3.14
+//왜 오류가 뜰까요?
+</code></pre>
+  </details>
+</li>
+</ul>
+</li>
+<li>
+<h3 id="변수variable의-개념-및-선언"><a class="header" href="#변수variable의-개념-및-선언">변수(variable)의 개념 및 선언</a></h3>
+<ul>
+<li>
+<p>변수는 <em>변하는 데이터(값)를 저장</em>할 수 있는 메모리 공간으로 <em>오직 한 개</em>만 저장<br>
+<img src="../images/js07.jpg" width="70%" height="70%"></p>
+</li>
+<li>
+<p>변수를 만들 때는 <em>let 키워드</em>를 사용하고, 기본적인 사용 방법은 상수와 같음</p>
+<ul>
+<li>기본형: <code>let 변수명 또는 let 변수명 = 값</code><br><br></li>
+</ul>
+  <details><summary> 예제 코드 보기/숨기기(클릭)</summary>
+<pre><code class="language-JavaScript">//Chrome 창에서 개발자도구(F12) &gt; Console 탭 활용 실습
+let box; 
+
+box = 100;
+box = 30;
+
+document.write(box);
+</code></pre>
+  </details>
+</li>
+</ul>
+</li>
+<li>
+<h3 id="변수명-설정-방법"><a class="header" href="#변수명-설정-방법">변수명 설정 방법</a></h3>
+<ul>
+<li>
+<p>한글을 사용할 수 없으며, <i>영문과 숫자 그리고 일부 특수문자(_, $)만 사용</i> 가능</p>
+<ul>
+<li>잘못된 예: <code>let 1num = 10;</code></li>
+<li>올바른 예: <code>let $snum = 10;</code></li>
+</ul>
+</li>
+<li>
+<p><i>첫 글자로 숫자</i>를 사용할 수 없고, <i>예약어(document, location, window 등)</i>를 식별자로 <i>사용할 수 없음</i></p>
+<ul>
+<li>잘못된 예: <code>let document = 10;</code></li>
+<li>올바른 예: <code>let num = 10;</code></li>
+</ul>
+</li>
+<li>
+<p>변수의 의미를 알 수 있도록 일정한 표기법을 사용</p>
+<ul>
+<li>
+<p>카멜 표기법(camelCase)</p>
+<ul>
+<li><em>두 번째 이후 단어의 대문자</em> 부분이 낙타의 혹처럼 보인다고 해서 지어진 이름으로 두 번째 이후 단어의 첫 글자를 대문자로 표기</li>
+<li>사용 예: newName, createLifeGame</li>
+</ul>
+</li>
+<li>
+<p>파스칼 표기법(PascalCase)</p>
+<ul>
+<li>프로그래밍 언어 파스칼에서 사용된 표기법으로 <em>각 단어의 첫 글자를 모두 대문자</em>로 표기</li>
+<li>사용 예: NewName, CreateLifeGame</li>
+</ul>
+</li>
+<li>
+<p>스네이크 표기법(snake_case)</p>
+<ul>
+<li>모든 단어를 소문자로 표기하며, <i>단어 사이사이에 언더바(_)</i>를 넣어 표기</li>
+<li>사용 예: new_name, create_life_game</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<h3 id="변수에-저장할-수-있는-자료형"><a class="header" href="#변수에-저장할-수-있는-자료형">변수에 저장할 수 있는 자료형</a></h3>
+<ul>
+<li>
+<p>문자형(string)</p>
+<ul>
+<li>사용할 문자나 숫자를 <em>큰따옴표 또는 작은따옴표</em>로 감싸서 선언</li>
+</ul>
+</li>
+<li>
+<p>숫자형(number)</p>
+<ul>
+<li>단어 의미 그대로 <em>숫자</em>를 의미(큰따옴표로 감싸진 숫자는 숫자가 아닌 문자형 데이터)</li>
+</ul>
+</li>
+<li>
+<p>논리형(boolean)</p>
+<ul>
+<li>주로 2개의 데이터를 비교할 때 나오는 결과로 <i>참(true)과 거짓(false)</i>이 있음</li>
+</ul>
+</li>
+<li>
+<p>null &amp; undefined</p>
+<ul>
+<li>Null은 변수에 저장된 값이 <em>null</em>인 경우, undefined는 변수에 값이 등록되기 전의 <em>기본값</em></li>
+</ul>
+</li>
+<li>
+<p>typeof</p>
+<ul>
+<li>지정한 데이터 또는 변수에 <em>저장된 자료형을 알고 싶을 때</em> 사용</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="2-연산자operator"><a class="header" href="#2-연산자operator">2. 연산자(Operator)</a></h2>
+<ul>
+<li>
+<h3 id="연산자란"><a class="header" href="#연산자란">연산자란?</a></h3>
+<ul>
+<li>
+<p>빼기, 더하기, 곱하기, 나누기, 비교 등을 하는 일련의 작업을 연산작업이라 함</p>
+</li>
+<li>
+<p>연산자는 <em>연산을 수행하는 기호</em>를 의미하고, 피연산자는 연산에 참여하는 변수나 상수의 값을 의미</p>
+</li>
+</ul>
+</li>
+<li>
+<h3 id="산술연산자"><a class="header" href="#산술연산자">산술연산자</a></h3>
+<ul>
+<li>연산을 하기 위해서는 연산 대상 데이터가 <em>반드시 2개</em> 있어야 함<br><br></li>
+</ul>
+<div class="table-wrapper"><table><thead><tr><th style="text-align: center">종류</th><th style="text-align: center">기본형</th><th style="text-align: center">설명</th></tr></thead><tbody>
+<tr><td style="text-align: center">+</td><td style="text-align: center">A + B</td><td style="text-align: center">더하기</td></tr>
+<tr><td style="text-align: center">-</td><td style="text-align: center">A - B</td><td style="text-align: center">빼기</td></tr>
+<tr><td style="text-align: center">*</td><td style="text-align: center">A * B</td><td style="text-align: center">곱하기</td></tr>
+<tr><td style="text-align: center">/</td><td style="text-align: center">A / B</td><td style="text-align: center">나누기</td></tr>
+<tr><td style="text-align: center">%</td><td style="text-align: center">A % B</td><td style="text-align: center">나머지</td></tr>
+</tbody></table>
+</div></li>
+<li>
+<h3 id="문자-결합-연산자"><a class="header" href="#문자-결합-연산자">문자 결합 연산자</a></h3>
+<ul>
+<li>
+<p><em>여러 개의 문자</em>를 하나의 문자형 데이터로 <em>결합</em>할 때 사용</p>
+</li>
+<li>
+<p>더하기에 피연산자로 문자형 데이터가 한 개라도 포함되어 있으면 다른 피연산자의 데이터는 자동으로 문자형으로 형 변환</p>
+<ul>
+<li>문자형 데이터 + 문자형 데이터 = 하나의 문자형 데이터</li>
+<li>문자형 데이터 + 숫자형 데이터 = 하나의 문자형 데이터<br><br></li>
+</ul>
+  <details><summary> 예제 코드 보기/숨기기(클릭)</summary>
+<pre><code class="language-JavaScript">//Chrome 창에서 개발자도구(F12) &gt; Console 탭 활용 실습
+let t1 = "학교종이";
+let t2 = "땡땡땡";
+let t3 = 8282;
+let t4 = "어서 모이자";
+let result
+
+result = t1 + t2 + t3 + t4;
+
+typeof(result)
+</code></pre>
+  </details> 
+</li>
+</ul>
+</li>
+<li>
+<h3 id="대입-연산자"><a class="header" href="#대입-연산자">대입 연산자</a></h3>
+<ul>
+<li>
+<p>대입 연산자(<code>=</code>)는 연산된 데이터를 <em>변수에 저장</em>할 때 사용</p>
+</li>
+<li>
+<p>복합 대입 연산자(<code>-=, +=, *=, /=, %=</code>)는 산술 연산자와 대입 연산자가 <em>복합적으로 적용</em>된 것</p>
+</li>
+</ul>
+<div class="table-wrapper"><table><thead><tr><th style="text-align: center">종류</th><th style="text-align: center">설명</th></tr></thead><tbody>
+<tr><td style="text-align: center">A = B</td><td style="text-align: center">A = B</td></tr>
+<tr><td style="text-align: center">A += B</td><td style="text-align: center">A = A + B</td></tr>
+<tr><td style="text-align: center">A -= B</td><td style="text-align: center">A = A - B</td></tr>
+<tr><td style="text-align: center">A *= B</td><td style="text-align: center">A = A * B</td></tr>
+<tr><td style="text-align: center">A /= B</td><td style="text-align: center">A = A / B</td></tr>
+<tr><td style="text-align: center">A %= B</td><td style="text-align: center">A = A % B</td></tr>
+</tbody></table>
+</div>  <br>
+  <details style="margin-left: 30px;"><summary> 예제 코드 보기/숨기기(클릭)</summary>
+<pre><code>  ```JavaScript
+  //Visual Studio Code에서 실습
+  let num1 = 10;
+  let num2 = 3;
+
+  num1 += num2;      //num1 = 10 + 3 = 13
+  document.write(num1, "&lt;br&gt;");
+
+  num1 -= num2;      //num1 = 13 - 3 = 10
+  document.write(num1, "&lt;br&gt;");
+
+  num1 *= num2;      //num1 = 10 * 3 = 30
+  document.write(num1, "&lt;br&gt;");
+
+  num1 /= num2;      //num1 = 30 / 3 = 10
+  document.write(num1, "&lt;br&gt;");
+
+  num1 %= num2;      //num1 = 10 % 3 = 1
+  document.write(num1, "&lt;br&gt;");
+  ```
+</code></pre>
+  </details> 
+</li>
+<li>
+<h3 id="증감-연산자"><a class="header" href="#증감-연산자">증감 연산자</a></h3>
+<ul>
+<li>
+<p>숫자형 데이터를 <em>1씩 증가시키는 증가 연산자</em>(<code>++</code>)와 반대로 <em>1씩 감소시키는 감소 연산자</em>(<code>--</code>)가 있음</p>
+</li>
+<li>
+<p>피 연산자가 한 개만 필요한 <em>단항 연산자</em></p>
+</li>
+<li>
+<p>증감 연산자는 변수의 <em>어느 위치에 오는가</em>에 따라 결과값이 달라짐</p>
+<ul>
+<li>기본형: <code>++변수, 변수++, --변수, 변수--</code><br><br>
+<img src="../images/js08.png" width="60%" height="60%"><br><br></li>
+</ul>
+</li>
+</ul>
+  <details style="margin-left: 30px;"><summary> 예제 코드 보기/숨기기(클릭)</summary>
+<pre><code class="language-JavaScript">//Visual Studio Code에서 실습
+let num1 = 10;
+let num2 = 20;
+let result;
+
+result = ++num1;             //num1이 원래 10인데 ++가 앞에 있으므로 1을 증가시키고 result에 대입
+document.write(result, "&lt;br&gt;");
+
+result = num1++;             //위의 결과에서 num1이 11로 바뀌고 ++가 뒤에 있으므로 바로 result에 대입
+document.write(result, "&lt;br&gt;");
+
+result = --num2;             //num1이 원래 20인데 --가 앞에 있으므로 1을 감소시키고 result에 대입
+document.write(result, "&lt;br&gt;");
+
+//result 추가 복사해서 왜 그런지 살펴보기!!
+result = num2--;             //위의 결과에서 num2가 19로 바뀌고 --가 뒤에 있으므로 바로 result에 대입
+document.write(result, "&lt;br&gt;");
+</code></pre>
+  </details>
+</li>
+<li>
+<h3 id="비교-연산자"><a class="header" href="#비교-연산자">비교 연산자</a></h3>
+<ul>
+<li>두 데이터를 <em>비교할 때 사용</em>하는 연산자로 결과값은 true(참), false(거짓)로 논리형 데이터를 반환<br><br></li>
+</ul>
+<div class="table-wrapper"><table><thead><tr><th style="text-align: center">종류</th><th style="text-align: center">설명</th><th style="text-align: center">비고</th></tr></thead><tbody>
+<tr><td style="text-align: center">A &gt; B</td><td style="text-align: center">A가 B보다 크다.</td><td style="text-align: center"></td></tr>
+<tr><td style="text-align: center">A &lt; B</td><td style="text-align: center">A가 B보다 작다.</td><td style="text-align: center"></td></tr>
+<tr><td style="text-align: center">A &gt;= B</td><td style="text-align: center">A가 B보다 크거나 같다.</td><td style="text-align: center"></td></tr>
+<tr><td style="text-align: center">A &lt;= B</td><td style="text-align: center">A가 B보다 작거나 같다.</td><td style="text-align: center"></td></tr>
+<tr><td style="text-align: center">A == B</td><td style="text-align: center">A와 B는 같다.</td><td style="text-align: center">숫자의 자료형에 상관없이 결과 반환</td></tr>
+<tr><td style="text-align: center">A != B</td><td style="text-align: center">A와 B는 다르다.</td><td style="text-align: center">숫자의 자료형에 상관없이 결과 반환</td></tr>
+<tr><td style="text-align: center">A ===B</td><td style="text-align: center">A와 B는 같다.</td><td style="text-align: center">반드시 표기된 숫자와 자료형이 일치해야만 결과 반환</td></tr>
+<tr><td style="text-align: center">A !==B</td><td style="text-align: center">A와 B는 다르다.</td><td style="text-align: center">반드시 표기된 숫자와 자료형이 일치해야만 결과 반환</td></tr>
+</tbody></table>
+</div>  <br>
+  <details style="margin-left: 20px;"><summary> 예제 코드 보기/숨기기(클릭)</summary>
+<pre><code class="language-JavaScript">//Visual Studio Code에서 실습
+let a = 10;
+let b = 20;
+let c = 30;
+let d = "10";
+let result;
+
+result = a &gt; b;     //10 &gt; 20이므로 false
+document.write(result, "&lt;br"&gt;);
+
+result = a &lt; b;     //10 &lt; 20이므로 true
+document.write(result, "&lt;br"&gt;);
+
+result = a &lt;= b;    //10 &lt;= 20이므로 true     
+document.write(result, "&lt;br"&gt;);
+
+result = a == d;    //10 == "10" 자료형 무시하므로 true
+document.write(result, "&lt;br"&gt;);
+
+result = a === d;   //10 == "10" 자료형 불일치로 false
+document.write(result, "&lt;br"&gt;);
+</code></pre>
+  </details>
+</li>
+<li>
+<h3 id="논리-연산자"><a class="header" href="#논리-연산자">논리 연산자</a></h3>
+<ul>
+<li>피 연산자가 논리형 데이터인 <em>true, false로 결과값</em>을 반환<br><br></li>
+</ul>
+<div class="table-wrapper"><table><thead><tr><th style="text-align: center">종류</th><th style="text-align: center">설명</th></tr></thead><tbody>
+<tr><td style="text-align: center"><code>||</code></td><td style="text-align: center">or 연산자로 피 연산자 중 값이 하나라도 true가 존재하면 true로 결과값을 반환</td></tr>
+<tr><td style="text-align: center"><code>&amp;&amp;</code></td><td style="text-align: center">and 연산자로 피 연산자 중 값이 하나라도 false가 존재하면 false로 결과값을 반환</td></tr>
+<tr><td style="text-align: center"><code>!</code></td><td style="text-align: center">not 연산자로 피 연산자의 값이 true면 반대로 false로 결과값을 반환</td></tr>
+</tbody></table>
+</div>  <br>
+  <details style="margin-left: 30px;"><summary> 예제 코드 보기/숨기기(클릭)</summary>
+<pre><code class="language-JavaScript">//Visual Studio Code에서 실습
+let a = 10;
+let b = 20;
+let c = 30;
+let d = "10";
+let result;
+
+result = a &gt; b || b &lt;= c;      // false || true = true (or 연산자)
+document.write(result, "&lt;br&gt;");
+
+result = b &gt;= a &amp;&amp; a &lt; c;      // true || true = true (and 연산자)
+document.write(result, "&lt;br&gt;");
+
+result = a == d                //true = true  
+document.write(result, "&lt;br&gt;");
+
+result = a !== d               //false = true (not 연산자)
+document.write(result, "&lt;br&gt;");
+</code></pre>
+  </details>
+</li>
+<li>
+<h3 id="삼항-조건-연산자"><a class="header" href="#삼항-조건-연산자">삼항 조건 연산자</a></h3>
+<ul>
+<li>
+<p><i>연산한 결과 조건식의 만족 여부(true 또는 false)에 따라 코드를 다르게 실행</i>하고자 할 때 사용</p>
+</li>
+<li>
+<p>연산을 위해 <em>피연산자가 3개</em> 필요</p>
+<ul>
+<li>기본형: <code>조건형 ? 코드 1 : 코드 2</code><br><br></li>
+</ul>
+</li>
+</ul>
+  <details style="margin-left: 30px;"><summary> 예제 코드 보기/숨기기(클릭)</summary>
+<pre><code class="language-JavaScript">//Visual Studio Code에서 실습
+let a = 10;
+let b = 20;
+let result;
+
+result = a &gt; b ? "크다" : "작다";
+document.write(result);
+</code></pre>
+  </details>
+</li>
+<li>
+<h3 id="연산자-우선순위"><a class="header" href="#연산자-우선순위">연산자 우선순위</a></h3>
+<ul>
+<li>
+<p>여러 개의 연산자를 사용할 때 <em>연산자의 종류에 따라 연산 시 우선 순위가 부여</em>됨</p>
+</li>
+<li>
+<p>( ) → 단항 연산자(--, ++, !) → 산술 연산자(+, -, *, /, %) → 비교 연산자(&gt;, &gt;=, &lt;, &lt;=, ==, ===, !==, !=) → 논리연산자(&amp;&amp;, ||) → 대입 연산자(=, +=, -=, *=, /=, %=)</p>
+</li>
+</ul>
+</li>
+<li>
+<h3 id="총-정리-실습적정-체중을-구하는-테스트기-만들기"><a class="header" href="#총-정리-실습적정-체중을-구하는-테스트기-만들기">총 정리 실습(적정 체중을 구하는 테스트기 만들기)</a></h3>
+<ul>
+<li>
+<p>적정 체중 계산법</p>
+<ul>
+<li>적정체중 = (본인 신장 - 100) * 0.9</li>
+</ul>
+</li>
+<li>
+<p>적정 체중을 계산하면 다음과 같이 결과가 나오도록 코딩</p>
+<ul>
+<li>신장: 180(cm)<br></li>
+<li>체중: 74(kg)<br></li>
+<li>적정 체중: (180 – 100) * 0.9<br></li>
+<li>결과: 적정 체중이 숫자로 나타남<br></li>
+</ul>
+</li>
+<li>
+<p><em>신장과 체중</em>은 사용자의 신장과 체중에 따라 <em>값이 변하므로 변수</em>에 저장해야 함</p>
+</li>
+<li>
+<p>신장이 바뀌면 <em>적정 체중도 바뀌므로 변수</em>에 저장해야 함</p>
+  <details><summary> 정답 코드 보기/숨기기(클릭)</summary>
+<pre><code class="language-JavaScript">let userHeight = 180;
+let userWeight = 74;
+let normalWeight = (userHeight - 100) * 0.9;
+
+document.write(normalWeight);
+</code></pre>
+  </details>
+</li>
+<li>
+<p>페이지를 방문한 방문자가 <em>질의응답 창에 자신의 신장 값을 입력하면 적정 체중을 구해주는 코드</em>를 작성</p>
+</li>
+<li>
+<p>질의응답 창은 <em>방문자에게 질문을 던져 응답을 받아올 수 있는 창으로 prompt() 메서드</em>를 사용</p>
+<ul>
+<li>기본형: prompt("질문", "기본 응답");</li>
+<li>prompt 매서드는 기본적으로 문자를 반환하지만 자바스크립트가 <i>자동으로 숫자로 변환</i>해 줌</li>
+<li>가끔 자동으로 형 변환이 안되는 경우 발생하는데 이 때는 <i>Number()로 숫자로 변환</i></li>
+</ul>
+</li>
+<li>
+<p>질의응답 창을 이용해 <em>방문자의 이름, 신장, 체중을 입력</em> 받은 후 적정 평균 체중을 구함</p>
+</li>
+<li>
+<p><em>적정 평균 체중의 오차는 ±5</em>이며 계산 결과 방문자가 적정 체중인지 아닌지에 따라 화면에 다르게 출력</p>
+<ul>
+<li>적정 체중일 경우: "000님은 적정 체중입니다"</li>
+<li>적정 체중이 아닐 경우: "000님은 적정 체중이 아닙니다"<br><br></li>
+</ul>
+</li>
+</ul>
+  <details style = "margin-left: 50px"><summary> 코드 보기/숨기기(클릭)</summary>
+<pre><code class="language-JavaScript">let userName = prompt("당신의 이름은?", "");
+let userHeight = prompt("당신의 신장은?", "0");
+let userWeight = prompt("당신의 체중은?", "0");
+&lt;!-- 주의사항 산술연산자 빼기 입력 시 오류가 나면 숫자키패드에서 입력 --&gt;
+let normalWeight = (userHeight – 100) * 0.9;
+let rangeNormal 
+let result
+
+rangeNormal = userWeight &gt;= normalWeight - 5 &amp;&amp; userWeight &lt;= normalWeight + 5;
+result = result ? "적정 체중입니다." : "적정 체중이 아닙니다.";
+
+document.write(userName + "님은" + " " + result);
+</code></pre>
+  </details><br> 
+<ul>
+<li>
+<p>박국토의 하루 지출 내역이 다음과 같다고 할 때, 하루 지출 비용의 합계를 구한 후 적정 지출 비용의 초과 여부를 출력해 봅시다.</p>
+<ul>
+<li>박국토의 하루 지출 내용은 교통비 3,000원, 식비 8,000원, 음료비 6,000원입니다. 삼항 조건 연산자를 사용하여 하루 적정 지출 비용인 1만 원을 초과했을 경우에는 "000원 초과"라고 출력하고, 아닐 경우에는 "돈 관리 참 잘했어요!"라고 출력해 봅시다.<br><br></li>
+</ul>
+</li>
+</ul>
+  <details style = "margin-left: 50px"><summary> 정답 코드 보기/숨기기(클릭)</summary>
+<pre><code class="language-Javascript">let traffic = 3000;
+let food = 8000;
+let drink = 6000;
+let result = traffic + food + drink;
+
+result = result &gt; 10000? result-10000 + "원 초과" : "돈 관리 참 잘했어요!";
+document.write(result);
+</code></pre>
+  </details>    
+</li>
+</ul>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../js/basic.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../js/control.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../js/basic.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../js/control.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
+
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+
+    </div>
+    </body>
+</html>

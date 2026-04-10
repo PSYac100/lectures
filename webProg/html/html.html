@@ -1,0 +1,788 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>HTML 기본 태그 - webProg</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="highlight-css" href="../highlight.css">
+        <link rel="stylesheet" id="tomorrow-night-css" href="../tomorrow-night.css">
+        <link rel="stylesheet" id="ayu-highlight-css" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "../";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+            window.path_to_searchindex_js = "../searchindex.js";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../toc.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+                sidebar_toggle.checked = false;
+            }
+            if (sidebar === 'visible') {
+                sidebar_toggle.checked = true;
+            } else {
+                html.classList.remove('sidebar-visible');
+            }
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../toc.html"></iframe>
+            </noscript>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">webProg</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <div class="search-wrapper">
+                            <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                            <div class="spinner-wrapper">
+                                <i class="fa fa-spinner fa-spin"></i>
+                            </div>
+                        </div>
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="html-기본-개념-및-주요-태그"><a class="header" href="#html-기본-개념-및-주요-태그">HTML 기본 개념 및 주요 태그</a></h1>
+<h2 id="1-html-개념"><a class="header" href="#1-html-개념">1. HTML 개념</a></h2>
+<ul>
+<li>
+<h3 id="웹-사이트에서-사용할-문서는-웹에-맞는-형식인-html-확장자를-붙여-다른-문서와-구분"><a class="header" href="#웹-사이트에서-사용할-문서는-웹에-맞는-형식인-html-확장자를-붙여-다른-문서와-구분">웹 사이트에서 사용할 문서는 웹에 맞는 형식인 <em>html 확장자</em>를 붙여 다른 문서와 구분</a></h3>
+</li>
+<li>
+<h3 id="html은-hypertext-markup-language의-줄임말로-웹에서-자유롭게-오갈-수-있는-웹-문서를-만드는-언어"><a class="header" href="#html은-hypertext-markup-language의-줄임말로-웹에서-자유롭게-오갈-수-있는-웹-문서를-만드는-언어">HTML은 <em>HyperText Markup Language의 줄임말</em>로 웹에서 자유롭게 오갈 수 있는 웹 문서를 만드는 언어</a></h3>
+  <img src="../images/html01.png" width="80%" height="80%">  
+</li>
+</ul>
+<h2 id="2-html-문서-생성"><a class="header" href="#2-html-문서-생성">2. HTML 문서 생성</a></h2>
+<ul>
+<li>
+<h3 id="visual-studio-code에서-파일--새-파일을-클릭하고-newhtml을-입력-후-팝업-되는-창에서-저장-위치-선택"><a class="header" href="#visual-studio-code에서-파일--새-파일을-클릭하고-newhtml을-입력-후-팝업-되는-창에서-저장-위치-선택">Visual Studio Code에서 <em>파일 &gt; 새 파일</em>을 클릭하고, <em>new.html을 입력</em> 후 팝업 되는 창에서 저장 위치 선택</a></h3>
+  <img src="../images/html02.png">  
+</li>
+<li>
+<h3 id="newhtml이라는-탭이-생성되면-느낌표를-입력하고-tab-키를-클릭"><a class="header" href="#newhtml이라는-탭이-생성되면-느낌표를-입력하고-tab-키를-클릭">new.html이라는 탭이 생성되면 <em>!(느낌표)를 입력하고 Tab 키</em>를 클릭</a></h3>
+<ul>
+<li>비주얼 스튜디오 코드에서는 웹 문서의 태그를 자동으로 입력해 주는 <em>이멧(Emmet) 기능</em> 존재<br><br>
+<img src="../images/html03.png"></li>
+</ul>
+</li>
+</ul>
+<h2 id="3-html-문서-구조"><a class="header" href="#3-html-문서-구조">3. HTML 문서 구조</a></h2>
+<ul>
+<li>
+<h3 id="어떤-웹-문서를-작성하든-이-기본-구조를-지켜야-함"><a class="header" href="#어떤-웹-문서를-작성하든-이-기본-구조를-지켜야-함">어떤 웹 문서를 작성하든 이 기본 구조를 지켜야 함</a></h3>
+<ul>
+<li>웹 브라우저에 표시되는 웹 문서 내용은 <i><code>&lt;body&gt;</code> 태그와 <code>&lt;/body&gt;</code> 태그 사이에 입력</i><br><br>
+<img src="../images/html04.png" width="90%" height="90%"></li>
+</ul>
+</li>
+<li>
+<h3 id="ctrl--s를-눌러-문서를-저장하고-코드-창에서-마우스-오른쪽-클릭하여-open-with-liver-server-클릭"><a class="header" href="#ctrl--s를-눌러-문서를-저장하고-코드-창에서-마우스-오른쪽-클릭하여-open-with-liver-server-클릭"><em>Ctrl + S</em>를 눌러 문서를 저장하고, 코드 창에서 마우스 오른쪽 클릭하여 <em>Open With Liver Server</em> 클릭</a></h3>
+<ul>
+<li>
+<p>윈도우 탐색기에서 new.html을 더블클릭해서 실행해도 됨</p>
+</li>
+<li>
+<p>웹 브라우저에서 <em>127.0.0.1:5500/new.html</em>을 입력하면 코드 수정 시 자동 반영<br><br>
+<img src="../images/html05.png" width="90%" height="90%"></p>
+</li>
+</ul>
+</li>
+<li>
+<h3 id="웹에서-특수-문자-및-특수-기호를-표시할-때는-미리-약속한-이름이나-표기법을-사용"><a class="header" href="#웹에서-특수-문자-및-특수-기호를-표시할-때는-미리-약속한-이름이나-표기법을-사용"><em>웹에서 특수 문자 및 특수 기호를 표시</em>할 때는 미리 약속한 이름이나 표기법을 사용</a></h3>
+<ul>
+<li>
+<p>이 표기법을 <i>'엔티티(entity) 이름' 또는 '엔티티 기호'</i>라고 함</p>
+</li>
+<li>
+<p>W3C(https://www.w3.org/MarkUp/html3/latin1/html)에서 제공하는 엔티티 코드 표에서 확인<br><br>
+<img src="../images/html06.png" width="95%" height="95%"></p>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="4-html의-태그tag-사용법"><a class="header" href="#4-html의-태그tag-사용법">4. HTML의 태그(tag) 사용법</a></h2>
+<ul>
+<li>
+<h3 id="태그는-와-를-이용해-구분"><a class="header" href="#태그는-와-를-이용해-구분">태그는 <em>&lt;와 &gt;를 이용</em>해 구분</a></h3>
+<ul>
+<li>웹 브라우저는 &lt;와 &gt; 사이에 있는 문자를 태그로 인식</li>
+</ul>
+</li>
+<li>
+<h3 id="태그와-태그-안에-사용하는-속성들은-모두-소문자로-사용"><a class="header" href="#태그와-태그-안에-사용하는-속성들은-모두-소문자로-사용">태그와 태그 안에 사용하는 속성들은 <em>모두 소문자</em>로 사용</a></h3>
+<ul>
+<li>맞는 예: <code>&lt;img src = "images/first.jpg"&gt;</code></li>
+<li>틀린 예: <code>&lt;IMG src = "images/first.jpg"&gt;</code></li>
+</ul>
+</li>
+<li>
+<h3 id="여는-태그와-닫는-태그를-정확하게-입력"><a class="header" href="#여는-태그와-닫는-태그를-정확하게-입력"><em>여는 태그와 닫는 태그</em>를 정확하게 입력</a></h3>
+<ul>
+<li>맞는 예: <code>&lt;h1&gt; 시간이란 &lt;/h1&gt;</code></li>
+<li>틀린 예: <code>&lt;h1&gt; 시간이란</code></li>
+</ul>
+</li>
+<li>
+<h3 id="tab-키를-이용해서-적당히-들여쓰기"><a class="header" href="#tab-키를-이용해서-적당히-들여쓰기"><em>[Tab] 키</em>를 이용해서 <em>적당히 들여쓰기</em></a></h3>
+<ul>
+<li>들여쓰기의 예<br>
+<code>&lt;ul&gt;</code><br>
+    <code>&lt;li&gt; 메뉴 1 &lt;/li&gt;</code><br>
+    <code>&lt;li&gt; 메뉴 2 &lt;/li&gt;</code><br>
+<code>&lt;/ul&gt;</code></li>
+</ul>
+</li>
+<li>
+<h3 id="태그는-여러-기능을-추가하는-속성과도-함께-사용"><a class="header" href="#태그는-여러-기능을-추가하는-속성과도-함께-사용">태그는 여러 기능을 추가하는 <em>속성과도 함께 사용</em></a></h3>
+<ul>
+<li>&lt;태그 속성 = "속성 값" 속성 = "속성 값" ...&gt; 형태로 사용</li>
+<li>예: <code>&lt;img src = "image/first.jpg" width="350" height="200" alt="시계이미지"&gt;</code></li>
+</ul>
+</li>
+<li>
+<h3 id="한-태그-안에-다른-태그를-포함시킬-때-여는-태그와-닫는-태그-쌍을-정확히-맞추어-사용"><a class="header" href="#한-태그-안에-다른-태그를-포함시킬-때-여는-태그와-닫는-태그-쌍을-정확히-맞추어-사용">한 태그 안에 다른 태그를 포함시킬 때, <em>여는 태그와 닫는 태그 쌍을 정확히 맞추어</em> 사용</a></h3>
+<ul>
+<li>예: <code>&lt;u&gt; 한국국토정보공사 &lt;i&gt;국토정보교육원&lt;/i&gt;&lt;/u&gt;</code></li>
+</ul>
+</li>
+</ul>
+<h2 id="5-제목과-문단-태그"><a class="header" href="#5-제목과-문단-태그">5. 제목과 문단 태그</a></h2>
+<ul>
+<li>
+<h3 id="제목을-뜻하는-heading의-줄임말인-h와-제목-크기를-나타내는-숫자16를-사용"><a class="header" href="#제목을-뜻하는-heading의-줄임말인-h와-제목-크기를-나타내는-숫자16를-사용">제목을 뜻하는 <i>heading의 줄임말인 'h'</i>와 제목 크기를 나타내는 <i>숫자(1~6)</i>를 사용</a></h3>
+  <img src="../images/html07.png" width ="55%" height="55%">
+</li>
+<li>
+<h3 id="br-hr-태그는-콘텐츠가-없는-태그빈-태그로-닫힘-태그-필요-없음"><a class="header" href="#br-hr-태그는-콘텐츠가-없는-태그빈-태그로-닫힘-태그-필요-없음"><code>&lt;br&gt;</code>, <code>&lt;hr&gt;</code> 태그는 콘텐츠가 없는 태그(빈 태그)로 닫힘 태그 필요 없음</a></h3>
+</li>
+</ul>
+<div class="table-wrapper"><table><thead><tr><th style="text-align: center">태그</th><th style="text-align: center">설명</th><th style="text-align: center">태그</th><th style="text-align: center">설명</th></tr></thead><tbody>
+<tr><td style="text-align: center"><code>&lt;p&gt;</code></td><td style="text-align: center">텍스트 단락 생성</td><td style="text-align: center"><code>&lt;br&gt;</code></td><td style="text-align: center">줄 바꿈</td></tr>
+<tr><td style="text-align: center"><code>&lt;hr&gt;</code></td><td style="text-align: center">가로 줄(수평 줄) 생성</td><td style="text-align: center"><code>&amp;nbsp;</code></td><td style="text-align: center">공백(스페이스) 삽입</td></tr>
+</tbody></table>
+</div>
+<h2 id="6-글자-태그"><a class="header" href="#6-글자-태그">6. 글자 태그</a></h2>
+<ul>
+<li>
+<h3 id="글자의-굵기-기울임-등-디자인-요소는-css로-지정"><a class="header" href="#글자의-굵기-기울임-등-디자인-요소는-css로-지정">글자의 굵기, 기울임 등 <em>디자인 요소는 CSS</em>로 지정</a></h3>
+</li>
+</ul>
+<div class="table-wrapper"><table><thead><tr><th style="text-align: center">태그</th><th style="text-align: center">설명</th><th style="text-align: center">태그</th><th style="text-align: center">설명</th></tr></thead><tbody>
+<tr><td style="text-align: center"><code>&lt;b&gt;</code></td><td style="text-align: center">굵게 표시하기(구 버전 HTML)</td><td style="text-align: center"><code>&lt;strong&gt;</code></td><td style="text-align: center">중요한 내용임을 명시</td></tr>
+<tr><td style="text-align: center"><code>&lt;i&gt;</code></td><td style="text-align: center">글자를 기울임(구 버전 HTML)</td><td style="text-align: center"><code>&lt;em&gt;</code></td><td style="text-align: center">강조할 내용임을 명시</td></tr>
+<tr><td style="text-align: center"><code>&lt;sup&gt;</code></td><td style="text-align: center">위 첨자</td><td style="text-align: center"><code>&lt;sub&gt;</code></td><td style="text-align: center">아래 첨자</td></tr>
+<tr><td style="text-align: center"><code>&lt;mark&gt;</code></td><td style="text-align: center">형광펜 효과 내기</td><td style="text-align: center"></td><td style="text-align: center"></td></tr>
+</tbody></table>
+</div>
+<ul>
+<li>
+<h3 id="제목과-글자-태그-활용-실습"><a class="header" href="#제목과-글자-태그-활용-실습">제목과 글자 태그 활용 실습</a></h3>
+<ul>
+<li>아래에 있는 LX국토정보교육원 소개 정보를 사용해서 다음 그림과 같이 웹 문서를 작성해 봅시다!<br><br>
+<img src="../images/html08.png" width="55%" height="55%"><br><br></li>
+</ul>
+  <details style = "margin-left: 30px"><summary> LX국토정보교육원 소개(클릭)</summary>
+  LX 국토정보교육원 국토정보교육원은 공간정보 공간정보처리및분석, 프로젝트, 플랫폼 분야 드론, 지적측량 등 디지털 혁신을 선도하는 국내 유일의 국토정보 전문 교육훈련기관입니다. 수요자 중심의 교육훈련체계 혁신을 바탕으로 대한민국 국토정보 발전의 거점이자 미래형 국토정보 혁신인재를 양성하는 전당이 되도록 최선의 노력을 다하겠습니다.
+  </details>
+  <details style = "margin-left: 30px"><summary> 정답 코드 보기/숨기기(클릭)</summary>
+<pre><code class="language-html">&lt;h1&gt;LX 국토정보교육원&lt;/h1&gt; &lt;b&gt;국토정보교육원&lt;/b&gt;은 공간정보 &lt;sup&gt;공간정보처리및분석, 
+프로젝트, 플랫폼 분야&lt;/sup&gt; 드론, 지적측량 등 디지털 혁신을 선도하는 &lt;mark&gt;국내 유일의 
+국토정보 전문 교육훈련기관&lt;/mark&gt;입니다. &lt;br&gt;&lt;hr&gt;&lt;sub&gt;수요자 중심의 교육훈련체계 혁신을 
+바탕으로&lt;/sub&gt; 대한민국 국토정보 발전의 거점이자 &lt;i&gt;&lt;b&gt;미래형 국토정보 혁신 인재를 
+양성&lt;/b&gt;&lt;/i&gt;하는 전당이 되도록 최선의 노력을 다하겠습니다.
+</code></pre>
+  </details>
+</li>
+</ul>
+<h2 id="7-목록-태그"><a class="header" href="#7-목록-태그">7. 목록 태그</a></h2>
+<ul>
+<li>
+<h3 id="목록-태그는-순서가-필요한-목록-순서가-필요하지-않은-목록-설명-목록으로-구분"><a class="header" href="#목록-태그는-순서가-필요한-목록-순서가-필요하지-않은-목록-설명-목록으로-구분">목록 태그는 <em>순서가 필요한 목록, 순서가 필요하지 않은 목록, 설명 목록</em>으로 구분</a></h3>
+  <img src="../images/html09.png" width="90%" height="90%">
+</li>
+</ul>
+<div class="table-wrapper"><table><thead><tr><th style="text-align: center">태그</th><th style="text-align: center">설명</th></tr></thead><tbody>
+<tr><td style="text-align: center"><code>&lt;ol&gt;</code></td><td style="text-align: center">순서가 필요한 목록을 만드는 태그(Ordered List)</td></tr>
+<tr><td style="text-align: center"><code>&lt;ul&gt;</code></td><td style="text-align: center">순서가 필요하지 않은 목록을 만드는 태그(Unordered List)</td></tr>
+<tr><td style="text-align: center"><code>&lt;li&gt;</code></td><td style="text-align: center">ol이나 ul 태그 안의 각 항목(List Item)</td></tr>
+<tr><td style="text-align: center"><code>&lt;dl&gt;</code></td><td style="text-align: center">설명 목록을 만드는 태그(Description List)</td></tr>
+<tr><td style="text-align: center"><code>&lt;dt&gt;</code></td><td style="text-align: center">설명 목록의 제목(Description Term)</td></tr>
+<tr><td style="text-align: center"><code>&lt;dd&gt;</code></td><td style="text-align: center">설명 목록의 내용(Description Detailes)</td></tr>
+</tbody></table>
+</div>
+<ul>
+<li>
+<h3 id="목록-태그-활용-실습"><a class="header" href="#목록-태그-활용-실습">목록 태그 활용 실습</a></h3>
+<ul>
+<li>
+<p>아래에 있는 직무전문분야 소개 정보를 다음 그림과 같이 웹 문서를 작성해 봅시다!<br>
+(단, 직무전문분야는 3단계 제목 태그 사용 )<br><br>
+<img src="../images/html10.png" width="30%" height="30%"></p>
+  <details><summary> 직무전문분야 소개(클릭)</summary>
+      직무전문분야
+      지적측량
+      융복합(공간정보+지적)
+      공간정보
+  </details>  
+  <details><summary> 정답 코드 보기/숨기기(클릭)</summary>
+<pre><code class="language-html">&lt;h3&gt;직무전문분야&lt;/h3&gt;
+&lt;ol&gt;
+    &lt;li&gt;지적측량&lt;/li&gt;
+    &lt;li&gt;융복합(공간정보+지적)&lt;/li&gt;
+    &lt;li&gt;공간정보&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;ul&gt;
+    &lt;li&gt;지적측량&lt;/li&gt;
+    &lt;li&gt;융복합(공간정보+지적)&lt;/li&gt;
+    &lt;li&gt;공간정보&lt;/li&gt;
+&lt;/ul&gt;
+</code></pre>
+  </details>
+</li>
+<li>
+<p>아래에 있는 지적재조사 정보를 사용해서 다음 그림과 같이 웹 문서를 작성해 봅시다!<br>
+(단, 지적재조사의 필요성, 기대효과는 3단계 제목 태그 사용 )<br><br>
+<img src="../images/html13.png" width="70%" height="70%"></p>
+  <details><summary> 지적재조사 정보(클릭)</summary>
+  지적재조사의 필요성
+  훼손되고 부정확한 종이지적도
+  국토의 약 15%가 지적도와 불일치
+  일본 동경을 기준으로 하는 대한민국 지적도
+  기대효과
+  디지털 지적을 통한 국민 재산권 보호
+  지표, 지상, 지하의 정보를 디지털 지적에 등록함으로써 국민의 재산권 보호 실현
+  대국민 지적행정 서비스의 질적 향상
+  중복정보 및 불일치 정보 정정으로 정확한 토지정보 제공
+  건축 및 개발 등에 필요한 행정적 절차의 간소화
+  </details>
+  <details><summary> 정답 코드 보기/숨기기(클릭)</summary>
+<pre><code class="language-html">&lt;h3&gt;지적재조사의 필요성&lt;/h3&gt;
+    &lt;ul&gt;
+        &lt;li&gt;&lt;b&gt;훼손되고 부정확&lt;/b&gt;한 종이지적도&lt;/li&gt;
+        &lt;li&gt;국토의 약 15%가 지적도와 &lt;b&gt;불일치&lt;/b&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;b&gt;일본 동경을 기준&lt;/b&gt;으로 하는 대한민국 지적도&lt;/li&gt;
+    &lt;/ul&gt;
+&lt;h3&gt;기대효과&lt;/h3&gt;
+    &lt;ul&gt;
+        &lt;li&gt;디지털 지적을 통한 국민 재산권 보호&lt;/li&gt;
+        &lt;ol&gt;
+            &lt;li&gt;지표, 지상, 지하의 정보를 디지털 지적에 등록함으로써 국민의 재산권 보호 실현&lt;/li&gt;            
+        &lt;/ol&gt;
+        &lt;li&gt;대국민 지적행정 서비스의 질적 향상&lt;/li&gt;
+        &lt;ol&gt;
+            &lt;li&gt;중복정보 및 불일치 정보 정정으로 정확한 토지정보 제공&lt;/li&gt;
+            &lt;li&gt;건축 및 개발 등에 필요한 행정적 절차의 간소화&lt;/li&gt;
+        &lt;/ol&gt;
+    &lt;/ul&gt;
+</code></pre>
+  </details>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="8-이미지-태그"><a class="header" href="#8-이미지-태그">8. 이미지 태그</a></h2>
+<ul>
+<li>
+<h3 id="웹-문서에-이미지를-삽입할-때는-img-태그를-사용"><a class="header" href="#웹-문서에-이미지를-삽입할-때는-img-태그를-사용">웹 문서에 <em>이미지를 삽입</em>할 때는 <em><code>&lt;img&gt;</code> 태그</em>를 사용</a></h3>
+<ul>
+<li>현재 html 문서 위치가 경로 기준이 되고 <i>한 단계 위로는 '..' 기호</i>를 사용<br><br>
+<img src="../images/html14.png" width="90%" height="90%"><br><br></li>
+</ul>
+<div class="table-wrapper"><table><thead><tr><th style="text-align: center">속성</th><th style="text-align: center">설명</th><th style="text-align: center">예시</th></tr></thead><tbody>
+<tr><td style="text-align: center">src</td><td style="text-align: center">이미지의 원본 파일 경로</td><td style="text-align: center"><code>&lt;img src="lx.png"&gt;</code></td></tr>
+<tr><td style="text-align: center">alt</td><td style="text-align: center">이미지를 설명해 주는 <br>대체 텍스트</td><td style="text-align: center"><code>&lt;img src="lx.png" alt="국토정보공사"&gt;</code></td></tr>
+<tr><td style="text-align: center">width, height</td><td style="text-align: center">이미지 크기 조정</td><td style="text-align: center"><code>&lt;img src = "lx.png"</code> <br><code>width="250" height="250"&gt;</code></td></tr>
+</tbody></table>
+</div></li>
+<li>
+<h3 id="이미지-태그-활용-실습"><a class="header" href="#이미지-태그-활용-실습">이미지 태그 활용 실습</a></h3>
+<ul>
+<li>국토정보교육원 홈페이지에서 로고를 이미지(lxcti.png)로 저장하고 이미지 태그를 사용해 봅시다.<br><br></li>
+</ul>
+  <details style = "margin-left: 30px"><summary> 정답 코드 보기/숨기기(클릭)</summary>
+<pre><code class="language-html">&lt;img src="lxcti.png"&gt;
+</code></pre>
+  </details>
+</li>
+</ul>
+<h2 id="9-링크-태그"><a class="header" href="#9-링크-태그">9. 링크 태그</a></h2>
+<ul>
+<li>
+<h3 id="a-태그를-사용해서-하이퍼링크hyperlink를-만들-수-있고-텍스트-또는-이미지와-함께-사용"><a class="header" href="#a-태그를-사용해서-하이퍼링크hyperlink를-만들-수-있고-텍스트-또는-이미지와-함께-사용"><em><code>&lt;a&gt;</code> 태그</em>를 사용해서 <i>하이퍼링크(hyperlink)</i>를 만들 수 있고, 텍스트 또는 이미지와 함께 사용</a></h3>
+<ul>
+<li>기본적으로 <em>href 속성을 이용해 주소를 지정</em>해야 함<br><br>
+<img src="../images/html15.png" width="90%" height="90%"></li>
+</ul>
+</li>
+<li>
+<h3 id="target-속성을-사용하면-현재-화면-뿐만-아니라-새로운-화면에서도-링크를-열-수-있음"><a class="header" href="#target-속성을-사용하면-현재-화면-뿐만-아니라-새로운-화면에서도-링크를-열-수-있음"><em>target 속성</em>을 사용하면 현재 화면 뿐만 아니라 새로운 화면에서도 링크를 열 수 있음</a></h3>
+<ul>
+<li>
+<p>_self: target 속성의 기본 값으로 <em>링크가 있는 화면</em>에서 열림</p>
+</li>
+<li>
+<p>_blank: 링크 내용이 새 창이나 새 탭에서 열림</p>
+</li>
+</ul>
+</li>
+<li>
+<h3 id="링크-태그-활용-실습"><a class="header" href="#링크-태그-활용-실습">링크 태그 활용 실습</a></h3>
+<ul>
+<li>
+<p>LX국토정보교육원 글자와 로고 이미지를 삽입하고 링크 태그를 사용하여 홈페이지로 이동하도록 웹 문서를 작성해 봅시다!<br>
+(단, 국토정보교육원 글자는 제목태그 3단계 사용, 링크를 클릭하면 새창에서 열리도록 지정)</p>
+  <details><summary> 정답 코드 보기/숨기기(클릭)</summary>
+<pre><code class="language-html">&lt;a href="http://lxcti.or.kr" target = "_blank"&gt;&lt;h3&gt;LX국토정보교육원&lt;/h3&gt;&lt;/a&gt;&lt;br&gt;
+&lt;a href="http://lxcti.or.kr" target = "_blank"&gt;&lt;img src="lxcti.png" alt="국토정보교육원"&gt;&lt;/a&gt;
+</code></pre>
+  </details>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="10-표-태그"><a class="header" href="#10-표-태그">10. 표 태그</a></h2>
+<ul>
+<li>
+<h3 id="표를-생성하기-위해서는-table-tr-td-th-태그를-사용"><a class="header" href="#표를-생성하기-위해서는-table-tr-td-th-태그를-사용">표를 생성하기 위해서는 <em><code>&lt;table&gt;</code>, <code>&lt;tr&gt;</code>, <code>&lt;td&gt;</code>, <code>&lt;th&gt;</code></em> 태그를 사용</a></h3>
+<ul>
+<li>
+<p><code>&lt;table&gt;</code> 태그를 이용해 표 전체 윤곽을 잡은 후 행이 2개이고 열이 3개인 표를 생성<br />
+<img src="../images/html18.png" width="85%" height="85%"></p>
+</li>
+<li>
+<p>열을 합칠 때는 <em>colspan</em>, 행을 합칠 때는 <em>rowspan</em> 속성을 이용해 합칠 셀의 개수를 지정하면 됨
+<img src="../images/html16.png" width="95%" height="95%"></p>
+</li>
+</ul>
+</li>
+<li>
+<h3 id="표-태그-활용-실습"><a class="header" href="#표-태그-활용-실습">표 태그 활용 실습</a></h3>
+<ul>
+<li>
+<p>위에 있는 표를 웹 문서로 작성해 봅시다!<br>
+(단, 테이블에 지정된 서식(선 색상, 선 굵기, 음영 색상, 정렬 등)은 무시!)</p>
+  <details><summary> 정답 코드 보기/숨기기(클릭)</summary>
+<pre><code class="language-html">&lt;table border = "1"&gt;
+&lt;tr&gt;
+    &lt;td&gt;방이름&lt;/td&gt;
+    &lt;td&gt;대상&lt;/td&gt;
+    &lt;td&gt;크기&lt;/td&gt;
+    &lt;td&gt;가격&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+    &lt;td&gt;유채방&lt;/td&gt;
+    &lt;td&gt;여성 도미토리&lt;/td&gt;
+    &lt;td&gt;2인실&lt;/td&gt;
+    &lt;td rowspan="3"&gt;1인 20,000원&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+    &lt;td rowspan="2"&gt;동백방&lt;/td&gt;
+    &lt;td&gt;동성 도미토리&lt;/td&gt;
+    &lt;td&gt;2인실&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+    &lt;td&gt;가족 1팀&lt;/td&gt;
+    &lt;td&gt;4인실&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+    &lt;td colspan="4"&gt;바깥채 전체를 렌트합니다.&lt;/td&gt;
+&lt;/tr&gt;    
+&lt;/table&gt;
+</code></pre>
+  </details>
+</li>
+<li>
+<p>아래에 있는 표를 웹 문서로 작성해 봅시다!<br>
+(단, 테이블에 지정된 서식(선 색상, 선 굵기, 음영 색상, 정렬 등)은 무시!)<br><br>
+<img src="../images/html19.png" width="100%" height="100%"></p>
+  <details><summary> 정답 코드 보기/숨기기(클릭)</summary>
+<pre><code class="language-html">&lt;table border = "1"&gt;
+&lt;tr&gt;
+    &lt;th&gt;&lt;/th&gt;
+    &lt;th&gt;GeoAI&lt;/th&gt;
+    &lt;th&gt;데이터 분석&lt;/th&gt;
+    &lt;th&gt;플랫폼 개발/운영&lt;/th&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+    &lt;th rowspan="3"&gt;전문&lt;/th&gt;
+    &lt;td colspan="3"&gt;프로젝트 관리&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+    &lt;td&gt;인공지능 분석과 활용&lt;/td&gt;
+    &lt;td&gt;국토정보분석&lt;/td&gt;
+    &lt;td&gt;공간정보 웹 서비스 개발&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+    &lt;td&gt;&lt;/td&gt;
+    &lt;td&gt;국토정보프로그래밍&lt;/td&gt;
+    &lt;td&gt;3차원 공간정보 서비스 구현&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+    &lt;th rowspan="4"&gt;기본&lt;/th&gt;
+    &lt;td colspan="3"&gt;공간정보 플랫폼 기술 융합&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+    &lt;td colspan="2"&gt;파이썬 기초 및 활용&lt;/td&gt;
+    &lt;td&gt;3D 그래픽 기본&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+    &lt;td&gt;노코드 기반 GeoAI 이해와 활용&lt;/td&gt;
+    &lt;td&gt;국토정보처리융합&lt;/td&gt;
+    &lt;td&gt;공간정보 DB기본&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+    &lt;td&gt;&lt;/td&gt;
+    &lt;td&gt;&lt;/td&gt;
+    &lt;td&gt;웹 프로그래밍 기본&lt;/td&gt;
+&lt;tr&gt;
+    &lt;th&gt;공통&lt;/th&gt;
+    &lt;td&gt;GIS TOOL 운용&lt;/td&gt;
+    &lt;td&gt;인공지능 이해와 활용&lt;/td&gt;
+    &lt;td&gt;데이터와 논리적 사고&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/table&gt;
+</code></pre>
+  </details>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="11-폼-만들기"><a class="header" href="#11-폼-만들기">11. 폼 만들기</a></h2>
+<ul>
+<li>
+<h3 id="폼form-태그"><a class="header" href="#폼form-태그">폼(form) 태그</a></h3>
+<ul>
+<li>
+<p>폼(form)은 사용자가 웹 사이트로 정보를 보낼 수 있는 요소</p>
+</li>
+<li>
+<p><code>&lt;form&gt;</code>과 <code>&lt;/form&gt;</code> 태그 사이에 여러 폼 요소와 관련된 태그를 삽입</p>
+<ul>
+<li>예: 아이디와 비밀번호 입력창, 로그인 버튼, 회원가입 창 등<br><br>
+<img src="../images/html20.png" width="90%" height="90%"></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<h3 id="폼-태그의-사용"><a class="header" href="#폼-태그의-사용">폼 태그의 사용</a></h3>
+<ul>
+<li>
+<p><code>&lt;label&gt;</code> 태그: 폼 요소에 레이블을 붙이기 위해 사용</p>
+</li>
+<li>
+<p><code>&lt;textarea&gt;</code>태그: 여러 줄로 된 텍스트 입력 필드를 나타내는 태그(cols, rows로 길이 설정)</p>
+</li>
+<li>
+<p><code>&lt;input&gt;</code> 태그: 사용자가 내용을 입력하는 부분을 생성하기 위해 사용</p>
+<ul>
+<li>
+<p>id 속성: 여러 번 사용된 폼 요소를 구분하기 위해 사용</p>
+</li>
+<li>
+<p>type 속성: 사용자가 입력할 수 있는 형태를 지정하기 위해 사용<br>
+(예: 라디오 버튼, 체크박스, 텍스트 상자 등)
+<img src="../images/html21.png" width="85%" height="85%"></p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<h3 id="input-태그의-type-속성에서-사용-가능한-유형"><a class="header" href="#input-태그의-type-속성에서-사용-가능한-유형"><code>&lt;input&gt;</code> 태그의 type 속성에서 사용 가능한 유형</a></h3>
+<ul>
+<li>
+<p>name 속성: 서버에서 폼 요소를 구분하기 위해 이름 지정</p>
+</li>
+<li>
+<p>value 속성: 선택한 라디오버튼이나 체크 박스를 서버로 알려줄 때 넘길 값을 지정</p>
+<ul>
+<li>button에서 value 속성은 버튼에 표시할 내용 지정<br><br></li>
+</ul>
+</li>
+</ul>
+<div class="table-wrapper"><table><thead><tr><th style="text-align: center">유형</th><th style="text-align: center">설명</th></tr></thead><tbody>
+<tr><td style="text-align: center">text</td><td style="text-align: center">한 줄 짜리 텍스트를 입력할 수 있는 텍스트 상자 삽입</td></tr>
+<tr><td style="text-align: center">radio</td><td style="text-align: center">주어진 항목에서 1개만 선택할 수 있는 radio 버튼 삽입</td></tr>
+<tr><td style="text-align: center">checkbox</td><td style="text-align: center">주어진 항목에서 2개 이상 선택 가능한 체크박스 삽입</td></tr>
+<tr><td style="text-align: center">button</td><td style="text-align: center">버튼 삽입</td></tr>
+</tbody></table>
+</div></li>
+<li>
+<h3 id="input-태그의-다양한-속성"><a class="header" href="#input-태그의-다양한-속성"><code>&lt;input&gt;</code> 태그의 다양한 속성</a></h3>
+<div class="table-wrapper"><table><thead><tr><th style="text-align: center">유형</th><th style="text-align: center">설명</th></tr></thead><tbody>
+<tr><td style="text-align: center">autofocus</td><td style="text-align: center">입력 커서 표시하기</td></tr>
+<tr><td style="text-align: center">placeholder</td><td style="text-align: center">힌트를 쌍따옴표 안에 표시하기</td></tr>
+</tbody></table>
+</div></li>
+<li>
+<h3 id="폼-태그-활용-실습"><a class="header" href="#폼-태그-활용-실습">폼 태그 활용 실습</a></h3>
+<ul>
+<li>
+<p>아래와 같이 폼 태그를 작성해 봅시다!<br>
+(단, 직원정보는 제목 태그의 3단계로 작성)<br><br>
+<img src="../images/html22.png" width="35%" height="35%"></p>
+<details><summary> 정답 코드 보기/숨기기(클릭)</summary>
+<pre><code class="language-html">&lt;form&gt;
+    &lt;h3&gt;직원 정보&lt;/h3&gt;
+    &lt;label for="name"&gt;이&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;름&amp;nbsp;&amp;nbsp;
+        &lt;input type="text", id="name" autofocus placeholder="띄어쓰기 없이 입력하세요"&gt;&lt;/label&gt;&lt;br&gt;
+    &lt;label for="phone"&gt;휴대폰&amp;nbsp;&amp;nbsp;
+        &lt;input type="phone", id="phone"&gt;&amp;nbsp;&lt;/label&gt;&lt;br&gt;
+    &lt;label for="email"&gt;이메일&amp;nbsp;&amp;nbsp;
+        &lt;input type="email", id="email"&gt;&lt;/label&gt;&lt;br&gt;&lt;br&gt;
+    &lt;input type="button", value="등록하기"&gt;&lt;/label&gt;
+&lt;/form&gt;
+</code></pre>
+</details>
+</li>
+<li>
+<p>아래와 같이 폼 태그를 작성해 봅시다!<br>
+(단, 질문은 제목 태그의 4단계로 작성)<br><br>
+<img src="../images/html23.png" width="60%" height="60%"></p>
+<details><summary> 정답 코드 보기/숨기기(클릭) </summary>
+<pre><code class="language-html">&lt;p&gt;여러분들의 의견을 들려주세요!&lt;/p&gt;
+&lt;hr&gt;
+&lt;form&gt;
+    &lt;h4&gt;개인정보&lt;/h4&gt;
+    &lt;ul&gt;
+        &lt;li&gt;
+            &lt;label for="name"&gt; 이름 &lt;/label&gt;
+            &lt;input type="text" name="info" id="name" autofocus placeholder="공백없이 입력하세요"&gt;                       
+        &lt;/li&gt;
+        &lt;li&gt;
+            &lt;label for="belong"&gt; 소속 &lt;/label&gt;
+            &lt;input type="text" name="info" id="belong"&gt;
+        &lt;/li&gt;
+    &lt;/ul&gt;
+    &lt;h4&gt;가장 유익한 과목은?&lt;/h4&gt;
+    &lt;ul&gt;
+        &lt;li&gt;
+            &lt;label for="sub1"&gt;
+            &lt;input type="radio" name="subject" id="sub1"&gt; HTML&lt;/label&gt;
+        &lt;/li&gt;
+        &lt;li&gt;
+            &lt;label for="sub2"&gt;
+            &lt;input type="radio" name="subject" id="sub2"&gt; CSS&lt;/label&gt;
+        &lt;/li&gt;
+            
+        &lt;li&gt;
+            &lt;label for="sub3"&gt;
+            &lt;input type="radio" name="subject" id="sub3"&gt; JavaScript&lt;/label&gt;
+        &lt;/li&gt;
+    &lt;/ul&gt;
+    &lt;h4&gt;강의시간이 더 필요한 과목은?&lt;/h4&gt;
+    &lt;ul&gt;
+        &lt;li&gt;
+            &lt;label for="sub4"&gt;
+            &lt;input type="checkbox" name="time" id="sub4"&gt; HTML&lt;/label&gt;
+        &lt;/li&gt;
+        &lt;li&gt;
+            &lt;label for="sub5"&gt;
+            &lt;input type="checkbox" name="time" id="sub5"&gt; CSS&lt;/label&gt;
+        &lt;/li&gt;
+        &lt;li&gt;
+            &lt;label for="sub6"&gt;
+            &lt;input type="checkbox" name="time" id="sub6"&gt; JavaScript&lt;/label&gt;
+        &lt;/li&gt;
+    &lt;/ul&gt;
+    &lt;h4&gt;건의사항&lt;/h4&gt;
+        &lt;label for="feedback"&gt;
+        &lt;textarea id="feedback" name="feedback" cols="60" rows="5" placeholder="수정 및 개선사항을 간략하게 써 주세요."&gt;&lt;/textarea&gt;
+        &lt;/label&gt;&lt;br&gt;
+        &lt;input type="button" value="등록하기"&gt;
+    &lt;/form&gt;
+</code></pre>
+</details>
+</li>
+</ul>
+</li>
+</ul>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../html/environment.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../html/css.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../html/environment.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../html/css.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
+
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+
+    </div>
+    </body>
+</html>

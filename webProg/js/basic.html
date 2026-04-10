@@ -1,0 +1,448 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>기초 문법 - webProg</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="highlight-css" href="../highlight.css">
+        <link rel="stylesheet" id="tomorrow-night-css" href="../tomorrow-night.css">
+        <link rel="stylesheet" id="ayu-highlight-css" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "../";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+            window.path_to_searchindex_js = "../searchindex.js";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../toc.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+                sidebar_toggle.checked = false;
+            }
+            if (sidebar === 'visible') {
+                sidebar_toggle.checked = true;
+            } else {
+                html.classList.remove('sidebar-visible');
+            }
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../toc.html"></iframe>
+            </noscript>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">webProg</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <div class="search-wrapper">
+                            <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                            <div class="spinner-wrapper">
+                                <i class="fa fa-spinner fa-spin"></i>
+                            </div>
+                        </div>
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="자바스크립트-이해"><a class="header" href="#자바스크립트-이해">자바스크립트 이해</a></h1>
+<h2 id="1-프런트앤드-개발-이해하기"><a class="header" href="#1-프런트앤드-개발-이해하기">1. 프런트앤드 개발 이해하기</a></h2>
+<ul>
+<li>
+<h3 id="1단계"><a class="header" href="#1단계">1단계</a></h3>
+<ul>
+<li>고객(클라이언트)에게 개발을 의뢰를 받으면 고객의 요구에 맞게 기획안을 작성</li>
+</ul>
+</li>
+<li>
+<h3 id="2단계"><a class="header" href="#2단계">2단계</a></h3>
+<ul>
+<li>기획안을 토대로 디자이너가 화면에 보여질 UI(User Interface)를 디자인</li>
+</ul>
+</li>
+<li>
+<h3 id="3단계"><a class="header" href="#3단계">3단계</a></h3>
+<ul>
+<li>프런트엔드 개발 단계로 HTML, CSS, JavaScript, JQuery 등을 이용해 사용자(사이트 방문자)의 눈에 보이는 부분을 개발</li>
+</ul>
+</li>
+<li>
+<h3 id="4단계"><a class="header" href="#4단계">4단계</a></h3>
+<ul>
+<li>백엔드 개발자는 3단계 결과를 ASP, PHP, JSP 등 서버 언어를 이용하여 화면에 보이지 않는 부분을 개발<br><br>
+<img src="../images/js01.jpg" width ="100%" height="100%"></li>
+</ul>
+</li>
+</ul>
+<h2 id="2-자바스크립트의-이해"><a class="header" href="#2-자바스크립트의-이해">2. 자바스크립트의 이해</a></h2>
+<ul>
+<li>
+<h3 id="자바스크립트는-프런트엔드-개발-언어이며-정적인-웹-문서에-동작을-부여"><a class="header" href="#자바스크립트는-프런트엔드-개발-언어이며-정적인-웹-문서에-동작을-부여">자바스크립트는 프런트엔드 개발 언어이며 정적인 <em>웹 문서에 동작</em>을 부여</a></h3>
+<ul>
+<li>웹 페이지에 생동감을 불어넣기 위해 만들어진 프로그래밍 언어<br><br>
+<img src="../images/js02.jpg" width ="80%" height="80%"></li>
+</ul>
+</li>
+<li>
+<h3 id="자바스크립트-탄생-배경"><a class="header" href="#자바스크립트-탄생-배경">자바스크립트 탄생 배경</a></h3>
+<ul>
+<li>
+<p><em>브라우저에서 동작하는 언어인 자바스크립트</em>는 1995년 세계 최초의 상용 브라우저인 넷스케이프 내비게이터(Netscape Navigator)를 출시한 <em>넷스케이프 커뮤니케이션즈가 개발</em></p>
+</li>
+<li>
+<p>출시 초기에는 라이브스크립트(LiveScript)라는 이름을 가지고 있었지만 당시 유행하던 자바의 영향을 받아 자바스크립트(JavaScript)로 변경</p>
+</li>
+<li>
+<p>구글 지도의 등장으로 새로운 웹의 가능성과 자바스크립트의 가능성을 인식</p>
+<ul>
+<li>당시 구글은 서버에서 반환된 HTML 데이터를 읽어들인 후 지도 확장이나 축소, 슬라이드 등의 동작을 브라우저에서 구현하고자 함<br><br>
+<img src="../images/js03.jpg" width ="80%" height="80%"></li>
+</ul>
+</li>
+<li>
+<p>각 브라우저는 자바스크립트를 구동하기 위한 엔진을 갖고 있으며 이를 <em>자바스크립트 가상 머신</em>이라 함</p>
+<ul>
+<li>Chrom, Opera(V8), FireFox(SpiderMonky), IE(Triden 및 Chakar), Microsoft Edge(ChakraCore), Safari(Nitro 및 SquirrelFish)</li>
+</ul>
+</li>
+<li>
+<p>국제 정보통신표준화기구(ECMA, European Computer Manufacturers Association)는 1996년부터 <em>자바스크립트 표준화</em>를 시작</p>
+<ul>
+<li>각 브라우저 개발사들의 자바스크립트 엔진이 다르고 그에 따른 <em>사용자들의 크로스 브라우징 이슈와 자바스크립트의 파편화를 방지</em> 목적</li>
+</ul>
+</li>
+<li>
+<p>ECMAScript(또는 ES)는 ECMA에 의해 표준화된 범용 프로그래밍 언어로 서로 다른 웹 브라우저들에서 웹 페이지의 상호운용성을 보장하기 위한 자바스크립트 표준</p>
+<ul>
+<li>ECMAScript는 스크립팅 언어를 어떻게 만들어야 하는지를 설명하는 일종의 설명서이고, 자바스크립트는 ECMAScript의 사양을 바탕으로 만들어진 언어</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<h3 id="자바스크립트로-할-수-있는-일"><a class="header" href="#자바스크립트로-할-수-있는-일">자바스크립트로 할 수 있는 일</a></h3>
+<ul>
+<li>
+<p>Native React라는 프레임워크를 통하여 HTML, CSS, JS 만으로 <em>웹 어플리케이션, 안드로이드 어플리케이션, ISO 어플리케이션을 한 방에 작성</em> 가능</p>
+</li>
+<li>
+<p>three.js 라이브러리를 통해 <em>3D 게임, 애니메이션 등을 제작하고, 데이터 시각화</em>도 가능</p>
+<ul>
+<li>three.js 사이트(http://threejs.org)에서 확인</li>
+</ul>
+</li>
+<li>
+<p>Electron으로 <em>데스크톱 개발</em>이 가능하고, 윈도우, 맥, 리눅스까지 지원<br><br>
+<img src="../images/js04.png" width ="80%" height="80%"></p>
+</li>
+<li>
+<p>TensorflowJS, BrainJS 등의 라이브러리를 활용하면 적은 파라미터로도 충분한 성능을 보여줄 수 있는 <em>머신러닝 신경망을 학습하고 학습된 모델을 실행</em>시켜 볼 수 있음<br><br>
+<img src="../images/js05.png" width ="70%" height="70%"></p>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="3-자바스크립트-기초-문법"><a class="header" href="#3-자바스크립트-기초-문법">3. 자바스크립트 기초 문법</a></h2>
+<ul>
+<li>
+<h3 id="자바스크립트-선언문"><a class="header" href="#자바스크립트-선언문">자바스크립트 선언문</a></h3>
+<ul>
+<li>
+<p>선언문은 <em>자바스크립트 코드를 작성할 영역을 선언</em>하는 것</p>
+</li>
+<li>
+<p><em><code>&lt;script&gt;</code> 태그로 선언문이 시작된 곳부터 <code>&lt;/script&gt;</code> 태그로 종료</em>된 곳까지가 스크립트 영역</p>
+</li>
+<li>
+<p><code>&lt;head&gt;</code> 태그 영역 또는 <em><code>&lt;body&gt;</code> 태그 영역</em>에 선언</p>
+<ul>
+<li>대부분 <code>&lt;head&gt;</code> 태그 영역에 작성</li>
+</ul>
+</li>
+<li>
+<p>선언문 안에 코드가 아닌 설명글을 넣고 싶을 때는 주석 처리</p>
+<ul>
+<li>한 줄 주석일 경우: '//한줄 설명글'로 작성</li>
+<li>여러 줄 주석일 경우: '/* 여러 줄 설명글 */'로 작성<br><br></li>
+</ul>
+  <details><summary> HTML 코드 보기/숨기기(클릭)</summary>
+<pre><code class="language-html">/* head 영역에 작성 */
+&lt;head&gt;
+    &lt;script&gt;
+        document.write("환영합니다");
+    &lt;/script&gt;
+&lt;/head&gt;
+</code></pre>
+  </details> 
+</li>
+</ul>
+</li>
+<li>
+<h3 id="내부-스크립트-외부로-분리하기"><a class="header" href="#내부-스크립트-외부로-분리하기">내부 스크립트 외부로 분리하기</a></h3>
+<ul>
+<li>
+<p>프로젝트 관리를 원활하게 하기 위해서 HTML 내부에 작성된 <em>자바스크립트 소스를 외부로 분리</em></p>
+  <details><summary> HTML 코드 보기/숨기기(클릭)</summary>
+<pre><code class="language-html">/* head 영역에 작성 */
+&lt;head&gt;
+    &lt;script src="script.js"&gt;&lt;/scipt&gt;
+&lt;/head&gt;
+</code></pre>
+  </details> 
+  <details><summary> JS 코드 보기/숨기기(클릭)</summary>
+<pre><code class="language-javascript">/* script라는 이름의 자바스크립트 파일을 생성 후 작성 */
+document.write("환영합니다");
+</code></pre>
+  </details> 
+</li>
+</ul>
+</li>
+<li>
+<h3 id="코드-입력-시-주의사항"><a class="header" href="#코드-입력-시-주의사항">코드 입력 시 주의사항</a></h3>
+<ul>
+<li>
+<p><em>대소문자를 구분</em>하여 작성</p>
+<ul>
+<li>잘못된 예: <code>document.Write("환영합니다");</code></li>
+<li>올바른 예: <code>document.write("환영합니다");</code></li>
+</ul>
+</li>
+<li>
+<p>코드를 한 줄 작성한 후에는 <i>세미콜론(;)</i>을 작성</p>
+<ul>
+<li>잘못된 예: <code>document.write("환영합니다")</code></li>
+<li>올바른 예: <code>document.write("환영합니다");</code></li>
+</ul>
+</li>
+<li>
+<p><em>한 줄에 한 문장만 작성</em>하는 것이 가독성을 위해 좋음</p>
+<ul>
+<li>권장하지 않음: <code>document.write("여러분"); document.write("환영합니다");</code></li>
+<li>권장함: <code>document.write("여러분");</code><br>
+    <code>document.write("환영합니다");</code></li>
+</ul>
+</li>
+<li>
+<p>문자형 데이터를 작성할 때는 <em>큰따옴표와 작은따옴표의 겹침 오류를 주의</em></p>
+<ul>
+<li>잘못된 예: <code>document.write("환영 "매우 환영"합니다");</code></li>
+<li>올바른 예: <code>document.write('환영 "매우 환영"합니다');</code></li>
+</ul>
+</li>
+<li>
+<p>중괄호 또는 소괄호의 <em>짝이 맞아야 함</em></p>
+<ul>
+<li>잘못된 예: <code>document.write("환영합니다";</code></li>
+<li>올바른 예: <code>document.write("환영합니다");</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="4-실습-환경"><a class="header" href="#4-실습-환경">4. 실습 환경</a></h2>
+<ul>
+<li>
+<h3 id="visual-studio-code"><a class="header" href="#visual-studio-code">Visual Studio Code</a></h3>
+<ul>
+<li>
+<p>웹 문서 내에서의 자바스크립트 구동 방식을 이해하기 위해 기본적으로는 <em>Visual Studio Code</em>를 활용하여 실습 진행</p>
+<ul>
+<li>자바스크립트는 내부 스크립트를 외부로 분리하여 선언하는 방식 사용</li>
+</ul>
+</li>
+<li>
+<p>간단한 코드 입력은 <em>구글 크롬의 개발자 도구</em> 활용</p>
+<ul>
+<li>크롬 브라우저에서 <i>F12 버튼(또는 단축키 Ctrl + Shift + i)</i>을 눌러 개발자 도구 실행</li>
+<li>Elements: HTML 요소에 적용된 스타일(CSS)을 검사</li>
+<li>Console: 자바스크립트 오류 체크 및 디버깅(debugging)</li>
+<li>Source: 브라우저가 자바스크립트 소스를 파싱(parsing)해 오는 과정을 보여줌<br><br>
+<img src="../images/js06.jpg" width="90%" height="90%"></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../js/js_README.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../js/variable.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../js/js_README.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../js/variable.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
+
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+
+    </div>
+    </body>
+</html>
