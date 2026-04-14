@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>원포인트 교육_2026년 - wantPoint</title>
+        <title>실습환경 - wantPoint</title>
 
 
         <!-- Custom HTML head -->
@@ -175,14 +175,97 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="원포인트-교육_2026년"><a class="header" href="#원포인트-교육_2026년">원포인트 교육_2026년</a></h1>
+                        <h1 id="실습-환경-구성"><a class="header" href="#실습-환경-구성">실습 환경 구성</a></h1>
+<h2 id="1-프로그램-다운로드-및-설치"><a class="header" href="#1-프로그램-다운로드-및-설치">1. 프로그램 다운로드 및 설치</a></h2>
+<ul>
+<li>
+<h3 id="아나콘다anaconda-설치"><a class="header" href="#아나콘다anaconda-설치">아나콘다(Anaconda) 설치</a></h3>
+<ul>
+<li>
+<p>아나콘다는 데이터 사이언스를 위해 <em>다양한 기능을 제공해주는 도구 모음</em></p>
+<ul>
+<li>
+<p>라이브러리 설치에 소요되는 <em>시간이 절약</em></p>
+</li>
+<li>
+<p>R과 파이썬 프로그래밍 모두 아나콘다 환경에서 실행 가능</p>
+</li>
+<li>
+<p><i>깔끔하고 직관적인 UX/UI</i> 제공</p>
+</li>
+</ul>
+</li>
+<li>
+<p>아나콘다 홈페이지로 접속한 후 <i>Free Download &gt; Get Started</i> 클릭</p>
+<ul>
+<li>https://www.anaconda.com</li>
+</ul>
+</li>
+<li>
+<p>다운로드 받은 설치파일 더블클릭 후 별 다른 설정 없이 <em>Next 버튼 클릭으로 설치</em> 완료</p>
+</li>
+</ul>
+</li>
+<li>
+<h3 id="주피터-노트북jupyter-notebook-설치"><a class="header" href="#주피터-노트북jupyter-notebook-설치">주피터 노트북(Jupyter Notebook) 설치</a></h3>
+<ul>
+<li>
+<p><em>웹 브라우저에서 파이썬 코드를 작성하고 단계적으로 실행 가능</em>하도록 하는 개발자 도구</p>
+<ul>
+<li>
+<p>하나의 서버에 여러 명이 붙어서 <em>동시에 작업</em>이 가능</p>
+</li>
+<li>
+<p>서버에 파일을 올리고 내리는 것이 매우 간단하여 <em>손쉽게 파일 관리</em></p>
+</li>
+<li>
+<p>코드 편집기나 IDE처럼 <em>코드 자동 완성기능이 없음</em></p>
+</li>
+</ul>
+</li>
+<li>
+<p><i>시작 메뉴 &gt; 아나콘다 내비게이터(Anaconda Navigator)</i>를 실행해서 <em>주피터 노트북의 Launch</em>를 클릭<br><br></p>
+</li>
+</ul>
+  <img src="./images/environ01.png" width ="90%" height="90%">    
+<ul>
+<li>웹 브라우저 새로운 탭에 주피터 노트북이 실행되고 오른쪽 상단의 <i>New &gt; Python3을 클릭</i>하면 새로운 파일이 생성<br><br></li>
+</ul>
+  <img src="./images/environ02.png" width ="90%" height="90%">  
+</li>
+</ul>
+<h2 id="2-jupyter-notebook-사용방법"><a class="header" href="#2-jupyter-notebook-사용방법">2. Jupyter Notebook 사용방법</a></h2>
+<ul>
+<li>
+<h3 id="주피터-노트북-실행-방법"><a class="header" href="#주피터-노트북-실행-방법">주피터 노트북 실행 방법</a></h3>
+<ul>
+<li>기본적으로 셀(cell) 단위로 실행되고, <i>[ ] 옆에 있는 네모 박스</i>에 파이썬 코드를 입력<br><br></li>
+</ul>
+  <details style = "margin-left: 40px"><summary> 예제 코드 보기/숨기기(클릭)</summary>
+<pre><code class="language-python">print("Hello")
+</code></pre>
+  </details>
+</li>
+<li>
+<h3 id="주피터-노트북-주요-단축키"><a class="header" href="#주피터-노트북-주요-단축키">주피터 노트북 주요 단축키</a></h3>
+<ul>
+<li>Ctrl + / : 주석 처리</li>
+<li>Ctrl + Enter: 편집 중인 셀 실행</li>
+<li>Shift + enter: 셀 실행 후 아래에 새로운 셀 추가</li>
+<li>b: 아래에 셀 추가</li>
+</ul>
+</li>
+</ul>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="index.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
 
-                            <a rel="next prefetch" href="environment.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next prefetch" href="api_01.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
 
@@ -192,8 +275,11 @@
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="index.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
 
-                    <a rel="next prefetch" href="environment.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a rel="next prefetch" href="api_01.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
             </nav>

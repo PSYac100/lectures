@@ -8,7 +8,7 @@ class MDBookSidebarScrollbox extends HTMLElement {
         super();
     }
     connectedCallback() {
-        this.innerHTML = '<ol class="chapter"><li class="chapter-item expanded "><a href="onepoint/index.html"><strong aria-hidden="true">1.</strong> 원포인트 교육_2026년</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="onepoint/api.html"><strong aria-hidden="true">1.1.</strong> openAPI 사용방법</a></li><li class="chapter-item expanded "><a href="onepoint/modeler.html"><strong aria-hidden="true">1.2.</strong> 그래픽 모델러 사용방법</a></li><li class="chapter-item expanded "><a href="onepoint/toolbox.html"><strong aria-hidden="true">1.3.</strong> 툴박스 생성방법</a></li></ol></li></ol>';
+        this.innerHTML = '<ol class="chapter"><li class="chapter-item expanded "><a href="index.html"><strong aria-hidden="true">1.</strong> 원포인트 교육_2026년</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="environment.html"><strong aria-hidden="true">1.1.</strong> 실습환경</a></li><li class="chapter-item expanded "><a href="api_01.html"><strong aria-hidden="true">1.2.</strong> openAPI 활용실습_01</a></li><li class="chapter-item expanded "><a href="api_02.html"><strong aria-hidden="true">1.3.</strong> openAPI 활용실습_02</a></li><li class="chapter-item expanded "><a href="toolbox.html"><strong aria-hidden="true">1.4.</strong> 툴박스 생성방법</a></li></ol></li></ol>';
         // Set the current, active page, and reveal it if it's hidden
         let current_page = document.location.href.toString().split("#")[0].split("?")[0];
         if (current_page.endsWith("/")) {
