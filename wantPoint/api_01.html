@@ -264,7 +264,7 @@
 </ul>
 </li>
 <li>
-<h3 id="jupyter에서-api-호출"><a class="header" href="#jupyter에서-api-호출">Jupyter에서 API 호출</a></h3>
+<h3 id="jupyter에서-api-호출-기본방법"><a class="header" href="#jupyter에서-api-호출-기본방법">Jupyter에서 API 호출 기본방법</a></h3>
 <ul>
 <li>설치된 라이브러리를 확인하고, 필요한 라이브러리를 호출한 후 API 호출
 <ul>
@@ -279,7 +279,7 @@
   ## requests는 웹 서버에 데이터를 요청하기 위한 가장 대중적인 라이브러리
   ## json은 서버로부터 받은 JSON 형식의 데이터를 읽기 편하게 처리하기 위해 사용
 import requests
-    
+      
 # 브이월드에서 발급받는 본인만의 인증 키 붙여넣기
 API_KEY = "여기에_본인_API_KEY"
 
@@ -301,7 +301,7 @@ params = {
     # 검색 대상의 타입
     "type": "place",
     # 검색 정밀도를 위해 브이월드 장소분류코드 참고
-    "category": "카테고리 입력"
+    "category": "카테고리 입력",
     # 응답 형식
     "format": "json",
     "key": API_KEY
@@ -315,11 +315,15 @@ data = response.json()
 data
 </code></pre>
   </details><br>
+</li>
+<li>
+<h3 id="jupyter에서-api-호출-수정방법"><a class="header" href="#jupyter에서-api-호출-수정방법">Jupyter에서 API 호출 수정방법</a></h3>
 <ul>
-<li>위의 코드로는 데이터 10만 추출되므로 전체 데이터가 추출되도록 코드 추가<br><br></li>
+<li>위의 코드로는 데이터 10개만 추출되므로 전체 데이터가 추출되도록 코드 추가<br><br></li>
 </ul>
   <details style = "margin-left: 40px"><summary> 예제 코드 보기/숨기기(클릭)</summary>
 <pre><code class="language-Python">import json
+import math
 
 total = int(data['response']['record']['total'])
 size = params['size']
