@@ -176,56 +176,137 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="qgis-python-실습"><a class="header" href="#qgis-python-실습">QGIS Python 실습</a></h1>
-<h1 id="request와-json-라이브러리-불러오기"><a class="header" href="#request와-json-라이브러리-불러오기">request와 json 라이브러리 불러오기</a></h1>
-<h2 id="requests는-웹-서버에-데이터를-요청하기-위한-가장-대중적인-라이브러리"><a class="header" href="#requests는-웹-서버에-데이터를-요청하기-위한-가장-대중적인-라이브러리">requests는 웹 서버에 데이터를 요청하기 위한 가장 대중적인 라이브러리</a></h2>
-<h2 id="json은-서버로부터-받은-json-형식의-데이터를-읽기-편하게-처리하기-위해-사용"><a class="header" href="#json은-서버로부터-받은-json-형식의-데이터를-읽기-편하게-처리하기-위해-사용">json은 서버로부터 받은 JSON 형식의 데이터를 읽기 편하게 처리하기 위해 사용</a></h2>
-<p>import requests</p>
-<h1 id="브이월드에서-발급받는-본인만의-인증-키-붙여넣기"><a class="header" href="#브이월드에서-발급받는-본인만의-인증-키-붙여넣기">브이월드에서 발급받는 본인만의 인증 키 붙여넣기</a></h1>
-<p>API_KEY = "AF39D71B-F3EF-3054-95BE-8C7D3E12428D"</p>
-<h1 id="브이월드의-서버-주소"><a class="header" href="#브이월드의-서버-주소">브이월드의 서버 주소</a></h1>
-<p>url = "https://api.vworld.kr/req/search"</p>
-<h1 id="어떤-데이터를-어떻게-보여달라고-요청하는-핵심-파라미터-설정"><a class="header" href="#어떤-데이터를-어떻게-보여달라고-요청하는-핵심-파라미터-설정">어떤 데이터를 어떻게 보여달라고 요청하는 핵심 파라미터 설정</a></h1>
-<p>params = {
-"service": "search",
-"request": "search",
-"version": "2.0",
-# 좌표계 설정
-"crs": "EPSG:4326",
-"bbox": "",
-"size": 80,
-"page": 1,
-# 검색어 작성
-"query": "시청",
-# 검색 대상의 타입
-"type": "place",
-# 검색 정밀도를 위해 브이월드 장소분류코드 참고
-"category": "010300203000",
-# 응답 형식
-"format": "json",
-"key": API_KEY
-}</p>
-<h1 id="설정한-urp과-파라미터를-조합해-요청을-보냄"><a class="header" href="#설정한-urp과-파라미터를-조합해-요청을-보냄">설정한 URP과 파라미터를 조합해 요청을 보냄</a></h1>
-<p>response = requests.get(url, params=params)</p>
-<h1 id="서버로부터-받은-json-형식의-응답을-python-딕셔너리-형태로-변환"><a class="header" href="#서버로부터-받은-json-형식의-응답을-python-딕셔너리-형태로-변환">서버로부터 받은 JSON 형식의 응답을 Python 딕셔너리 형태로 변환</a></h1>
-<p>data = response.json()</p>
-<h1 id="생성할-레이어의-타입을-정의하고-좌표계-설정-vworld는-레이어-이름-memory는-임시레이어로-생성"><a class="header" href="#생성할-레이어의-타입을-정의하고-좌표계-설정-vworld는-레이어-이름-memory는-임시레이어로-생성">생성할 레이어의 타입을 정의하고 좌표계 설정, vworld는 레이어 이름, memory는 임시레이어로 생성</a></h1>
-<p>layer = QgsVectorLayer("Point?crs=EPSG:4326", "vworld", "memory")</p>
-<h1 id="dataprovider는-레이어에-데이터를-넣거나-수정할-수-있는-통로를-활보"><a class="header" href="#dataprovider는-레이어에-데이터를-넣거나-수정할-수-있는-통로를-활보">dataProvider는 레이어에 데이터를 넣거나 수정할 수 있는 통로를 활보</a></h1>
-<p>provider = layer.dataProvider()</p>
-<h1 id="addattributes는-속성-테이블에-열을-추가"><a class="header" href="#addattributes는-속성-테이블에-열을-추가">addAttributes는 속성 테이블에 열을 추가</a></h1>
-<p>provider.addAttributes([QgsField("name", QVariant.String)])
+<h2 id="1-v-world-검색-api-실습-문제점"><a class="header" href="#1-v-world-검색-api-실습-문제점">1. V-World 검색 API 실습 문제점</a></h2>
+<ul>
+<li>
+<h3 id="파싱과-결과-확인의-분리"><a class="header" href="#파싱과-결과-확인의-분리">파싱과 결과 확인의 분리</a></h3>
+<ul>
+<li>앞선 과정에서 했던 V-World 검색 API 실습은 Jupyter Notebook으로 V-World 검색 API를 파싱하고 결과를 저장하여 QGIS에서 확인하였음</li>
+</ul>
+</li>
+<li>
+<h3 id="파싱과-결과-확인의-통합"><a class="header" href="#파싱과-결과-확인의-통합">파싱과 결과 확인의 통합</a></h3>
+<ul>
+<li>두 과정을 통합하여 파싱 결과를 QGIS 화면에 바로 띄우도록 수정하는 실습 수행</li>
+</ul>
+</li>
+</ul>
+<h2 id="2-v-world-검색-api-실습-수정"><a class="header" href="#2-v-world-검색-api-실습-수정">2. V-World 검색 API 실습 수정</a></h2>
+<ul>
+<li>
+<h3 id="qgis-python-주요-클래스"><a class="header" href="#qgis-python-주요-클래스">QGIS Python 주요 클래스</a></h3>
+<ul>
+<li>
+<p>QgsVectorLayer</p>
+<ul>
+<li>점, 선, 면 같은 벡터 데이터의 도형 자료와 속성 자료를 관리</li>
+</ul>
+</li>
+<li>
+<p>dataProvider()</p>
+<ul>
+<li>레이어의 실제 데이터에 접근하기 위한 통보로 layer.dataProvoder()를 호출하여 사용</li>
+</ul>
+</li>
+<li>
+<p>addAttributes(), updataFiels()</p>
+<ul>
+<li>데이터의 속성 컬럼을 추가하고, 추가한 정보를 새로고침</li>
+</ul>
+</li>
+<li>
+<p>QgsFeature</p>
+<ul>
+<li>지도 위의 하나의 객체(점 하나, 혹은 행 하나)를 의미하는 단위</li>
+</ul>
+</li>
+<li>
+<p>setGeometry(), setAttributes()</p>
+<ul>
+<li>생성한 QgsFeature에 도형 정보를 부여하고, 속성 정보를 채움</li>
+</ul>
+</li>
+<li>
+<p>addFeature()</p>
+<ul>
+<li>내용을 채운 QgsFeature를 실제 레이어에 최종적으로 집어넣는 작업</li>
+</ul>
+</li>
+<li>
+<p>updateExtents()</p>
+<ul>
+<li>레이어가 차지하는 전체 범위를 다시 계산</li>
+</ul>
+</li>
+<li>
+<p>QgsProject.instance().addMapLayer(layer)</p>
+<ul>
+<li>메모리 상에 있는 레이어를 현재 실행 중인 QGIS 프로젝트 켄버스 창에 실제로 나타나게 하는 역할<br><br></li>
+</ul>
+</li>
+</ul>
+  <details style = "margin-left: 40px"><summary> 예제 코드 보기/숨기기(클릭)</summary>
+<pre><code class="language-Python"># request와 json 라이브러리 불러오기
+## requests는 웹 서버에 데이터를 요청하기 위한 가장 대중적인 라이브러리
+## json은 서버로부터 받은 JSON 형식의 데이터를 읽기 편하게 처리하기 위해 사용
+import requests
+
+# 브이월드에서 발급받는 본인만의 인증 키 붙여넣기
+API_KEY = "여기에_본인_API_KEY"
+
+# 브이월드의 서버 주소
+url = "https://api.vworld.kr/req/search"
+
+# 어떤 데이터를 어떻게 보여달라고 요청하는 핵심 파라미터 설정
+params = {
+    "service": "search",
+    "request": "search",
+    "version": "2.0",
+    # 좌표계 설정
+    "crs": "EPSG:4326",
+    "bbox": "",
+    "size": 80,
+    "page": 1,
+    # 검색어 작성
+    "query": "시청",
+    # 검색 대상의 타입
+    "type": "place",
+    # 검색 정밀도를 위해 브이월드 장소분류코드 참고
+    "category": "카테고리 입력",
+    # 응답 형식
+    "format": "json",
+    "key": API_KEY
+}
+
+# 설정한 URL과 파라미터를 조합해 요청을 보냄
+response = requests.get(url, params=params)
+
+# 서버로부터 받은 JSON 형식의 응답을 Python 딕셔너리 형태로 변환
+data = response.json() 
+
+# 생성할 레이어의 타입을 정의하고 좌표계 설정, vworld는 레이어 이름, memory는 임시레이어로 생성
+layer = QgsVectorLayer("Point?crs=EPSG:4326", "vworld", "memory")
+
+# dataProvider는 레이어에 데이터를 넣거나 수정할 수 있는 통로를 활보
+provider = layer.dataProvider()
+
+# addAttributes는 속성 테이블에 열을 추가
+provider.addAttributes([QgsField("name", QVariant.String)])
 provider.addAttributes([QgsField("address", QVariant.String)])
 provider.addAttributes([QgsField("x", QVariant.String)])
-provider.addAttributes([QgsField("y", QVariant.String)])</p>
-<h1 id="방금-추가한-속성-칸을-레이어에-최종적으로-적용"><a class="header" href="#방금-추가한-속성-칸을-레이어에-최종적으로-적용">방금 추가한 속성 칸을 레이어에 최종적으로 적용</a></h1>
-<p>layer.updateFields()</p>
-<p>for item in data['response']['result']['items']:
-feat = QgsFeature()             # 새로운 '피처'(도형+속성 하나) 객체 생성
-x = float(item['point']['x'])   # API 데이터 속 경도(x)
-y = float(item['point']['y'])   # API 데이터 속 위도(y)
-name = item['title']           # API 데이터 속 기관 이름
-address = item['address']['road']    # APU 데이터 속 주소(여기서는 도로명주소)</p>
-<pre><code># 지점의 좌표를 설정 (Geometry)
+provider.addAttributes([QgsField("y", QVariant.String)])
+
+# 방금 추가한 속성 칸을 레이어에 최종적으로 적용
+layer.updateFields()
+
+for item in data['response']['result']['items']:
+    feat = QgsFeature()             # 새로운 '피처'(도형+속성 하나) 객체 생성
+    x = float(item['point']['x'])   # API 데이터 속 경도(x)
+    y = float(item['point']['y'])   # API 데이터 속 위도(y)
+    name = item['title']            # API 데이터 속 기관 이름
+    address = item['address']['road']    # API 데이터 속 주소(여기서는 도로명주소)
+
+# 지점의 좌표를 설정 (Geometry)
 feat.setGeometry(QgsGeometry.fromPointXY(QgsPointXY(x, y)))
 
 # 지점의 이름 정보를 입력 (Attributes) 열 추가된 순서대로!!
@@ -233,11 +314,16 @@ feat.setAttributes([name, address, x, y])
 
 # 준비된 피처를 레이어(provider)에 추가
 provider.addFeature(feat)
+
+# 레이어에 추가된 모든 점들의 범위를 계산
+layer.updateExtents()
+
+# QGIS 메인 프로젝트 화면에 표시
+QgsProject.instance().addMapLayer(layer)
 </code></pre>
-<h1 id="레이어에-추가된-모든-점들의-범위를-계산"><a class="header" href="#레이어에-추가된-모든-점들의-범위를-계산">레이어에 추가된 모든 점들의 범위를 계산</a></h1>
-<p>layer.updateExtents()</p>
-<h1 id="qgis-메인-프로젝트-화면에-표시"><a class="header" href="#qgis-메인-프로젝트-화면에-표시">QGIS 메인 프로젝트 화면에 표시</a></h1>
-<p>QgsProject.instance().addMapLayer(layer)</p>
+  </details><br>
+</li>
+</ul>
 
                     </main>
 
