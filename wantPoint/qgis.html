@@ -306,14 +306,14 @@ for item in data['response']['result']['items']:
     name = item['title']            # API 데이터 속 기관 이름
     address = item['address']['road']    # API 데이터 속 주소(여기서는 도로명주소)
 
-# 지점의 좌표를 설정 (Geometry)
-feat.setGeometry(QgsGeometry.fromPointXY(QgsPointXY(x, y)))
+    # 지점의 좌표를 설정 (Geometry)
+    feat.setGeometry(QgsGeometry.fromPointXY(QgsPointXY(x, y)))
 
-# 지점의 이름 정보를 입력 (Attributes) 열 추가된 순서대로!!
-feat.setAttributes([name, address, x, y])
+    # 지점의 이름 정보를 입력 (Attributes) 열 추가된 순서대로!!
+    feat.setAttributes([name, address, x, y])
 
-# 준비된 피처를 레이어(provider)에 추가
-provider.addFeature(feat)
+    # 준비된 피처를 레이어(provider)에 추가
+    provider.addFeature(feat)
 
 # 레이어에 추가된 모든 점들의 범위를 계산
 layer.updateExtents()
@@ -333,6 +333,9 @@ QgsProject.instance().addMapLayer(layer)
                                 <i class="fa fa-angle-left"></i>
                             </a>
 
+                            <a rel="next prefetch" href="modeler.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
 
                         <div style="clear: both"></div>
                     </nav>
@@ -344,6 +347,9 @@ QgsProject.instance().addMapLayer(layer)
                         <i class="fa fa-angle-left"></i>
                     </a>
 
+                    <a rel="next prefetch" href="modeler.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
             </nav>
 
         </div>
